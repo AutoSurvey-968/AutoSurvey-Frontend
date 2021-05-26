@@ -9,6 +9,7 @@ import { SubmissionComponent } from './submission/submission.component';
 import { UploadComponent } from './upload/upload.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SendemailsComponent } from './sendemails/sendemails.component';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { SendemailsComponent } from './sendemails/sendemails.component';
     SendemailsComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
