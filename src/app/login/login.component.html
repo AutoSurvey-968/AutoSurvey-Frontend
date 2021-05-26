@@ -1,1 +1,19 @@
-<p>login works!</p>
+<div class="d-flex h-90 align-items-center">
+  <div class="container">
+    <div class="row text-center justify-content-center">
+      <div class="col-md-8 col-xl-6 offset-xl-1 col-sm-12 col-xs-12 bubble">
+        <h1 class="display-4">QC Login</h1>
+        <p class="lead">View survey analytics & upload data.</p>
+        <hr class="my-4">
+        <div class="text-center">
+          <form class="form">
+            <input type="text" id="email" [(ngModel)]="email" class="form-control" placeholder="Email" required>
+            <input type="password" id="password" [(ngModel)]="password" class="form-control" placeholder="Password" required>
+            <br>
+            <button class="btn btn-lg btn-custom" id="loginButton" (click)="login()">Log In</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
