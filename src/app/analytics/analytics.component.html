@@ -24,8 +24,7 @@
                             <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">Invalid start date</mat-error>
                             <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Invalid end date</mat-error>
                           </mat-form-field>
-                          <p *ngIf='range.get("start")==null'>Week of: {{$any(range.get('start')).value | json}}</p>
-                          <p>Week of: {{$any(range.get('start')).value | json}}</p>
+                          <p *ngIf='(!(range.controls.start.value==null))'>Week of: {{($any(range.get('start')).value+"").substring(0,15) }}</p>
                     </div>
                 </div>
                 <div class="tab-pane fade" id="nav-batch" role="tabpanel" aria-labelledby="nav-batch-tab">
