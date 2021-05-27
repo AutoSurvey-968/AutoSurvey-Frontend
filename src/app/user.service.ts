@@ -7,12 +7,18 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class UserService {
-  endpoint: string = environment.apiUrl+'/users';
+  endpoint: string = environment.apiUrl+'/';
 
   constructor(private http: HttpClient) { }
 
   login(email: string, password: string) {
-      return this.http.put(this.endpoint, {email, password}).pipe(
+      let body:JSON;
+      body = <JSON><unknown>{
+        "email": email,
+        "password": password
+      }
+
+      return this.http.put(this.endpoint, body).pipe(
       map(response => response as string)
     );
   }
