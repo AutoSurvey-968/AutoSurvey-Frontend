@@ -16,6 +16,8 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BatchcalendarDirective } from './batchcalendar.directive';
 import {MatNativeDateModule, MatRippleModule} from '@angular/material/core';
+import { WorkWeekSelectionStrategyDirective } from './work-week-selection-strategy.directive'
+
 
 
 @NgModule({
@@ -28,7 +30,8 @@ import {MatNativeDateModule, MatRippleModule} from '@angular/material/core';
     UploadComponent,
     NavbarComponent,
     SendemailsComponent,
-    BatchcalendarDirective
+    BatchcalendarDirective,
+    WorkWeekSelectionStrategyDirective
   ],
   imports: [
     BrowserModule,
