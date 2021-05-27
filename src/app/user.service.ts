@@ -12,7 +12,12 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   login(email: string, password: string) {
-      return this.http.put(this.endpoint, {email, password}).pipe(
+    let body = {
+      email: email,
+      password: password
+    };
+
+    return this.http.put(this.endpoint, body).pipe(
       map(response => response as string)
     );
   }
