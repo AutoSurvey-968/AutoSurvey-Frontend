@@ -12,7 +12,7 @@ import { UploadComponent } from './upload/upload.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SendemailsComponent } from './sendemails/sendemails.component';
 import { AppRoutingModule } from './app-routing.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BatchcalendarDirective } from './batchcalendar.directive';
 import {MatNativeDateModule, MatRippleModule} from '@angular/material/core';
@@ -41,7 +41,8 @@ import { WorkWeekSelectionStrategyDirective } from './work-week-selection-strate
     BrowserAnimationsModule,
     MatFormFieldModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
