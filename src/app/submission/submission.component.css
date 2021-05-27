@@ -1,0 +1,52 @@
+.form-check{
+  padding-top: 10px;
+}
+
+.satisfactionQuestionGroup{
+  display: inline-block;
+  text-align:center;
+}
+
+.satisfactionQuestionGroup label{
+  display: block;
+}
+
+.understandingQuestionGroup{
+  display: inline-block;
+  text-align: center;
+}
+
+.understandingQuestionGroup label{
+  display: block;
+}
+
+input[type='radio']{
+  border-color: black;
+  border-radius: 1px;
+  border-style: solid;
+}
+
+.table.align-middle.text-center {
+  border-style: solid;
+  border-color: black;
+  border-width: 1px;
+  background-color: rgb(233, 233, 233);
+}
+
+.form-control {
+  max-width: 400px;
+}
+
+span {
+  color:red;
+}
+
+.display-4 {
+  padding-bottom:10px;
+  padding-top: 10px;
+}
+
+.container.bubble {
+  margin-top: 2%;
+  width:800px;
+}

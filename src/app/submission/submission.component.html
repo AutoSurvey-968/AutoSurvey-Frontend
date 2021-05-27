@@ -1,1 +1,76 @@
-<p>submission works!</p>
+
+  <div class="container bubble">
+
+    <div class="d-flex justify-content-center">
+      <h1 class="display-4">Training Feedback</h1>
+    </div>
+    <hr>
+    <div class="container">
+
+      <br>
+      <p>Thank you for being a part of Revature. We hope you are having as much fun attending as we do organizing.</p>
+      <p>We want to hear your feedback so we can keep improving our logistics and content. Please fill this quick survey out and let us know your thoughts. Please note that you will be using this SAME link EVERY week to give your feedback about training, so you may want to bookmark or pin this URL in your Slack channel.</p>
+      <p>Survey responses are only accessible by the QC team and are collected anonymously unless you fill in your information below.</p>
+      <p>Please note this survey is for the last completed week of training (e.g. if you are currently in Week 4, please fill out the survey for Week 3.)</p>
+      <p style="color:red;">* Required</p>
+    </div>
+
+    <br><hr><br>
+
+    <form>
+
+        <div id="emailQuestion">
+            <div class="mb-3">
+                <label for="name" class="form-label">Name (Optional)</label>
+                <input type="text" class="form-control" id="name">
+              </div>
+        </div>
+
+        <div id="emailQuestion">
+          <div class="mb-3">
+            <label for="email" class="form-label">Email (Optional)</label>
+            <input type="text" class="form-control" id="email">
+          </div>
+        </div>
+
+        <br> <hr> <br>
+
+        <div id="locationQuestion">
+          <div class="mb-3">
+            <label for="location" class="form-label">Where is your training location? <span style="color: red">*</span></label>
+            <select class="form-control" id="location" required></select>
+          </div>
+        </div>
+
+        <div id="batchQuestion">
+          <div class="mb-3">
+            <label for="batch" class="form-label">What batch are you in? <span style="color: red">*</span></label>
+            <select class="form-control" id="batch" required></select>
+          </div>
+        </div>
+
+        <br> <hr> <br>
+
+        <div id="weekQuestion">
+            <label for="week" class="form-label">What was your most recently completed week of training? (Extended batches start with Week A, normal batches start with Week 1)<span >*</span></label>
+            <select class="form-control" id="week" required>
+              <option value="A">Week A</option>
+              <option value="B">Week B</option>
+              <option value="1">Week 1</option>
+              <option value="2">Week 2</option>
+              <option value="3">Week 3</option>
+              <option value="4">Week 4</option>
+              <option value="5">Week 5</option>
+              <option value="6">Week 6</option>
+              <option value="7">Week 7</option>
+              <option value="8">Week 8</option>
+              <option value="9">Week 9</option>
+            </select>
+        </div>
+
+        <br> <hr> <br>
+
+        <button id="submitSurvey" type="button" class="btn btn-lg btn-custom">Submit</button>
+
+      </form>
+  </div>
