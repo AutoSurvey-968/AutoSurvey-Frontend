@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ISurvey } from '../isurvey.survey';
+import { SurveyService } from '../survey.service';
 import { UserService } from '../user.service';
 
 @Component({
