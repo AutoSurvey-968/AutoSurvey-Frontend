@@ -1,1 +1,27 @@
-<p>upload works!</p>
+<!-- Upload -->
+<div class="container bubble">
+  <div class="d-flex justify-content-center">
+    <h1>Upload CSV File</h1>
+  </div>
+
+  <div class="container">
+    <br>
+    <hr>
+    <br>
+  </div>
+
+  <div class="d-flex justify-content-center">
+    <div class="d-flex justify-content-center">
+      <select name="survey" id="survey" *ngFor="let survey of surveys">
+        <option value="{{survey.title}}">{{survey.title}}</option>
+      </select>
+      <input type="file" name="upload-file" class="form-control" id="uploadedCSV" accept=".csv">
+      <button id="uploadButton" name="submit" class="btn btn-custom" (click)="submitFile()">Upload</button>
+    </div>
+  </div>
+  <br>
+  <br>
+
+  <p>Using the form above, you may upload QC data from the Google Forms QC Survey and add it to the database.
+      Please ensure that the data is uploaded as a .CSV from Google Sheets.</p>
+</div>

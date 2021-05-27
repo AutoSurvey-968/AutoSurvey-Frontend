@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ISurvey } from '../isurvey.survey';
+import { SurveyService } from '../survey.service';
+import { UploadService } from '../upload.service';
 
 @Component({
   selector: 'app-upload',
@@ -6,10 +9,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./upload.component.css']
 })
 export class UploadComponent implements OnInit {
+  @Input() activeSurvey!: ISurvey;
+  @Input() file!: File;
+  surveys: ISurvey[] = this.surveyService.getSurveys();
 
-  constructor() { }
+  constructor(
+    private surveyService: SurveyService,
+    private uploadService: UploadService
+  ) { }
 
   ngOnInit(): void {
   }
 
+  submitFile(): void {
+    this.uploadService.upload(this.activeSurvey.uuid, this.surveys);
+  }
 }
