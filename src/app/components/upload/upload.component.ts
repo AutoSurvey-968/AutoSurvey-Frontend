@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ISurvey } from '../isurvey.survey';
-import { SurveyService } from '../survey.service';
-import { UploadService } from '../upload.service';
+import { ISurvey } from '../../models/isurvey-survey';
+import { SurveyService } from '../../services/survey/survey.service';
+import { UploadService } from '../../services/upload/upload.service';
 
 @Component({
   selector: 'app-upload',
