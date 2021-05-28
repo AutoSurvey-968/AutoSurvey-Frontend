@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AnalyticsComponent } from './analytics/analytics.component';
-import { LoginComponent } from './login/login.component';
-import { SendemailsComponent } from './sendemails/sendemails.component';
-import { SubmissionComponent } from './submission/submission.component';
-import { SurveyComponent } from './survey/survey.component';
-import { UploadComponent } from './upload/upload.component';
+import { AnalyticsComponent } from './components/analytics/analytics.component';
+import { LoginComponent } from './components/login/login.component';
+import { SendemailsComponent } from './components/sendemails/sendemails.component';
+import { SubmissionComponent } from './components/submission/submission.component';
+import { SurveyComponent } from './components/survey/survey.component';
+import { UploadComponent } from './components/upload/upload.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },

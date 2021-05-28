@@ -1,4 +1,4 @@
-import { IQuestion } from "./iquestion";
+import { IQuestion } from "./iquestion.question";
 
 export interface ISurvey {
   uuid: string;

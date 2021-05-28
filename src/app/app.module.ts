@@ -1,22 +1,21 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
+import {MatNativeDateModule, MatRippleModule} from '@angular/material/core';
 import { MatFormFieldModule} from '@angular/material/form-field';
-import {MatDatepickerModule} from '@angular/material/datepicker'
+import {MatDatepickerModule} from '@angular/material/datepicker';
 import { AppComponent } from './app.component';
-import { SurveyComponent } from './survey/survey.component';
-import { LoginComponent } from './login/login.component';
-import { AnalyticsComponent } from './analytics/analytics.component';
-import { SubmissionComponent } from './submission/submission.component';
-import { UploadComponent } from './upload/upload.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { SendemailsComponent } from './sendemails/sendemails.component';
+import { SurveyComponent } from './components/survey/survey.component';
+import { LoginComponent } from './components/login/login.component';
+import { AnalyticsComponent } from './components/analytics/analytics.component';
+import { SubmissionComponent } from './components/submission/submission.component';
+import { UploadComponent } from './components/upload/upload.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { SendemailsComponent } from './components/sendemails/sendemails.component';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { BatchcalendarDirective } from './batchcalendar.directive';
-import {MatNativeDateModule, MatRippleModule} from '@angular/material/core';
-import { WorkWeekSelectionStrategyDirective } from './work-week-selection-strategy.directive'
+import { WorkWeekSelectionStrategyDirective } from './directives/work-week-selection/work-week-selection-strategy.directive'
 
 
 
@@ -30,7 +29,6 @@ import { WorkWeekSelectionStrategyDirective } from './work-week-selection-strate
     UploadComponent,
     NavbarComponent,
     SendemailsComponent,
-    BatchcalendarDirective,
     WorkWeekSelectionStrategyDirective
   ],
   imports: [
