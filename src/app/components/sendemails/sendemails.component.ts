@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {Batch} from '../../models/batch';
-import {CaliburService} from '../../services/caliber/calibur.service';
+import {Batch} from '../../models/Caliber/batch';
+import { Employee } from '../../models/Caliber/employee';
+import {CaliberService} from '../../services/caliber/caliber.service';
 
 @Component({
   selector: 'app-sendemails',
@@ -11,13 +12,18 @@ import {CaliburService} from '../../services/caliber/calibur.service';
 export class SendemailsComponent implements OnInit {
 
   public batches!: Batch[];
-  constructor(private calivurService: CaliburService) { }
+  public leadTrainers!: Employee[];
+  constructor(private caliberService: CaliberService) { }
+
 
   ngOnInit(): void {
+    this.getAllBatches();
   }
 
-  getAllBatches(): void{
-    this.calivurService.getAllBatches()
-    .subscribe(data => {this.batches = data});
+  getAllBatches():void{
+    console.log("a");
+    this.caliberService.getAllBatches()
+    .subscribe(data => {this.batches = data;
+    });
   }
 }

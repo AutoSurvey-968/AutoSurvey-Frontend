@@ -10,8 +10,8 @@
                     <mat-form-field appearance="fill">
                         <mat-label>Batch</mat-label>
                         <mat-select>
-                          <mat-option *ngFor="let batch of batches">
-                            {{batch.batchId}}
+                          <mat-option *ngFor="let batch of batches" id={{batch.id}}>
+                              {{batch.name}}
                           </mat-option>
                         </mat-select>
                       </mat-form-field>

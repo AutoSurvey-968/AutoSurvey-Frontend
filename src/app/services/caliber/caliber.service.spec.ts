@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { CaliburService } from './calibur.service';
+import { CaliberService } from './caliber.service';
 
 describe('CaliburService', () => {
-  let service: CaliburService;
+  let service: CaliberService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(CaliburService);
+    service = TestBed.inject(CaliberService);
   });
 
   it('should be created', () => {
