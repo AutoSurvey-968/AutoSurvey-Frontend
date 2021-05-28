@@ -1,4 +1,4 @@
-<<div class="container bubble" style="max-width: 750px;">
+<<div class="container bubble">
     <div class="container-fluid align-items-center">
         <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs nav-justified">
             <li [ngbNavItem]="1">
@@ -21,13 +21,13 @@
               <li [ngbNavItem]="2">
                 <a ngbNavLink>By Batch and Week</a>
                 <ng-template ngbNavContent>
-                    <select class="form-control" style="width:100%;font-size: x-large;">
+                    <select class="form-control">
                         <option data-rate="0" value="" selected>Select Location</option>
                     </select><br><br>
-                    <select class="form-control" style="width:100%;font-size: x-large;">
+                    <select class="form-control">
                         <option data-rate="0" value="" selected>Select Batch</option>
                     </select><br><br>
-                    <select class="form-control" style="width:100%;font-size: x-large;">
+                    <select class="form-control">
                         <option data-rate="0" value="" selected>Select Week</option>
                     </select>
                 </ng-template>
@@ -39,7 +39,7 @@
 
         <div class="row">
             <div class="col d-flex justify-content-center">
-                <button class="btn btn-lg btn-custom" style="margin-top: 20px;" onclick="getData()">Search</button>
+                <button class="btn btn-lg btn-custom" (click)="getData()">Search</button>
             </div>
         </div><br><br>
 

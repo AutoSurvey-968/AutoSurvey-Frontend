@@ -1,7 +1,10 @@
-ul {
-    text-align: center;
-    }
-    
-    li {
-    display: inline-block;
-    }
+btn{
+    margin-top: 20px
+}
+form-control{
+    width:100%;
+    font-size: x-large;
+}
+bubble{
+    max-width: 750px;
+}
