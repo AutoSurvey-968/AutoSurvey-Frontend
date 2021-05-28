@@ -21,8 +21,7 @@ export class SubmissionComponent implements OnInit {
       if(this.readyState == 4 && this.status == 200){
         var batches = JSON.parse(this.responseText.valueOf());
         console.log(batches);
-        for(let i = 0; i < batches.length; i++){
-          let batch = batches[i];
+        for(let batch of batches){
           var option = document.createElement("option");
           option.value = batch.name;
           option.text = batch.skill + " - " + batch.employeeAssignments[0].employee.firstName + " " + batch.employeeAssignments[0].employee.lastName;
@@ -44,8 +43,7 @@ export class SubmissionComponent implements OnInit {
     xhttp.onreadystatechange = function () {
       if(this.readyState == 4 && this.status == 200){
         var locations = JSON.parse(this.responseText);
-        for(let i = 0; i < locations.length; i++){
-          let location = locations[i];
+        for(let location of locations){
           let option = document.createElement("option");
           option.value = location;
           option.text = location;
