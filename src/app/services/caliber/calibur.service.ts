@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { Observable, of } from 'rxjs';
-import { Batch } from './batch';
+import { Observable } from 'rxjs';
+import { Batch } from '../../models/batch';
 
 @Injectable({
   providedIn: 'root'
@@ -14,11 +14,7 @@ export class CaliburService {
   
     constructor(private http: HttpClient) { }
   
-    getAllBatches(): Observable<batch[]> {  
-
-      let batches = of(Batch);
-      return this.http.get(this.endpoint).pipe(
-        map(response => response as Batch[])
-      );
+    getAllBatches(): Observable<Batch[]> {
+      return this.http.get<Batch[]>(this.endpoint)
     }
   }

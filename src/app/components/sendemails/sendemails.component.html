@@ -8,10 +8,10 @@
                 <hr class="my-4">
                 <div> 
                     <mat-form-field appearance="fill">
-                        <mat-label>Favorite food</mat-label>
+                        <mat-label>Batch</mat-label>
                         <mat-select>
                           <mat-option *ngFor="let batch of batches">
-                            {{batch}}
+                            {{batch.batchId}}
                           </mat-option>
                         </mat-select>
                       </mat-form-field>

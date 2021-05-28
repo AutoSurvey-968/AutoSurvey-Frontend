@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {MatSelectModule} from '@angular/material/select'; 
-import {Batch} from './batch';
-import {CaliburService} from './calibur.service';
+import {Batch} from '../../models/batch';
+import {CaliburService} from '../../services/caliber/calibur.service';
 
 @Component({
   selector: 'app-sendemails',
@@ -11,10 +10,14 @@ import {CaliburService} from './calibur.service';
 
 export class SendemailsComponent implements OnInit {
 
-  public batches?: Batch[];
-  constructor() { }
+  public batches!: Batch[];
+  constructor(private calivurService: CaliburService) { }
 
   ngOnInit(): void {
   }
 
+  getAllBatches(): void{
+    this.calivurService.getAllBatches()
+    .subscribe(data => {this.batches = data});
+  }
 }

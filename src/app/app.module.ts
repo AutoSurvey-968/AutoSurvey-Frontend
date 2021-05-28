@@ -16,6 +16,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { WorkWeekSelectionStrategyDirective } from './directives/work-week-selection/work-week-selection-strategy.directive'
+import { MatSelectModule } from '@angular/material/select';
 
 
 
@@ -40,6 +41,7 @@ import { WorkWeekSelectionStrategyDirective } from './directives/work-week-selec
     MatFormFieldModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatSelectModule,
     ReactiveFormsModule
   ],
   providers: [],
