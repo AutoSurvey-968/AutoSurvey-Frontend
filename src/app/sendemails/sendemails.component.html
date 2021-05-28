@@ -1,1 +1,22 @@
-<p>sendemails works!</p>
+<!-- <p>sendemails works!</p> -->
+<div class="d-flex h-90 align-items-center">
+    <div class="container">
+        <div class="row text-center justify-content-center">
+            <div class="col-md-8 col-xl-6 offset-xl-1 col-sm-12 col-xs-12 bubble">
+                <h1 class="display-4">Send survey link</h1>
+                <p class="lead">Select a batch</p>
+                <hr class="my-4">
+                <div> 
+                    <mat-form-field appearance="fill">
+                        <mat-label>Favorite food</mat-label>
+                        <mat-select>
+                          <mat-option *ngFor="let batch of batches">
+                            {{batch}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

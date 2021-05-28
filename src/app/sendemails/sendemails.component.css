@@ -1,0 +1,40 @@
+.display-4 {
+    padding-bottom:10px;
+  }
+  
+  .align-items-center {
+    margin-top:8%;
+  }
+  
+  .form {
+    margin:auto;
+    max-width: 360px;
+  }
+  
+  .bubble {
+    width: 500px;
+  }
+  
+  .btn-custom {
+    height:auto;
+    margin-top:25px;
+  }
+  
+  .btn-custom#loginButton {
+    width: 200px;
+    height:auto;
+  }
+  
+  .form-control#email {
+    margin-bottom:10px;
+    border-radius:5px;
+    border-color:#474c5583;
+    border-style:solid;
+  }
+  
+  .form-control#password {
+    border-radius:5px;
+    border-color:#474c557a;
+    border-style:solid;
+  }
+  
