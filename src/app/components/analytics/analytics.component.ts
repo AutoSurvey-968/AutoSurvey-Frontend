@@ -7,6 +7,7 @@ import {FormGroup, FormControl} from '@angular/forms';
   styleUrls: ['./analytics.component.css']
 })
 export class AnalyticsComponent implements OnInit {
+  active = 1;
   range = new FormGroup({
     start: new FormControl(),
     end: new FormControl()
