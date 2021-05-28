@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { ISurvey } from '../../models/isurvey-survey';
 
@@ -11,9 +13,9 @@ export class UploadService {
 
   constructor(private http:  HttpClient) { }
 
-  upload(surveyId: string, body: ISurvey[]) {
+  upload(surveyId: string, body: ISurvey[]): Observable<string> {
     return this.http.put(this.endpoint+'/'+surveyId, body).pipe(
-
+      map(response => response as string)
     );
   }
 }
