@@ -1,4 +1,10 @@
+import { Input } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { ISubmission } from 'src/app/models/isubmission-submission';
+import { ISurvey } from 'src/app/models/isurvey-survey';
+import { SubmissionService } from 'src/app/services/submission/submission.service';
+import { SurveyService } from 'src/app/services/survey/survey.service';
 
 @Component({
   selector: 'app-submission',
@@ -6,26 +12,42 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./submission.component.css']
 })
 export class SubmissionComponent implements OnInit {
+  surveyId!: string;
+  @Input() submission!: ISubmission;
+  survey: ISurvey = this.surveyService.getSurveyById(this.surveyId);
 
-  constructor() { }
+  constructor(
+    private surveyService: SurveyService,
+    private submissionService: SubmissionService,
+    private route: ActivatedRoute
+  ) {
+    this.route.params.subscribe(params => {
+      this.surveyId = params['surveyId'];
+      console.log("Survey ID: " + this.surveyId);
+    })
+  }
+
+
 
   ngOnInit(): void {
     this.populateBatches();
     this.populateLocations();
   }
 
-  populateBatches(){
+  submitSubmission() {
+    this.submissionService.submit(this.submission);
+  }
+
+  populateBatches() {
     let xhttp = new XMLHttpRequest();
     var batchSelect = document.getElementById("batch") as HTMLSelectElement;
     xhttp.onreadystatechange = function () {
       if(this.readyState == 4 && this.status == 200){
         var batches = JSON.parse(this.responseText.valueOf());
-        console.log(batches);
         for(let batch of batches){
           var option = document.createElement("option");
           option.value = batch.name;
           option.text = batch.skill + " - " + batch.employeeAssignments[0].employee.firstName + " " + batch.employeeAssignments[0].employee.lastName;
-          console.log(option);
           batchSelect.add(option);
         }
       }
@@ -37,7 +59,7 @@ export class SubmissionComponent implements OnInit {
     xhttp.send();
   }
 
-  populateLocations(){
+  populateLocations() {
     let xhttp = new XMLHttpRequest();
     var locationSelect = document.getElementById("location") as HTMLSelectElement;
     xhttp.onreadystatechange = function () {
@@ -57,8 +79,6 @@ export class SubmissionComponent implements OnInit {
     xhttp.setRequestHeader("Accept", "*/*");
     xhttp.send();
   }
-
-
   // Note for whoever does the JS for this:
 
   // For the radio buttons, something like the following should
