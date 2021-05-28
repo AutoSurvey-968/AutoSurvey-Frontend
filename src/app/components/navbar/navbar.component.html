@@ -1,0 +1,60 @@
+<nav class="navbar navbar-expand-md navbar-light bg-dark sticky-top py-0">
+  <div class="container-fluid">
+      <a class="navbar-brand"> <img src="../../assets/img/rev-logo-alt.png" width="200px"></a>
+  </div>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+        <li  class="nav-item">
+            <a *ngIf="route.url !== '/login'" id="login" class="nav-link" routerLink="/login">
+              Login
+            </a>
+        </li>
+        <li class="nav-item">
+          <a *ngIf="route.url !== '/survey'" id="survey" class="nav-link" routerLink="/survey">
+            Survey
+          </a>
+          <span *ngIf="route.url==='/survey'" id="survey" class="nav-link font-weight-bold">
+            Survey
+          </span>
+        </li>
+    </ul>
+  </div>
+</nav>
+
+
+<!-- This is some interesting if-else functionality i had for login.
+  <ng-container *ngIf="!loggedUser; else display">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        Username:
+        <input type="text" [(ngModel)]="username">
+      </li>
+      <li class="nav-item">
+        Password:
+        <input type="password" [(ngModel)]="password" (keydown.enter)="login()">
+      </li>
+      <li class="nav-item">
+        <button class="btn btn-primary" (click)="login()">Login</button>
+      </li>
+    </ul>
+  </ng-container>
+
+  <ng-template #display>
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <div *ngIf="loggedUser.employee; else customer">
+          <span>Welcome {{loggedUser.employee.title}}!
+            {{loggedUser.employee.first + " " + loggedUser.employee.last}}</span>
+        </div>
+      </li>
+      <li class="nav-item">
+        <button class="btn btn-danger" (click)="logout()">Logout</button>
+      </li>
+    </ul>
+  </ng-template>
+  <ng-template #customer>
+    <div>
+      <span>Welcome Customer! {{loggedUser.customer.first + " " + loggedUser.customer.last}}</span>
+    </div>
+  </ng-template>
+-->

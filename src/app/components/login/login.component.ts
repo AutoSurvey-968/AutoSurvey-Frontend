@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { UserService } from '../user.service';
+import { ISurvey } from '../../models/isurvey-survey';
+import { SurveyService } from '../../services/survey/survey.service';
+import { UserService } from '../../services/user/user.service';
 
 @Component({
   selector: 'app-login',
