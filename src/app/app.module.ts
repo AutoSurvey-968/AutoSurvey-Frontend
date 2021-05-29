@@ -18,6 +18,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { WorkWeekSelectionStrategyDirective } from './directives/work-week-selection/work-week-selection-strategy.directive'
 import {NgbModule, NgbPaginationModule, NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatSelectModule } from '@angular/material/select';
 
 
 
@@ -46,7 +47,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     NgbPaginationModule,
     NgbAlertModule,
     NgbModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

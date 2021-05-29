@@ -3,6 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
+import { IReport } from 'src/app/models/ireport-report';
+import { WeekDay } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -12,15 +14,14 @@ export class AnalyticsService {
   private httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }), withCredentials:true};
   constructor(private http: HttpClient) { }
 
-  getDataWeek(startDate: string){
-    let body={
-      "startDate":startDate
-    }
-    return this.http.put(this.endpoint, body,this.httpOptions).pipe(
-      map(response => response as string)
+  getDataWeek(surveyId: string, startDate: string){
+    return this.http.put(this.endpoint+surveyId+"/"+WeekDay,this.httpOptions).pipe(
+      map(response => response as IReport)
     );
   }
-  getDataWeekBatch(startDate: string, batchId: string){
-
+  getDataWeekBatch(surveyId: string, startDate: string, batchId: string){
+    return this.http.put(this.endpoint+surveyId+"/"+WeekDay+"/"+batchId,this.httpOptions).pipe(
+      map(response => response as IReport)
+    );
   }
 }

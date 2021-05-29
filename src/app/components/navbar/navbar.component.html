@@ -5,15 +5,15 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
         <li  class="nav-item">
-            <a *ngIf="route.url !== '/login'" id="login" class="nav-link" routerLink="/login">
+            <a *ngIf="route.url !== '/login'" id="login" class="nav-link text-white" routerLink="/login">
               Login
             </a>
         </li>
         <li class="nav-item">
-          <a *ngIf="route.url !== '/survey'" id="survey" class="nav-link" routerLink="/survey">
+          <a *ngIf="route.url !== '/survey'" id="survey" class="nav-link text-white" routerLink="/survey">
             Survey
           </a>
-          <span *ngIf="route.url==='/survey'" id="survey" class="nav-link font-weight-bold">
+          <span *ngIf="route.url==='/survey'" id="survey" class="nav-link text-secondary font-weight-bold">
             Survey
           </span>
         </li>

@@ -27,10 +27,10 @@ export class AnalyticsComponent implements OnInit {
   pipe = new DatePipe('en-US');
   getData(){
     if (this.active==1 && this.range.get('start')!=null &&this.range.get('start')?.value!=null ){
-      this.analyticsService.getDataWeek(this.pipe.transform(this.range.get('start')?.value, 'yyyy-MM-dd')||"");
+      this.analyticsService.getDataWeek("",this.pipe.transform(this.range.get('start')?.value, 'yyyy-MM-dd')||"");
     }
     else if (this.active==2 && this.range.get('start')!=null &&this.range.get('start')?.value!=null ){
-      this.analyticsService.getDataWeekBatch(this.pipe.transform(this.range.get('start')?.value, 'yyyy-MM-dd')||"", "");    }
+      this.analyticsService.getDataWeekBatch("", this.pipe.transform(this.range.get('start')?.value, 'yyyy-MM-dd')||"", "");    }
     else{
       this._snackBar.open("Form isn't fully filled out", "Okay");
       setTimeout(this._snackBar.dismiss.bind(this._snackBar), 2000);
