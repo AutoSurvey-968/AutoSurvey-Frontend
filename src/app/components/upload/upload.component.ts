@@ -32,9 +32,7 @@ export class UploadComponent implements OnInit {
   setSurveys() : void {
     this.surveyService.getSurveys().subscribe(
       data => {
-        data.forEach( survey => {
-          this.surveys.set(survey.uuid, survey);
-        });
+        this.surveys = data as Map<string, ISurvey>;
       }
     );
   }
@@ -46,6 +44,7 @@ export class UploadComponent implements OnInit {
 
   getSurveys(): ISurvey[] {
     let result: ISurvey[] = [];
+    if(this.surveys.size === undefined) return result;
     this.surveys.forEach(
       survey => {
         result.push(survey);
