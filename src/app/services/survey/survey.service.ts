@@ -6,7 +6,7 @@ import { environment } from 'src/environments/environment';
 import { ISurvey } from '../../models/isurvey-survey';
 
 interface SurveyServiceInterface {
-  getSurveys(): Observable<ISurvey[]>
+  getSurveys(): Observable<Map<string, ISurvey>>;
 }
 
 @Injectable({
@@ -14,13 +14,13 @@ interface SurveyServiceInterface {
 })
 export class SurveyService implements SurveyServiceInterface {
   endpoint: string = environment.apiUrl+'/surveys';
-  private httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+  private httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }), withCredentials: true };
 
   constructor(private http: HttpClient) { }
 
-  getSurveys(): Observable<ISurvey[]> {
+  getSurveys(): Observable<Map<string, ISurvey>> {
     return this.http.get(this.endpoint+'/', this.httpOptions).pipe(
-      map(response => response as ISurvey[])
+      map(response => response as Map<string, ISurvey> )
     );
   }
 }
@@ -31,26 +31,28 @@ export class SurveyService implements SurveyServiceInterface {
 export class MockSurveyService implements SurveyServiceInterface {
   constructor() {}
 
-  getSurveys(): Observable<ISurvey[]> {
-    return of([
-      {
+  getSurveys(): Observable<Map<string, ISurvey>> {
+    let survey0: ISurvey = {
       uuid: "000",
       createdOn: "now",
-      title: "title",
+      title: "title0",
       description: "",
       confirmation: "",
       version: "",
       questions: [],
-      },
-      {
-        uuid: "001",
-        createdOn: "now",
-        title: "title 2",
-        description: "",
-        confirmation: "",
-        version: "",
-        questions: [],
-      }
-    ]);
+    }
+    let survey1: ISurvey = {
+      uuid: "001",
+      createdOn: "now",
+      title: "title1",
+      description: "",
+      confirmation: "",
+      version: "",
+      questions: [],
+    }
+    let response: Map<string, ISurvey> = new Map();
+    response.set(survey0.uuid, survey0);
+    response.set(survey1.uuid, survey1);
+    return of(response);
   }
 }

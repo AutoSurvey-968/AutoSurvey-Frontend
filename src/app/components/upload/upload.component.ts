@@ -12,10 +12,10 @@ import { UploadService } from '../../services/upload/upload.service';
 export class UploadComponent implements OnInit {
   @Input() selectedSurveyUuid!: string;
   @Input() file!: File;
-  surveys: ISurvey[] = [];
+  surveys: Map<string, ISurvey> = new Map();
 
   constructor(
-    private surveyService: SurveyService,
+    private surveyService: MockSurveyService,
     private uploadService: UploadService
   ) { }
 
@@ -31,12 +31,26 @@ export class UploadComponent implements OnInit {
 
   setSurveys() : void {
     this.surveyService.getSurveys().subscribe(
-      data => {this.surveys = data;}
+      data => {
+        data.forEach( survey => {
+          this.surveys.set(survey.uuid, survey);
+        });
+      }
     );
   }
 
   selectedValueAction(event: MatSelectChange): void {
     this.selectedSurveyUuid = event.value;
     console.log(this.selectedSurveyUuid);
+  }
+
+  getSurveys(): ISurvey[] {
+    let result: ISurvey[] = [];
+    this.surveys.forEach(
+      survey => {
+        result.push(survey);
+      }
+    )
+    return result;
   }
 }

@@ -15,7 +15,7 @@
       <mat-form-field appearance="fill">
         <mat-label class="form-label">Survey</mat-label>
         <mat-select name="survey-dropdown" (selectionChange)="selectedValueAction($event)">
-          <mat-option *ngFor="let survey of surveys" class="form-control" id={{survey.title}} [value]=[survey.uuid]>{{survey.title}}</mat-option>
+          <mat-option *ngFor="let survey of getSurveys()" class="form-control" id={{survey.title}} [value]=[survey.uuid]>{{survey.title}}</mat-option>
         </mat-select>
       </mat-form-field>
       <input type="file" name="upload-file" class="form-control" id="uploadedCSV" accept=".csv">

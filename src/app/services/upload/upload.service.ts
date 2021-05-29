@@ -13,7 +13,7 @@ export class UploadService {
 
   constructor(private http:  HttpClient) { }
 
-  upload(surveyId: string, body: ISurvey[]): Observable<string> {
+  upload(surveyId: string, body: Map<string, ISurvey>): Observable<string> {
     return this.http.put(this.endpoint+'/'+surveyId, body).pipe(
       map(response => response as string)
     );
