@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { MatSelectChange } from '@angular/material/select';
 import { ISurvey } from '../../models/isurvey-survey';
-import { SurveyService } from '../../services/survey/survey.service';
+import { MockSurveyService, SurveyService } from '../../services/survey/survey.service';
 import { UploadService } from '../../services/upload/upload.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { UploadService } from '../../services/upload/upload.service';
   styleUrls: ['./upload.component.css']
 })
 export class UploadComponent implements OnInit {
-  @Input() activeSurvey!: ISurvey;
+  @Input() selectedSurveyUuid!: string;
   @Input() file!: File;
   surveys: ISurvey[] = [];
 
@@ -23,7 +24,7 @@ export class UploadComponent implements OnInit {
   }
 
   upload(): void {
-    this.uploadService.upload(this.activeSurvey.uuid, this.surveys).subscribe(
+    this.uploadService.upload(this.selectedSurveyUuid, this.surveys).subscribe(
        data => {}
     );
   }
@@ -32,5 +33,10 @@ export class UploadComponent implements OnInit {
     this.surveyService.getSurveys().subscribe(
       data => {this.surveys = data;}
     );
+  }
+
+  selectedValueAction(event: MatSelectChange): void {
+    this.selectedSurveyUuid = event.value;
+    console.log(this.selectedSurveyUuid);
   }
 }

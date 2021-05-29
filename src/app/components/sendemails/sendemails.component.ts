@@ -15,13 +15,11 @@ export class SendemailsComponent implements OnInit {
   public leadTrainers!: Employee[];
   constructor(private caliberService: CaliberService) { }
 
-
   ngOnInit(): void {
     this.getAllBatches();
   }
 
-  getAllBatches():void{
-    console.log("a");
+  getAllBatches(): void{
     this.caliberService.getAllBatches()
     .subscribe(data => {this.batches = data;
     });
