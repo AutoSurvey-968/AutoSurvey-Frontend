@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ISurvey } from '../../models/isurvey-survey';
+import { IUser } from '../../models/iuser-user';
 import { SurveyService } from '../../services/survey/survey.service';
 import { UserService } from '../../services/user/user.service';
 
@@ -19,7 +20,10 @@ export class LoginComponent implements OnInit {
 
   login(): void {
     this.userService.login(this.email, this.password).subscribe((data) => {
-      console.log(data);
+      const date = new Date();
+      const value = data.token;
+      document.cookie = "token="+value+"; path=/;SameSite=Lax";
+      console.log(document.cookie);
     });
   }
 }
