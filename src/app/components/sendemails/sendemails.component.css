@@ -1,0 +1,27 @@
+.form-check{
+    padding-top: 10px;
+  }
+
+  .satisfactionQuestionGroup{
+    display: inline-block;
+    text-align:center;
+  }
+
+  .satisfactionQuestionGroup label{
+    display: block;
+  }
+
+  .understandingQuestionGroup{
+    display: inline-block;
+    text-align: center;
+  }
+
+  .understandingQuestionGroup label{
+    display: block;
+  }
+
+  input[type='radio']{
+    border-color: black;
+    border-radius: 1px;
+    border-style: solid;
+  }

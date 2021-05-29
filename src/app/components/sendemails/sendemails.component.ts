@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Batch} from '../../models/Caliber/batch';
-import { Employee } from '../../models/Caliber/employee';
+import { ISurvey } from '../../models/isurvey-survey';
 import {CaliberService} from '../../services/caliber/caliber.service';
+import { SurveyService } from '../../services/survey/survey.service';
 
 @Component({
   selector: 'app-sendemails',
@@ -12,8 +13,10 @@ import {CaliberService} from '../../services/caliber/caliber.service';
 export class SendemailsComponent implements OnInit {
 
   public batches!: Batch[];
-  public leadTrainers!: Employee[];
-  constructor(private caliberService: CaliberService) { }
+  public surveys!: ISurvey[];
+  public selectedBatch?: Batch;
+  public selectedSurvey?: ISurvey;
+  constructor(private caliberService: CaliberService, private surveyService: SurveyService) { }
 
 
   ngOnInit(): void {
@@ -25,5 +28,13 @@ export class SendemailsComponent implements OnInit {
     this.caliberService.getAllBatches()
     .subscribe(data => {this.batches = data;
     });
+  }
+
+  getSurveys():void{
+    this.surveys = this.surveyService.getSurveys()
+  }
+
+  send():void{
+    
   }
 }
