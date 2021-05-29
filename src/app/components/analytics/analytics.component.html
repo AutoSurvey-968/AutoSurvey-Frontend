@@ -24,6 +24,16 @@
               <li [ngbNavItem]="2">
                 <a ngbNavLink>By Batch and Week</a>
                 <ng-template ngbNavContent>
+
+                    <mat-form-field appearance="fill">
+                        <mat-label class="form-label">Survey</mat-label>
+                        <mat-select name="survey-dropdown" (selectionChange)="selectedValueAction($event)">
+                          <mat-option *ngFor="let survey of getSurveys()" class="form-control" id={{survey.title}} [value]=[survey.uuid]>
+                              {{survey.title}}
+                        </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
                     <select class="form-control">
                         <option data-rate="0" value="" selected>Select Location</option>
                     </select><br><br>
@@ -33,6 +43,7 @@
                     <select class="form-control">
                         <option data-rate="0" value="" selected>Select Week</option>
                     </select>
+
                 </ng-template>
               </li>
               

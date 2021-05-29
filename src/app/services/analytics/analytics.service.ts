@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { Observable } from 'rxjs';
 import { IReport } from 'src/app/models/ireport-report';
 import { WeekDay } from '@angular/common';
+
 
 @Injectable({
   providedIn: 'root'

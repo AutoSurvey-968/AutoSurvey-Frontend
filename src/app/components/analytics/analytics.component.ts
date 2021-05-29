@@ -6,8 +6,10 @@ import {
   MatSnackBarHorizontalPosition,
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
-
+import { MatSelectChange } from '@angular/material/select';
+import { ISurvey } from '../../models/isurvey-survey';
 import { AnalyticsService } from '../../services/analytics/analytics.service';
+import {SurveyService} from '../../services/survey/survey.service'
 
 @Component({
   selector: 'app-analytics',
@@ -20,9 +22,12 @@ export class AnalyticsComponent implements OnInit {
     start: new FormControl(),
     end: new FormControl()
   });
-  constructor(private _snackBar: MatSnackBar, private analyticsService: AnalyticsService) { }
-  ngOnInit(): void {
+  constructor(private _snackBar: MatSnackBar, private analyticsService: AnalyticsService, private surveyService: SurveyService) { }
+  @Input() selectedSurveyUuid!: string;
+  surveys: Map<string, ISurvey> = new Map();
 
+  ngOnInit(): void {
+    //this.setSurveys();//it should be set that if it does errors it doesn't break
   }
   pipe = new DatePipe('en-US');
   getData(){
@@ -35,7 +40,30 @@ export class AnalyticsComponent implements OnInit {
       this._snackBar.open("Form isn't fully filled out", "Okay");
       setTimeout(this._snackBar.dismiss.bind(this._snackBar), 2000);
     }
-    
+  }
+
+  setSurveys(){
+    this.surveyService.getSurveys().subscribe(
+      data => {
+        this.surveys = data as Map<string, ISurvey>;
+      }
+    );
+  }
+
+  selectedValueAction(event: MatSelectChange): void {
+    this.selectedSurveyUuid = event.value;
+    console.log(this.selectedSurveyUuid);
+  }
+
+  getSurveys(): ISurvey[] {
+    let result: ISurvey[] = [];
+    if(this.surveys.size === undefined) return result;
+    this.surveys.forEach(
+      survey => {
+        result.push(survey);
+      }
+    )
+    return result;
   }
 
 }
