@@ -5,7 +5,7 @@ export class Batch {
     id?: number;
     batchId?: String;
     name?: String;
-    startdate?: String;
+    startDate?: String;
     endDate?: String;
     skill?: String;
     location?: String;
