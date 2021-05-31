@@ -1,53 +1,69 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, switchMap } from 'rxjs/operators';
-import { IQuestion } from 'src/app/models/iquestion.question';
+import { Observable, of } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { ISurvey } from '../../models/isurvey-survey';
+
+
+interface SurveyServiceInterface {
+  getSurveys(): Observable<Map<string, ISurvey>>;
+}
 
 @Injectable({
   providedIn: 'root'
 })
-export class SurveyService {
+export class SurveyService implements SurveyServiceInterface {
   endpoint: string = environment.apiUrl+'/surveys';
+  private httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }), withCredentials: true };
 
   constructor(private http: HttpClient) { }
 
-  getSurveys(): ISurvey[] {
-    let surveys: ISurvey[] = [];
-
-    // this.http.get(this.endpoint).pipe(
-    //   map(response => response as string)
-    // );
-    return surveys;
+  getSurveys(): Observable<Map<string, ISurvey>> {
+    return this.http.get<any>(this.endpoint+'/', this.httpOptions).pipe(
+      map(response => response as Map<string, ISurvey> )
+    );
   }
 
-  getSurveyById(surveyId: string) {
-    console.log(surveyId);
-    return {
-      uuid: '1',
-      createdOn: '',
-      title: 'Hello people?',
-      description: '',
-      confirmation: '',
-      version: '',
-      questions: [{
-        questionType: 'MULTIPLE_CHOICE',
-        title: 'hello, how are you today',
-        helpText: 'help',
-        isRequired: true,
-        choices: ['a', 'b'],
-        hasOtherOption: false
-      }]
+  addSurvey(survey: ISurvey):Observable<ISurvey> {
+    const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+    return this.http.post<ISurvey>(this.endpoint, survey, httpOptions);
+  }
 
+  getSurveyById(surveyId: string): Observable<ISurvey> {
+    return this.http.get<ISurvey>(this.endpoint + "/" + surveyId);
+  }
+
+}
+
+@Injectable({
+  providedIn: 'root'
+})
+export class MockSurveyService implements SurveyServiceInterface {
+  constructor() {}
+  getSurveys(): Observable<Map<string, ISurvey>> {
+    let survey0: ISurvey = {
+      uuid: "000",
+      createdOn: "now",
+      title: "title0",
+      description: "",
+      confirmation: "",
+      version: "",
+      questions: [],
     }
-    // return this.http.get(this.endpoint+'/'+surveyId).pipe(
-    //   switchMap((survey) => {
-    //     return <ISurvey>{
-    //       uuid: survey.uuid,
-
-    //     }
-    //   })
-    // )
+    let survey1: ISurvey = {
+      uuid: "001",
+      createdOn: "now",
+      title: "title1",
+      description: "",
+      confirmation: "",
+      version: "",
+      questions: [],
+    }
+    let response: Map<string, ISurvey> = new Map();
+    response.set(survey0.uuid, survey0);
+    response.set(survey1.uuid, survey1);
+    return of(response);
   }
+
 }

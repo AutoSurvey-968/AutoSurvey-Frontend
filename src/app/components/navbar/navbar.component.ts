@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../../services/user/user.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-navbar',
@@ -8,9 +11,19 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(public route: Router) { }
+  constructor(public userService: UserService, public route: Router) { }
 
   ngOnInit(): void {
   }
+
+  isLoggedIn(){
+    // this.http.get<String>
+    return true;
+  }
+
+  isAdmin(){
+    return true;
+  }
+
 
 }
