@@ -5,17 +5,39 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
         <li  class="nav-item">
-            <a *ngIf="route.url !== '/login'" id="login" class="nav-link" routerLink="/login">
+            <a *ngIf="route.url !== '/login' && !isLoggedIn()" id="login" class="nav-link" routerLink="/login">
               Login
             </a>
         </li>
-        <li class="nav-item">
-          <a *ngIf="route.url !== '/survey'" id="survey" class="nav-link" routerLink="/survey">
-            Survey
+        <li  class="nav-item">
+          <a *ngIf="route.url !== '/login' && isLoggedIn()" id="logout" class="nav-link" routerLink="/login">
+            Logout
           </a>
+      </li>
+        <li  class="nav-item">
+          <a *ngIf="route.url !== '/submission' && isLoggedIn()" id="submission" class="nav-link">
+            Submit
+          </a>
+        </li>
+        <li  class="nav-item">
+          <a *ngIf="route.url === '/survey' && isLoggedIn()" id="upload" class="nav-link" routerLink="/upload">
+            Upload
+          </a>
+        </li>
+        <li  class="nav-item">
+          <a *ngIf="route.url !== '/analytics' && isAdmin()" id="analytics" class="nav-link" routerLink="/analytics">
+            Analytics
+          </a>
+      </li>
+        <li class="nav-item">
+          <a *ngIf="route.url !== '/sendemails' && isLoggedIn()" id="sendemails" class="nav-link" routerLink="/sendemails">
+            Send Emails
+          </a>
+          <!--
           <span *ngIf="route.url==='/survey'" id="survey" class="nav-link font-weight-bold">
             Survey
           </span>
+          -->
         </li>
     </ul>
   </div>
