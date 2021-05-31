@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { CookieService } from 'ngx-cookie-service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { environment } from 'src/environments/environment';
 import { ISurvey } from '../../models/isurvey-survey';
 import { SurveyService } from '../../services/survey/survey.service';
@@ -17,15 +17,20 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private cookieService: CookieService
-    ) { }
+    private snackBar: MatSnackBar
+  ) { }
 
   ngOnInit(): void {
   }
 
   login(): void {
-    this.userService.login(this.email, this.password).subscribe((data) => {
-      localStorage.setItem('token', data.token);
-    });
+    this.userService.login(this.email, this.password).subscribe(
+      (data) => {
+        localStorage.setItem('token', data.token);
+        console.log(localStorage.getItem('token'));
+      },
+      (error) => {
+        this.snackBar.open("Username or password was incorrect.", undefined, {duration: 2000 } );
+      });
   }
 }
