@@ -1,4 +1,4 @@
-import { Component, Input} from "@angular/core";
+import { ChangeDetectionStrategy, Component, Input} from "@angular/core";
 import {
   ApexChart,
   ApexNonAxisChartSeries,
@@ -18,7 +18,8 @@ export type ChartOptions = {
 @Component({
   selector: 'app-piecharts',
   templateUrl: './piecharts.component.html',
-  styleUrls: ['./piecharts.component.css']
+  styleUrls: ['./piecharts.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 
