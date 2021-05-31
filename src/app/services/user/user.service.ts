@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
+import { IUser } from 'src/app/models/iuser-user';
 
 @Injectable({
   providedIn: 'root'
@@ -13,14 +14,14 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  login(email: string, password: string): Observable<string> {
+  login(email: string, password: string): Observable<IUser> {
     let body = {
       "email": email,
       "password": password
     };
 
     return this.http.put(this.endpoint, JSON.stringify(body), this.httpOptions).pipe(
-      map(response => response as string)
+      map(response => response as IUser)
     );
   }
 }
