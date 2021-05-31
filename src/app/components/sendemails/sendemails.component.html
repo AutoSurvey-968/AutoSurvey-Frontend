@@ -1,22 +1,78 @@
 <!-- <p>sendemails works!</p> -->
-<div class="d-flex h-90 align-items-center">
+<div class="container bubble" style="margin-top: 2%; width:800px;">
+
+    <div class="d-flex justify-content-center">
+      <h1 class="display-4" style="padding-bottom:10px; padding-top: 10px;">Training Feedback</h1>
+    </div>
+
+    <br><hr><br>
+
+    <form>
+        <div id="SurveySelection">
+            <div class="mb-3">
+                <h3>Survey to Email</h3>
+                <mat-form-field appearance="fill">
+                    <mat-label class="form-label">Survey</mat-label>
+                    <mat-select [(value)]="selectedSurvey">
+                      <mat-option *ngFor="let survey of surveys" class="form-control" value="{{survey.uuid}}">
+                            {{survey.title}}
+                      </mat-option>
+                    </mat-select>
+                    <br>
+                </mat-form-field>
+              </div>
+        </div>
+
+        <br><hr><br>
+
+        <div id="BatchSelection">
+            <div class="mb-3">
+                
+                <h3>Batch</h3>
+                <mat-form-field appearance="fill">
+                    <mat-label class="form-label">Batch</mat-label>
+                    <mat-select [(value)]="selectedBatch">
+                      <mat-option class="form-control" *ngFor="let batch of batches" id={{batch.id}} value={{batch.id}}>
+                          {{batch.name}}
+                      </mat-option>
+                    </mat-select>
+                    <br>
+                </mat-form-field>
+              </div>
+        </div>
+
+       <!-- <br> <hr> <br> -->
+
+        <br><hr><br>
+
+        <button mat-button id="submitSurvey" type="button" 
+        class="btn btn-lg btn-custom" 
+        (click)="send(selectedBatch, selectedSurvey)">Submit</button>
+
+      </form>
+  </div>
+<!-- <div class="d-flex h-90 align-items-center">
     <div class="container">
         <div class="row text-center justify-content-center">
             <div class="col-md-8 col-xl-6 offset-xl-1 col-sm-12 col-xs-12 bubble">
                 <h1 class="display-4">Send survey link</h1>
-                <p class="lead">Select a batch</p>
+                <p class="lead">Send survey to batch</p>
                 <hr class="my-4">
                 <div> 
                     <mat-form-field appearance="fill">
                         <mat-label>Batch</mat-label>
                         <mat-select>
-                          <mat-option *ngFor="let batch of batches" id={{batch.id}}>
+                          <mat-option *ngFor="let batch of batches" id={{batch.id}} value="{{batch.id}}">
                               {{batch.name}}
                           </mat-option>
                         </mat-select>
+                        <br>
+                    </mat-form-field>
+                          <br>
+                        <button mat-button>Send</button>
                       </mat-form-field>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</div> -->

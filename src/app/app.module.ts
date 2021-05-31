@@ -19,6 +19,7 @@ import { WorkWeekSelectionStrategyDirective } from './directives/work-week-selec
 import {NgbModule, NgbPaginationModule, NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { MatSelectModule } from '@angular/material/select';
+import { MatButtonModule } from '@angular/material/button';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { BarChartsComponent } from './components/analytics/charts/barcharts.component';
 import { PiechartsComponent } from './components/analytics/charts/piecharts.component';
@@ -48,13 +49,14 @@ import { PiechartsComponent } from './components/analytics/charts/piecharts.comp
     MatFormFieldModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatSelectModule,
+    MatButtonModule,
     ReactiveFormsModule,
     NgbPaginationModule,
     NgbAlertModule,
     NgbModule,
     NgApexchartsModule,
     MatSnackBarModule,
-    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]
