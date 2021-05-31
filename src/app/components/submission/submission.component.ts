@@ -1,10 +1,10 @@
-import { Input } from '@angular/core';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ISubmission } from 'src/app/models/isubmission-submission';
 import { ISurvey } from 'src/app/models/isurvey-survey';
 import { SubmissionService } from 'src/app/services/submission/submission.service';
 import { SurveyService } from 'src/app/services/survey/survey.service';
+import { RadioQuestionComponent } from './radio-question.component';
 
 @Component({
   selector: 'app-submission',
@@ -23,7 +23,6 @@ export class SubmissionComponent implements OnInit {
   ) {
     this.route.params.subscribe(params => {
       this.surveyId = params['surveyId'];
-      console.log("Survey ID: " + this.surveyId);
     })
   }
 
@@ -40,10 +39,10 @@ export class SubmissionComponent implements OnInit {
 
   populateBatches() {
     let xhttp = new XMLHttpRequest();
-    var batchSelect = document.getElementById("batch") as HTMLSelectElement;
+    let batchSelect = document.getElementById("batch") as HTMLSelectElement;
     xhttp.onreadystatechange = function () {
       if(this.readyState == 4 && this.status == 200){
-        var batches = JSON.parse(this.responseText.valueOf());
+        let batches = JSON.parse(this.responseText.valueOf());
         for(let batch of batches){
           var option = document.createElement("option");
           option.value = batch.name;
@@ -61,10 +60,10 @@ export class SubmissionComponent implements OnInit {
 
   populateLocations() {
     let xhttp = new XMLHttpRequest();
-    var locationSelect = document.getElementById("location") as HTMLSelectElement;
+    let locationSelect = document.getElementById("location") as HTMLSelectElement;
     xhttp.onreadystatechange = function () {
       if(this.readyState == 4 && this.status == 200){
-        var locations = JSON.parse(this.responseText);
+        let locations = JSON.parse(this.responseText);
         for(let location of locations){
           let option = document.createElement("option");
           option.value = location;

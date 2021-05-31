@@ -2,21 +2,12 @@
   padding-top: 10px;
 }
 
-.satisfactionQuestionGroup{
+.radioQuestionGroup {
   display: inline-block;
   text-align:center;
 }
 
-.satisfactionQuestionGroup label{
-  display: block;
-}
-
-.understandingQuestionGroup{
-  display: inline-block;
-  text-align: center;
-}
-
-.understandingQuestionGroup label{
+.radioQuestionGroup label{
   display: block;
 }
 

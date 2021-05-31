@@ -70,6 +70,13 @@
 
         <br> <hr> <br>
 
+        <div class="surveyQuestions">
+          <ul>
+            <li *ngFor="let question of survey.questions">
+              <radio-question></radio-question>
+            </li>
+          </ul>
+        </div>
 
         <button id="submitSurvey" type="button" class="btn btn-lg btn-custom">Submit</button>
 

@@ -23,16 +23,17 @@ export class SurveyService {
   }
 
   getSurveyById(surveyId: string) {
-    let survey: ISurvey = {
+    console.log(surveyId);
+    return {
       uuid: '1',
       createdOn: '',
-      title: '',
+      title: 'Hello people?',
       description: '',
       confirmation: '',
       version: '',
       questions: [{
         questionType: 'MULTIPLE_CHOICE',
-        title: 'title',
+        title: 'hello, how are you today',
         helpText: 'help',
         isRequired: true,
         choices: ['a', 'b'],
@@ -48,6 +49,5 @@ export class SurveyService {
     //     }
     //   })
     // )
-    return survey;
   }
 }
