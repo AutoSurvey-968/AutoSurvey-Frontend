@@ -34,9 +34,15 @@ export class SendemailsComponent implements OnInit {
     });
   }
 
-  getSurveys():void{
-    this.surveyService.getSurveys()
-    .subscribe(data => {this.surveys = data})
+  getSurveys(): ISurvey[] {
+    let result: ISurvey[] = [];
+    if(this.surveys.size === undefined) return result;
+    this.surveys.forEach(
+      survey => {
+        result.push(survey);
+      }
+    )
+    return result;
   }
 
   send(
