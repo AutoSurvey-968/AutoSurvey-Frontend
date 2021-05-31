@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Associate } from 'src/app/models/Caliber/associate';
+import { IoService } from 'src/app/services/io/io.service';
 import {Batch} from '../../models/Caliber/batch';
 import { ISurvey } from '../../models/isurvey-survey';
 import {CaliberService} from '../../services/caliber/caliber.service';
@@ -14,10 +16,13 @@ export class SendemailsComponent implements OnInit {
 
   public batches!: Batch[];
   public surveys!: ISurvey[];
-  public selectedBatch?: Batch;
-  public selectedSurvey?: ISurvey;
-  constructor(private caliberService: CaliberService, private surveyService: SurveyService) { }
-
+  public selectedBatch!: Number;
+  public selectedSurvey!: Number;
+  constructor(
+    private caliberService: CaliberService, 
+    private surveyService: SurveyService,
+    private ioService: IoService
+    ) { }
 
   ngOnInit(): void {
     this.getAllBatches();
@@ -31,10 +36,24 @@ export class SendemailsComponent implements OnInit {
   }
 
   getSurveys():void{
-    this.surveys = this.surveyService.getSurveys()
+    this.surveyService.getSurveys()
+    .subscribe(data => {this.surveys = data})
   }
 
-  send():void{
-    
+  send(
+    batchId:Number,
+    surveyId:Number
+  ):void{
+
+    this.caliberService.getAssociatesByBatch(batchId)
+    .subscribe(associateData =>{
+      associateData.forEach(associate =>{
+        this.ioService.sendEmail(
+          associate.email,
+          "Hi " + associate.firstname + ", you got invited to fill out a survey",
+          "Survey request"
+          )
+      });
+    })
   }
 }

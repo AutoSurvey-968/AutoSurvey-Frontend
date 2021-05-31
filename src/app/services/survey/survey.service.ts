@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ISurvey } from '../../models/isurvey-survey';
 
@@ -11,12 +12,9 @@ export class SurveyService {
 
   constructor(private http: HttpClient) { }
 
-  getSurveys(): ISurvey[] {
+  getSurveys(): Observable<ISurvey[]> {
     let surveys: ISurvey[] = [];
 
-    // this.http.get(this.endpoint).pipe(
-    //   map(response => response as string)
-    // );
-    return surveys;
+    return this.http.get<ISurvey[]>(this.endpoint);
   }
 }

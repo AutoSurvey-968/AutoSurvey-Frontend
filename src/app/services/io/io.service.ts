@@ -11,7 +11,15 @@ export class IoService {
 
   constructor(private http:HttpClient) { }
 
-  sendEmail():void{ 
-    return this.http.post();
-  }
+  sendEmail(
+    email: String, 
+    message:String, 
+    subject: String, 
+    ):void{ 
+
+    let parameters: String = 
+    '?recipient='+email+'&subject=' + 
+    subject+'&message='+ message;
+    this.http.post(this.endpoint + parameters, "");
+   }
 }

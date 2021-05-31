@@ -12,9 +12,9 @@
 
   <div class="d-flex justify-content-center">
     <div class="d-flex justify-content-center">
-      <select name="survey" id="survey" *ngFor="let survey of surveys">
-        <option value="{{survey.title}}">{{survey.title}}</option>
-      </select>
+      <!-- <select name="survey" id="survey" *ngFor="let survey of surveys"> -->
+        <!-- <option value="{{survey.title}}">{{survey.title}}</option> -->
+      <!-- </select> -->
       <input type="file" name="upload-file" class="form-control" id="uploadedCSV" accept=".csv">
       <button id="uploadButton" name="submit" class="btn btn-custom" (click)="submitFile()">Upload</button>
     </div>

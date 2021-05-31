@@ -11,7 +11,7 @@ import { UploadService } from '../../services/upload/upload.service';
 export class UploadComponent implements OnInit {
   @Input() activeSurvey!: ISurvey;
   @Input() file!: File;
-  surveys: ISurvey[] = this.surveyService.getSurveys();
+  // surveys: ISurvey[] = this.surveyService.getSurveys();
 
   constructor(
     private surveyService: SurveyService,
@@ -22,6 +22,6 @@ export class UploadComponent implements OnInit {
   }
 
   submitFile(): void {
-    this.uploadService.upload(this.activeSurvey.uuid, this.surveys);
+    // this.uploadService.upload(this.activeSurvey.uuid, this.surveys);
   }
 }

@@ -13,9 +13,9 @@
                 <h3>Survey to Email</h3>
                 <mat-form-field appearance="fill">
                     <mat-label class="form-label">Survey</mat-label>
-                    <mat-select>
-                      <mat-option class="form-control" value="batch.id">
-                            Survey Name
+                    <mat-select [(value)]="selectedSurvey">
+                      <mat-option *ngFor="let survey of surveys" class="form-control" value="{{survey.uuid}}">
+                            {{survey.title}}
                       </mat-option>
                     </mat-select>
                     <br>
@@ -31,7 +31,7 @@
                 <h3>Batch</h3>
                 <mat-form-field appearance="fill">
                     <mat-label class="form-label">Batch</mat-label>
-                    <mat-select>
+                    <mat-select [(value)]="selectedBatch">
                       <mat-option class="form-control" *ngFor="let batch of batches" id={{batch.id}} value={{batch.id}}>
                           {{batch.name}}
                       </mat-option>
@@ -45,7 +45,9 @@
 
         <br><hr><br>
 
-        <button mat-button id="submitSurvey" type="button" class="btn btn-lg btn-custom" (click)="send()">Submit</button>
+        <button mat-button id="submitSurvey" type="button" 
+        class="btn btn-lg btn-custom" 
+        (click)="send(selectedBatch, selectedSurvey)">Submit</button>
 
       </form>
   </div>
