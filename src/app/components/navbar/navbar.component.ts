@@ -15,18 +15,22 @@ export class NavbarComponent implements OnInit {
     public userService: UserService,
     public route: Router
   ) { }
-
   ngOnInit(): void {
   }
 
-  isLoggedIn(){
-    // this.http.get<String>
-    return true;
+  getNameFromCookie() : void {
+    let cookies = document.cookie
+    .split(';')
+    .map(c => c.split('='))
+    .reduce((accumulator,[key,value]) => ({...accumulator, [key.trim()]: decodeURIComponent(value)}),{});
+    console.log(cookies);
   }
 
-  isAdmin(){
-    return true;
+  isLoggedIn(): boolean{
+    return document.cookie != "";
   }
 
-
+  isAdmin(): boolean{
+    return true;
+  }
 }
