@@ -14,7 +14,7 @@
                 <mat-form-field appearance="fill">
                     <mat-label class="form-label">Survey</mat-label>
                     <mat-select [(value)]="selectedSurvey">
-                      <mat-option *ngFor="let survey of surveys" class="form-control" value="{{survey.uuid}}">
+                      <mat-option *ngFor="let survey of getSurveys()" class="form-control" [value]="[survey.uuid]">
                             {{survey.title}}
                       </mat-option>
                     </mat-select>

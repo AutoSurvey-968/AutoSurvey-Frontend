@@ -15,7 +15,7 @@ import { SurveyService } from '../../services/survey/survey.service';
 export class SendemailsComponent implements OnInit {
 
   public batches!: Batch[];
-  public surveys!: ISurvey[];
+  surveys: Map<string, ISurvey> = new Map();
   public selectedBatch!: Number;
   public selectedSurvey!: Number;
   constructor(
@@ -34,7 +34,15 @@ export class SendemailsComponent implements OnInit {
     });
   }
 
-  getSurveys(): ISurvey[] {
+  setSurveys() : void {
+    this.surveyService.getSurveys().subscribe(
+      data => {
+        this.surveys = data as Map<string, ISurvey>;
+      }
+    );
+  }
+
+  getSurveys(): ISurvey[]{
     let result: ISurvey[] = [];
     if(this.surveys.size === undefined) return result;
     this.surveys.forEach(
