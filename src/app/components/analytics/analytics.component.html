@@ -1,4 +1,4 @@
-<<div class="container bubble">
+<div class="container bubble">
     <div class="container-fluid align-items-center">
         <!--ngb nav gives tabs, active is what we ref in ts to see what's on top-->
         <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs nav-justified">
@@ -87,12 +87,8 @@
         <div [ngbNavOutlet]="nav" class="mt-2"></div>
 
 
-        
-
-        <div class="row">
-            <div class="col d-flex justify-content-center">
-                <canvas id="chart1" width=50%></canvas>
-            </div>
-        </div><br><br>
-    </div>
-</div>>
+         
+     </div>    
+</div>
+<app-charts [nestedReport]="parentReport"></app-charts>
+<!---->

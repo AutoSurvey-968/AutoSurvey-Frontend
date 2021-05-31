@@ -19,6 +19,8 @@ import { WorkWeekSelectionStrategyDirective } from './directives/work-week-selec
 import {NgbModule, NgbPaginationModule, NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { MatSelectModule } from '@angular/material/select';
+import { NgApexchartsModule } from 'ng-apexcharts';
+import { ChartsComponent } from './components/charts/charts.component';
 
 
 
@@ -32,7 +34,8 @@ import { MatSelectModule } from '@angular/material/select';
     UploadComponent,
     NavbarComponent,
     SendemailsComponent,
-    WorkWeekSelectionStrategyDirective
+    WorkWeekSelectionStrategyDirective,
+    ChartsComponent
   ],
   imports: [
     BrowserModule,
@@ -47,6 +50,7 @@ import { MatSelectModule } from '@angular/material/select';
     NgbPaginationModule,
     NgbAlertModule,
     NgbModule,
+    NgApexchartsModule,
     MatSnackBarModule,
     MatSelectModule
   ],

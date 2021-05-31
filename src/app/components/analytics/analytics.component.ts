@@ -8,6 +8,8 @@ import {SurveyService} from '../../services/survey/survey.service'
 import {CaliberService} from '../../services/caliber/caliber.service';
 import { Batch } from 'src/app/models/Caliber/batch';
 import { DateAdapter } from '@angular/material/core';
+import { IReport } from 'src/app/models/ireport-report';
+import { getInterpolationArgsLength } from '@angular/compiler/src/render3/view/util';
 
 //still need to take care of dates
 
@@ -47,6 +49,8 @@ export class AnalyticsComponent implements OnInit {
   batches: Batch[] = [];
   weeks: Date[] = [];
 
+  parentReport?: IReport;
+
   ngOnInit(): void {
     //this.setSurveys();//it should be set that if it does errors it doesn't break
     this.setUpBatches();
@@ -54,10 +58,26 @@ export class AnalyticsComponent implements OnInit {
   pipe = new DatePipe('en-US');
   getData(){
     if (this.active==1){
-      this.analyticsService.getDataWeek(this.surveyWeek.value,this.pipe.transform(this.range.get('start')?.value, 'yyyy-MM-dd')||"");
+      this.analyticsService.getDataWeek(this.surveyWeek.value,this.pipe.transform(this.range.get('start')?.value, 'yyyy-MM-dd')||"").subscribe((data: IReport)=>{
+        this.parentReport= {
+          surveyId: data.surveyId,
+          weekEnum: data.weekEnum,
+          batchString: data.batchString,
+          averages: data.averages,
+          percentages: data.percentages
+        }
+      });
     }
     else if (this.active==2){
-      this.analyticsService.getDataWeekBatch(this.surveyWeekBatch.value, this.pipe.transform(this.weekSelect.value, 'yyyy-MM-dd')||"", this.batchSelect.value);    }
+      this.analyticsService.getDataWeekBatch(this.surveyWeekBatch.value, this.pipe.transform(this.weekSelect.value, 'yyyy-MM-dd')||"", this.batchSelect.value).subscribe((data: IReport)=>{
+        this.parentReport= {
+          surveyId: data.surveyId,
+          weekEnum: data.weekEnum,
+          batchString: data.batchString,
+          averages: data.averages,
+          percentages: data.percentages
+        }
+      });    }
   }
 
   setSurveys(){
