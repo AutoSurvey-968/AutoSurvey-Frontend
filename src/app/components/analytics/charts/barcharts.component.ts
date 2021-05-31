@@ -74,27 +74,6 @@ export class BarChartsComponent{
           y: [3, 11]
         }
       ]
-    },
-    {
-      name: "green",
-      data: [
-        {
-          x: "Team A",
-          y: [2, 6]
-        },
-        {
-          x: "Team B",
-          y: [1, 3]
-        },
-        {
-          x: "Team C",
-          y: [7, 8]
-        },
-        {
-          x: "Team D",
-          y: [5, 9]
-        }
-      ]
     }
   ]
   changeData():void{

@@ -28,6 +28,7 @@ export class PiechartsComponent{
   set nestedReport(nestedReport: IReport|undefined){
     this._nestedReport=nestedReport;
     this.setChartValues(nestedReport);
+    this.pieChartOptionsArray=[];
     for(let i=0;i<this.pieData.length;i++){
       this.chartMaker(this.pieData[i],this.pieLabels[i],this.pieTitles[i])
     }
@@ -49,6 +50,7 @@ export class PiechartsComponent{
 
 
   changeData():void{
+    this.pieChartOptionsArray=[]
     this.chartMaker(this.data1,this.labels1,"test1")
     this.chartMaker(this.data2,this.labels2,"title2")
     for(let i=0;i<8;i++){
@@ -80,7 +82,7 @@ export class PiechartsComponent{
     }
   }
   chartMaker(data:number[],labels:string[], title:string): void{
-    
+
     this.pieChartOptionsArray.push( {
       series: data,
       chart: {

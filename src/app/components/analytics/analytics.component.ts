@@ -51,7 +51,7 @@ export class AnalyticsComponent implements OnInit {
   parentReport?: IReport;
 
   ngOnInit(): void {
-    //this.setSurveys();//it should be set that if it does errors it doesn't break
+    this.setSurveys();//it should be set that if it does errors it doesn't break
     this.setUpBatches();
   }
   pipe = new DatePipe('en-US');
