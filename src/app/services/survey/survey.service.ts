@@ -19,7 +19,7 @@ export class SurveyService implements SurveyServiceInterface {
   constructor(private http: HttpClient) { }
 
   getSurveys(): Observable<Map<string, ISurvey>> {
-    return this.http.get(this.endpoint+'/', this.httpOptions).pipe(
+    return this.http.get<any>(this.endpoint+'/', this.httpOptions).pipe(
       map(response => response as Map<string, ISurvey> )
     );
   }
