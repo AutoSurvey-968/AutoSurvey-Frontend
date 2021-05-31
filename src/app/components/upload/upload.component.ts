@@ -15,7 +15,7 @@ export class UploadComponent implements OnInit {
   surveys: Map<string, ISurvey> = new Map();
 
   constructor(
-    private surveyService: MockSurveyService,
+    private surveyService: SurveyService,
     private uploadService: UploadService
   ) { }
 
