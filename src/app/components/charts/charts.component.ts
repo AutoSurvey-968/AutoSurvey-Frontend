@@ -45,24 +45,10 @@ export class ChartsComponent{
   barsHeight?: ChartOptions["chart"];
 
 
-  public barChartOptions: Partial<ChartOptions>;
+  public barChartOptions?: Partial<ChartOptions>;
 
   constructor() {
-    this.barChartOptions = {
-      series: this.data1,
-      chart: {
-        type: "rangeBar",
-        height: 350
-      },
-      plotOptions: {
-        bar: {
-          horizontal: false
-        }
-      },
-      dataLabels: {
-        enabled: true
-      }
-    };
+    
 
   }
   data1: ChartOptions["series"]=[
@@ -110,50 +96,7 @@ export class ChartsComponent{
     }
   ]
   changeData():void{
-    this.data1=[
-      {
-        name: "blue",
-        data: [
-          {
-            x: "Team e",
-            y: [1, 5]
-          },
-          {
-            x: "Team f",
-            y: [4, 6]
-          },
-          {
-            x: "Team g",
-            y: [5, 8]
-          },
-          {
-            x: "Team h",
-            y: [3, 11]
-          }
-        ]
-      },
-      {
-        name: "green",
-        data: [
-          {
-            x: "Team e",
-            y: [3,3]
-          },
-          {
-            x: "Team f",
-            y: [2, 3]
-          },
-          {
-            x: "Team g",
-            y: [7, 11]
-          },
-          {
-            x: "Team h",
-            y: [9,5]
-          }
-        ]
-      }
-    ]
+    
     this.barChartOptions = {
       series: this.data1,
       chart: {
