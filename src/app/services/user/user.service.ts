@@ -9,12 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class UserService {
   endpoint: string = environment.apiUrl+'/users';
-<<<<<<< HEAD
   private httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }), withCredentials:true};
-=======
-  //private httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }), withCredentials:true};
-  private httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }), withCredentials: true };
->>>>>>> d752dc3b5da94036fd58e57dc8afcef34a25d3c3
 
   constructor(private http: HttpClient) { }
 
