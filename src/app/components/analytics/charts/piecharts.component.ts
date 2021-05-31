@@ -51,6 +51,9 @@ export class PiechartsComponent{
   changeData():void{
     this.chartMaker(this.data1,this.labels1,"test1")
     this.chartMaker(this.data2,this.labels2,"title2")
+    for(let i=0;i<8;i++){
+      this.chartMaker([1,99],["my knowledge","my sheer force of will"],`for loop chart:${i}`)
+    }
   }
 
   setChartValues(nestedReport: IReport | undefined): void{
