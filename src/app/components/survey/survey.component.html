@@ -1,1 +1,99 @@
-<p>survey works!</p>
+<div class="container">
+    <div class="text-center">
+      <h1 class="display-4">Create A New Survey</h1>
+    </div>
+    <form #surveyForm1="ngForm" [formGroup]="surveyForm" (submit)="addSurvey()">
+    <div class="row">
+      <div class="col-sm">
+      <mat-form-field class="form-field" appearance="fill" class="formField">
+        <mat-label> Survey Name
+        </mat-label>
+        <input matInput class="form-control form-control-lg" formControlName="surveyName" placeholder="Survey Name" name="surveyName" required />
+        <mat-error *ngIf="surveyForm.controls.surveyName.touched">
+          <span *ngIf="surveyForm.controls.surveyName.errors?.required">This field is mandatory.</span>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="col-sm d-flex align-items-end" >
+      <mat-form-field appearance="fill">
+        <mat-label> Batch
+        </mat-label>
+        <mat-select matSelect formControlName="batch" name="batch" required>
+          <mat-option *ngFor="let batch of batches" [value]="batch.id">
+            {{batch.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    </div>
+  
+      <table class="table table-bordered" formArrayName="questions">
+        <tr>
+          <th colspan="2">Add Questions</th>
+          <th width="150px"><button type="button" (click)="addQuestion()" class="mat-raised-button btn addQuestion">Add More</button></th>
+        </tr>
+      <tr *ngFor= "let question of questions().controls; let i=index" [formGroupName]="i">
+       <td>
+         <mat-form-field appearance="fill" class="questionField">
+          <mat-label> Question
+          </mat-label>
+          <input matInput class="form-control form-control-lg" formControlName="quest" placeholder="Question" name="quest" required />
+          <mat-error *ngIf="surveyForm.controls.surveyName.touched">
+            <span *ngIf="surveyForm.controls.surveyName.errors?.required">This field is mandatory.</span>
+          </mat-error>
+        </mat-form-field>
+       </td>
+       <td>
+        <mat-form-field class="text-center d-flex justify-content-center" appearance="fill">
+          <mat-label> Question Type
+          </mat-label>
+          <mat-select matSelect formControlName="questionType" name="questionType" required>
+          <mat-option value="CHECKBOX">Check Box</mat-option>
+          <mat-option value="DROPDOWN">Drop Down</mat-option>
+          <mat-option value="MULTIPLE_CHOICE">Multiple Choice</mat-option>
+          <mat-option value="PARAGRAPH">Paragraph</mat-option>
+          <mat-option value="RADIO">Radio</mat-option>
+          <mat-option value="SHORT_ANSWER">Short Answer</mat-option>
+        </mat-select>
+      </mat-form-field>
+       </td>
+       <td >
+        <button id="removeButton" type="button" (click)="removeQuestion(i)" class="mat-raised-button btn">Remove</button>
+      </td>
+      </tr>
+      </table>
+  <!--
+      <div class = row *ngFor= "let question of questions().controls; let i=index" [formGroupName]="i"]>
+        <div class= col-sm>
+          <mat-form-field appearance="fill">
+            <mat-label> Question
+            </mat-label>
+            <input class="form-control form-control-lg surveyQuestion" matInput formControlName="question" placeholder="Question" required>
+            <mat-error *ngIf="surveyForm.controls.surveyName.touched">
+              <span *ngIf="surveyForm.controls.surveyName.errors?.required">This field is mandatory.</span>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class= col-sm>
+        <mat-form-field appearance="fill">
+          <mat-label> Question Type
+          </mat-label>
+          <select>
+          <option label="Select Question Type"></option>
+          <option value="CHECKBOX">Check Box</option>
+          <option value="DROPDOWN">Drop Down</option>
+          <option value="MULTIPLE_CHOICE">Multiple Choice</option>
+          <option value="PARAGRAPH">Paragraph</option>
+          <option value="RADIO">Radio</option>
+          <option value="SHORT_ANSWER">Short Answer</option>
+        </select>
+      </mat-form-field>
+      </div>
+      <div class= col-sm>
+      <button mat-raised-button color="primary" (click)="addQuestion()">+</button>
+      <button (click)="removeQuestion(i)" class="btn btn-danger">Remove</button>
+      </div>
+    </div> -->
+      <button mat-raised-button class="mat-raised-button btn addQuestion" type="submit">Submit</button>
+    </form>
+  </div>
