@@ -8,18 +8,19 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class UserService {
-  endpoint: string = environment.apiUrl+'/';
-  private httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }), withCredentials:true};
+  endpoint: string = environment.apiUrl+'/users';
+  //private httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }), withCredentials:true};
+  private httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
 
   constructor(private http: HttpClient) { }
 
-  login(email: string, password: string): Observable<string> {  
+  login(email: string, password: string): Observable<string> {
     let body = {
       "email": email,
       "password": password
     };
 
-    return this.http.put(this.endpoint, body,this.httpOptions).pipe(
+    return this.http.put(this.endpoint, JSON.stringify(body), this.httpOptions).pipe(
       map(response => response as string)
     );
   }
