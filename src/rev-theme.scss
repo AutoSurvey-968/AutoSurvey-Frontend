@@ -1,0 +1,69 @@
+@import '@angular/material/theming';
+@include mat-core();
+
+$dark-primary-text: rgba(black, 0.87);
+$light-primary-text: white;
+$rev-orange: (
+    50: #fdede5,
+    100: #fbb2be,
+    200: #f9b492,
+    300: #f69666,
+    400: #f48046,
+    500: #f26925,
+    600: #f06121,
+    700: #ee561b,
+    800: #ec4c16,
+    900: #e93b0d,
+    contrast:(
+        50: $dark-primary-text,
+        100: $dark-primary-text,
+        200: $dark-primary-text,
+        300: $dark-primary-text,
+        400: $dark-primary-text,
+        500: $light-primary-text,
+        600: $light-primary-text,
+        700: $light-primary-text,
+        800: $light-primary-text,
+        900: $light-primary-text,
+        A100: #fffbfa,
+        A200: #ffd8c7,
+        A400: #ffb594,
+        A700: #ffa37a
+    )
+);
+$rev-blue: (
+    50: #eef4f8,
+    100: #d5e4ed,
+    200: #b9d2e1,
+    300: #9cbfd4,
+    400: #87b2cb,
+    500: #72a4c2,
+    600: #6a9cbc,
+    700: #5f92b4,
+    800: #5589ad,
+    900: #4378a0,
+    contrast:(
+        50: $dark-primary-text,
+        100: $dark-primary-text,
+        200: $dark-primary-text,
+        300: $dark-primary-text,
+        400: $dark-primary-text,
+        500: $light-primary-text,
+        600: $light-primary-text,
+        700: $light-primary-text,
+        800: $light-primary-text,
+        900: $light-primary-text,
+        A100: white,
+        A200: #dbf1ff,
+        A400: #a8ddff,
+        A700: #8ed3ff
+    )
+);
+
+$rev-primary: mat-palette($rev-orange);
+$rev-secondary: mat-palette($mat-cyan, A200, A100, A400);
+$rev-warn: mat-palette($mat-red);
+
+$rev-theme: mat-light-theme($rev-primary,$rev-secondary,$rev-warn);
+
+@include angular-material-theme($rev-theme);

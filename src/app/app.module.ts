@@ -16,8 +16,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { WorkWeekSelectionStrategyDirective } from './directives/work-week-selection/work-week-selection-strategy.directive'
+import {NgbModule, NgbPaginationModule, NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
+import { NgApexchartsModule } from 'ng-apexcharts';
+import { BarChartsComponent } from './components/analytics/charts/barcharts.component';
+import { PiechartsComponent } from './components/analytics/charts/piecharts.component';
 
 
 
@@ -31,7 +36,9 @@ import { MatButtonModule } from '@angular/material/button';
     UploadComponent,
     NavbarComponent,
     SendemailsComponent,
-    WorkWeekSelectionStrategyDirective
+    WorkWeekSelectionStrategyDirective,
+    BarChartsComponent,
+    PiechartsComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +51,12 @@ import { MatButtonModule } from '@angular/material/button';
     MatNativeDateModule,
     MatSelectModule,
     MatButtonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbPaginationModule,
+    NgbAlertModule,
+    NgbModule,
+    NgApexchartsModule,
+    MatSnackBarModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

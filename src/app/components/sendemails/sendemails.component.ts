@@ -28,8 +28,7 @@ export class SendemailsComponent implements OnInit {
     this.getAllBatches();
   }
 
-  getAllBatches():void{
-    console.log("a");
+  getAllBatches(): void{
     this.caliberService.getAllBatches()
     .subscribe(data => {this.batches = data;
     });

@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { MatSelectChange } from '@angular/material/select';
 import { ISurvey } from '../../models/isurvey-survey';
-import { SurveyService } from '../../services/survey/survey.service';
+import { MockSurveyService, SurveyService } from '../../services/survey/survey.service';
 import { UploadService } from '../../services/upload/upload.service';
 
 @Component({
@@ -9,9 +10,9 @@ import { UploadService } from '../../services/upload/upload.service';
   styleUrls: ['./upload.component.css']
 })
 export class UploadComponent implements OnInit {
-  @Input() activeSurvey!: ISurvey;
+  @Input() selectedSurveyUuid!: string;
   @Input() file!: File;
-  // surveys: ISurvey[] = this.surveyService.getSurveys();
+  surveys: Map<string, ISurvey> = new Map();
 
   constructor(
     private surveyService: SurveyService,
@@ -19,9 +20,36 @@ export class UploadComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.setSurveys();
   }
 
-  submitFile(): void {
-    // this.uploadService.upload(this.activeSurvey.uuid, this.surveys);
+  upload(): void {
+    this.uploadService.upload(this.selectedSurveyUuid, this.surveys).subscribe(
+       data => {}
+    );
+  }
+
+  setSurveys() : void {
+    this.surveyService.getSurveys().subscribe(
+      data => {
+        this.surveys = data as Map<string, ISurvey>;
+      }
+    );
+  }
+
+  selectedValueAction(event: MatSelectChange): void {
+    this.selectedSurveyUuid = event.value;
+    console.log(this.selectedSurveyUuid);
+  }
+
+  getSurveys(): ISurvey[] {
+    let result: ISurvey[] = [];
+    if(this.surveys.size === undefined) return result;
+    this.surveys.forEach(
+      survey => {
+        result.push(survey);
+      }
+    )
+    return result;
   }
 }

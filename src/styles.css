@@ -1,5 +1,4 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
-
 @font-face{
   font-family: Futura-Std-Book;
   src:url("assets/fonts/Futura-Std-Book.otf")
@@ -86,6 +85,9 @@ body h1{
 .hidden{
   display: none !important;
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
