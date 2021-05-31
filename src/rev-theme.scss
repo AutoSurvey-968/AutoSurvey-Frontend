@@ -28,7 +28,7 @@ $rev-orange: (
         A100: #fffbfa,
         A200: #ffd8c7,
         A400: #ffb594,
-        A700: #ffa37a
+        A700: #ffa37a,
     )
 );
 $rev-blue: (
@@ -56,12 +56,12 @@ $rev-blue: (
         A100: white,
         A200: #dbf1ff,
         A400: #a8ddff,
-        A700: #8ed3ff
+        A700: #8ed3ff,
     )
 );
 
-$rev-primary: mat-palette($rev-orange);
-$rev-secondary: mat-palette($mat-cyan, A200, A100, A400);
+$rev-primary: mat-palette($rev-blue, 500, 300, 700);
+$rev-secondary: mat-palette($rev-orange, 500, 300, 700);
 $rev-warn: mat-palette($mat-red);
 
 $rev-theme: mat-light-theme($rev-primary,$rev-secondary,$rev-warn);
