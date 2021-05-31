@@ -4,23 +4,18 @@
   </div>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-        <li  class="nav-item">
-            <a *ngIf="route.url !== '/login' && !isLoggedIn()" id="login" class="nav-link" routerLink="/login">
-              Login
-            </a>
-        </li>
-        <li  class="nav-item">
-          <a *ngIf="route.url !== '/login' && isLoggedIn()" id="logout" class="nav-link" routerLink="/login">
-            Logout
-          </a>
+      <li  class="nav-item">
+        <a *ngIf="route.url !== '/survey' && isLoggedIn()" id="survey" class="nav-link" routerLink="/survey">
+          Survey
+        </a>
       </li>
         <li  class="nav-item">
-          <a *ngIf="route.url !== '/submission' && isLoggedIn()" id="submission" class="nav-link">
+          <a *ngIf="route.url !== '/submission' && isLoggedIn()" id="submission" class="nav-link" routerLink="/submission">
             Submit
           </a>
         </li>
         <li  class="nav-item">
-          <a *ngIf="route.url === '/survey' && isLoggedIn()" id="upload" class="nav-link" routerLink="/upload">
+          <a *ngIf="route.url !== '/upload' && isLoggedIn()" id="upload" class="nav-link" routerLink="/upload">
             Upload
           </a>
         </li>
@@ -31,7 +26,7 @@
       </li>
         <li class="nav-item">
           <a *ngIf="route.url !== '/sendemails' && isLoggedIn()" id="sendemails" class="nav-link" routerLink="/sendemails">
-            Send Emails
+            Emails
           </a>
           <!--
           <span *ngIf="route.url==='/survey'" id="survey" class="nav-link font-weight-bold">
@@ -39,6 +34,16 @@
           </span>
           -->
         </li>
+        <li  class="nav-item">
+          <a *ngIf="route.url !== '/login' && !isLoggedIn()" id="login" class="nav-link" routerLink="/login">
+            Login
+          </a>
+      </li>
+      <li  class="nav-item">
+        <a *ngIf="route.url !== '/login' && isLoggedIn()" id="logout" class="nav-link" routerLink="/login">
+          Logout
+        </a>
+      </li>
     </ul>
   </div>
 </nav>
