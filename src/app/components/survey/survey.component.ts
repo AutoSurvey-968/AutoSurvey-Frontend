@@ -19,13 +19,11 @@ export class SurveyComponent implements OnInit {
   survey!: ISurvey;
   surveyForm: FormGroup;
   public batches!: Batch[];
-  surveyQuestions!: IQuestion [];
-  question!: IQuestion;
 
   constructor(private surveyService: SurveyService, private formBuilder: FormBuilder, private caliberService: CaliberService ) {
     this.surveyForm = this.formBuilder.group({
       surveyName: [' ', [Validators.required]],
-      batch: [null, Validators.required],
+      description: [null, Validators.required],
       questions: this.formBuilder.array([]),
     });
    }
@@ -38,9 +36,13 @@ export class SurveyComponent implements OnInit {
     if(!this.surveyForm.valid){
       return;
     }
-    this.survey = Object.assign({}, this.surveyForm.value);
 
-    alert(this.survey.title);
+    this.survey = Object.assign({}, this.surveyForm.value);
+    this.survey.title = this.surveyForm.value.surveyName;
+    this.survey.questions = this.surveyForm.value.questions;
+    this.survey.description = this.surveyForm.value.description;
+
+    alert(this.survey.title + " " + this.survey.description + " " + this.survey.questions);
     this.surveyService.addSurvey(this.survey).subscribe((data) => {
       console.log(data);
     });

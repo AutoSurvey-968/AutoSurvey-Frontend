@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { CookieService } from 'ngx-cookie-service';
+// import { CookieService } from 'ngx-cookie-service';
 import { environment } from 'src/environments/environment';
 import { ISurvey } from '../../models/isurvey-survey';
 import { SurveyService } from '../../services/survey/survey.service';
@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private cookieService: CookieService
+    // private cookieService: CookieService
     ) { }
 
   ngOnInit(): void {
