@@ -20,10 +20,8 @@ export class LoginComponent implements OnInit {
 
   login(): void {
     this.userService.login(this.email, this.password).subscribe((data) => {
-      const date = new Date();
-      const value = data.token;
-      document.cookie = "token="+value+"; path=/;SameSite=Lax";
       console.log(document.cookie);
+      localStorage.setItem("token", data.token);
     });
   }
 }
