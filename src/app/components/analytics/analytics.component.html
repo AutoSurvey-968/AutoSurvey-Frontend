@@ -5,7 +5,7 @@
             <li [ngbNavItem]="1">
                 <a ngbNavLink>By Week</a>
                 <ng-template ngbNavContent>
-                    <mat-form-field appearance="outline" class="form-control form-control-sm">
+                    <mat-form-field appearance="fill" class="form-control form-control-sm">
                         <mat-label class="form-label">Survey</mat-label>
                         <mat-select name="survey-dropdown" [formControl]="surveyWeek">
                           <mat-option *ngFor="let survey of getSurveys()" class="form-control" [value]=[survey.uuid]>

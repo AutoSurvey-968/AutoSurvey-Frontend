@@ -1,4 +1,4 @@
-import { Component, Input} from "@angular/core";
+import { ChangeDetectionStrategy, Component, Input} from "@angular/core";
 import {
   ApexAxisChartSeries,
   ApexChart,
@@ -18,7 +18,8 @@ export type ChartOptions = {
 @Component({
   selector: 'app-barcharts',
   templateUrl: './barcharts.component.html',
-  styleUrls: ['./barcharts.component.css']
+  styleUrls: ['./barcharts.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class BarChartsComponent{

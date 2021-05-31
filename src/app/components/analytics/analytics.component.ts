@@ -79,7 +79,7 @@ export class AnalyticsComponent implements OnInit {
       });    }
   }
 
-  setSurveys(){
+  setSurveys() : void {
     this.surveyService.getSurveys().subscribe(
       data => {
         this.surveys = data as Map<string, ISurvey>;
