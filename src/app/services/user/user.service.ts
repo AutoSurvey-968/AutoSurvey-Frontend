@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { from, Observable } from 'rxjs';
+import { EMPTY, from, Observable } from 'rxjs';
 import { IUser } from '../../models/iuser-user';
 
 @Injectable({
@@ -27,14 +27,22 @@ export class UserService {
   }
 
   register(firstName: string, lastName: string, email: string, password: string): Observable<string> {
+    if (localStorage.getItem("token") === null) {
+      return EMPTY;
+    } 
+    this.httpOptions.headers = new HttpHeaders({ 'Content-Type': 'application/json' , 'Authorization' : 'Bearer ' + localStorage.getItem('token')});
+    console.log(this.httpOptions.headers);
     let body = {
       "firstName" : firstName,
       "lastName" : lastName,
       "email" : email,
       "password" : password
     };
+    console.log(body);
     return this.http.post(this.endpoint, body, this.httpOptions).pipe(
-      map(response => response as string)
+      map(response => {
+        return response as string;
+      })
     );
   }
 }

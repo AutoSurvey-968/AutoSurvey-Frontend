@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
   selector: 'app-admin',
@@ -7,9 +8,10 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class AdminComponent implements OnInit {
   @Input() email!: string;
-  @Input() password!: string;
+  @Input() firstName!: string;
+  @Input() lastName!: string;
 
-  constructor() { 
+  constructor(private userService: UserService) {
 
   }
 
@@ -17,6 +19,8 @@ export class AdminComponent implements OnInit {
   }
 
   registerEmployee(): void {
-      console.log();
+      this.userService.register(this.firstName, this.lastName, this.email,  "").subscribe((data) => {
+        console.log(data);
+      })
   }
 }

@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
 
   login(): void {
     this.userService.login(this.email, this.password).subscribe((data) => {
-      console.log(document.cookie);
+      console.log(data);
       localStorage.setItem("token", data.token);
     });
   }
