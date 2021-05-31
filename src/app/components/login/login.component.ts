@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
+import { environment } from 'src/environments/environment';
 import { ISurvey } from '../../models/isurvey-survey';
 import { SurveyService } from '../../services/survey/survey.service';
 import { UserService } from '../../services/user/user.service';
@@ -13,14 +15,17 @@ export class LoginComponent implements OnInit {
   @Input() email!: string;
   @Input() password!: string;
 
-  constructor(private userService: UserService) { }
+  constructor(
+    private userService: UserService,
+    private cookieService: CookieService
+    ) { }
 
   ngOnInit(): void {
   }
 
   login(): void {
     this.userService.login(this.email, this.password).subscribe((data) => {
-      console.log(data);
+      localStorage.setItem('token', data.token);
     });
   }
 }
