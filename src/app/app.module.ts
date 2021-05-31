@@ -24,7 +24,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { BarChartsComponent } from './components/analytics/charts/barcharts.component';
 import { PiechartsComponent } from './components/analytics/charts/piecharts.component';
-
+import { MatInputModule } from '@angular/material/input';
 
 
 @NgModule({
@@ -59,6 +59,7 @@ import { PiechartsComponent } from './components/analytics/charts/piecharts.comp
     NgbModule,
     NgApexchartsModule,
     MatSnackBarModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]

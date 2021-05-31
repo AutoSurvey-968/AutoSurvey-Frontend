@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { ISurvey } from '../../models/isurvey-survey';
 
+
 interface SurveyServiceInterface {
   getSurveys(): Observable<Map<string, ISurvey>>;
 }
@@ -14,7 +15,13 @@ interface SurveyServiceInterface {
 })
 export class SurveyService implements SurveyServiceInterface {
   endpoint: string = environment.apiUrl+'/surveys';
-  private httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json', "Authorization" : "Bearer " + localStorage.getItem("token")}), withCredentials: true };
+  private httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer '+localStorage.getItem('token')
+    }),
+    withCredentials: true
+  };
 
   constructor(private http: HttpClient) { }
 
@@ -23,6 +30,16 @@ export class SurveyService implements SurveyServiceInterface {
       map(response => response as Map<string, ISurvey> )
     );
   }
+
+  addSurvey(survey: ISurvey):Observable<ISurvey> {
+    const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+    return this.http.post<ISurvey>(this.endpoint, survey, httpOptions);
+  }
+
+  getSurveyById(surveyId: string): Observable<ISurvey> {
+    return this.http.get<ISurvey>(this.endpoint + "/" + surveyId);
+  }
+
 }
 
 @Injectable({
@@ -30,7 +47,6 @@ export class SurveyService implements SurveyServiceInterface {
 })
 export class MockSurveyService implements SurveyServiceInterface {
   constructor() {}
-
   getSurveys(): Observable<Map<string, ISurvey>> {
     let survey0: ISurvey = {
       uuid: "000",
@@ -55,4 +71,5 @@ export class MockSurveyService implements SurveyServiceInterface {
     response.set(survey1.uuid, survey1);
     return of(response);
   }
+
 }

@@ -14,7 +14,7 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  login(email: string, password: string): Observable<IUser> {  
+  login(email: string, password: string): Observable<IUser> {
     let body = {
       "email": email,
       "password": password
