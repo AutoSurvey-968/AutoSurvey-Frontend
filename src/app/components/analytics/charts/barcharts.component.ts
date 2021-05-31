@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from "@angular/core";
+import { Component, Input} from "@angular/core";
 import {
   ApexAxisChartSeries,
   ApexChart,
@@ -14,13 +14,14 @@ export type ChartOptions = {
   plotOptions: ApexPlotOptions;
 };
 
+
 @Component({
-  selector: 'app-charts',
-  templateUrl: './charts.component.html',
-  styleUrls: ['./charts.component.css']
+  selector: 'app-barcharts',
+  templateUrl: './barcharts.component.html',
+  styleUrls: ['./barcharts.component.css']
 })
 
-export class ChartsComponent{
+export class BarChartsComponent{
   @Input()
   get nestedReport(): IReport|undefined{return this.nestedReport}
   set nestedReport(nestedReport: IReport|undefined){
@@ -46,6 +47,7 @@ export class ChartsComponent{
 
 
   public barChartOptions?: Partial<ChartOptions>;
+  public pieChartOptions?: Partial<ChartOptions>[];
 
   constructor() {
     
@@ -115,7 +117,6 @@ export class ChartsComponent{
   }
 
   setChartValues(nestedReport: IReport | undefined): void{
-    this.dataBars=[]
     if (nestedReport!==undefined){
       if (nestedReport.averages!==undefined){
         let tempdata =[]

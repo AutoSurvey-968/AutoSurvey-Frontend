@@ -20,7 +20,8 @@ import {NgbModule, NgbPaginationModule, NgbAlertModule} from '@ng-bootstrap/ng-b
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { MatSelectModule } from '@angular/material/select';
 import { NgApexchartsModule } from 'ng-apexcharts';
-import { ChartsComponent } from './components/charts/charts.component';
+import { BarChartsComponent } from './components/analytics/charts/barcharts.component';
+import { PiechartsComponent } from './components/analytics/charts/piecharts.component';
 
 
 
@@ -35,7 +36,8 @@ import { ChartsComponent } from './components/charts/charts.component';
     NavbarComponent,
     SendemailsComponent,
     WorkWeekSelectionStrategyDirective,
-    ChartsComponent
+    BarChartsComponent,
+    PiechartsComponent
   ],
   imports: [
     BrowserModule,

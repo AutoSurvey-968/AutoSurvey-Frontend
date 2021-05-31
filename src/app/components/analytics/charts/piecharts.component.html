@@ -1,0 +1,19 @@
+
+
+<button class="btn btn-lg btn-custom" (click)="changeData()">Change Data</button>
+<div class="container-fluid">
+    <div class="ro d-flex justify-content-center">
+        <div name="chart-container" class="col-3" *ngFor='let pieChartOptions of pieChartOptionsArray'>
+            <div id="chart" *ngIf="pieChartOptions!==undefined&& pieChartOptions.series!==undefined&& pieChartOptions.chart!== undefined && pieChartOptions.labels!==undefined&&pieChartOptions.responsive!==undefined && pieChartOptions.title!==undefined">
+                <apx-chart
+                  [series]="pieChartOptions.series"
+                  [chart]="pieChartOptions.chart"
+                  [labels]="pieChartOptions.labels"
+                  [responsive]="pieChartOptions.responsive"
+                  [title]="pieChartOptions.title"
+                ></apx-chart>
+              </div>
+        </div>
+    </div>
+</div>
+

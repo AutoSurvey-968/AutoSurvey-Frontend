@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import {FormGroup, FormControl, Validators} from '@angular/forms';
 import { MatSelectChange } from '@angular/material/select';
 import { ISurvey } from '../../models/isurvey-survey';
@@ -9,7 +9,6 @@ import {CaliberService} from '../../services/caliber/caliber.service';
 import { Batch } from 'src/app/models/Caliber/batch';
 import { DateAdapter } from '@angular/material/core';
 import { IReport } from 'src/app/models/ireport-report';
-import { getInterpolationArgsLength } from '@angular/compiler/src/render3/view/util';
 
 //still need to take care of dates
 
