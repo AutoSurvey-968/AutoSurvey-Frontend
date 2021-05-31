@@ -8,4 +8,5 @@ export interface IUser {
   credentialsNonExpired: boolean;
   accountNonLocked: boolean;
   accountNonExpired: boolean;
+  token: string;
 }
