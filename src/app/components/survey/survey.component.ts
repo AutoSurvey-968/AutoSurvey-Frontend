@@ -27,7 +27,7 @@ export class SurveyComponent implements OnInit {
       questions: this.formBuilder.array([]),
     });
    }
-
+   
   ngOnInit(): void {
     this.getAllBatches();
   }
