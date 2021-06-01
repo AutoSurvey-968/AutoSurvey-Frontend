@@ -1,4 +1,5 @@
 export interface IUser {
+  id: number;
   firstName: string;
   lastName: string;
   email: string;
@@ -8,4 +9,5 @@ export interface IUser {
   credentialsNonExpired: boolean;
   accountNonLocked: boolean;
   accountNonExpired: boolean;
+  token: string;
 }

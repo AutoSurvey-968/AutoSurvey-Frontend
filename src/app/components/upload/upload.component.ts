@@ -32,6 +32,7 @@ export class UploadComponent implements OnInit {
   setSurveys() : void {
     this.surveyService.getSurveys().subscribe(
       data => {
+        console.log(data)
         this.surveys = data as Map<string, ISurvey>;
       }
     );
