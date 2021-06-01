@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { IQuestion } from 'src/app/models/iquestion.question';
+import { IQuestion } from 'src/app/models/iquestion-question';
 
 @Component({
   selector: 'radio-question',

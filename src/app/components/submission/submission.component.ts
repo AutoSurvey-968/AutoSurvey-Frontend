@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { IQuestion } from 'src/app/models/iquestion.question';
+import { IQuestion } from 'src/app/models/iquestion-question';
 import { ISubmission } from 'src/app/models/isubmission-submission';
 import { ISurvey } from 'src/app/models/isurvey-survey';
 import { SubmissionService } from 'src/app/services/submission/submission.service';
