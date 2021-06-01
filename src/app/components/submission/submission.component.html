@@ -65,7 +65,7 @@
             </select>
         </div>
 
-        <div class="survey-questions" *ngFor="let question of questions; index as i; " formArrayName="responses">
+        <div class="survey-questions" *ngFor="let question of questions; index as i;" formArrayName="responses">
           <radio-question id="{{'question-'+i}}" [question]="question" [index]="i" [form]="submissionForm" *ngIf="question.questionType == 'RADIO'"></radio-question>
           <multiple-choice-question id="{{'question-'+i}}" [question]="question" [index]="i" [form]="submissionForm" *ngIf="question.questionType == 'MULTIPLE_CHOICE'"></multiple-choice-question>
           <short-answer-question id="{{'question-'+i}}" [question]="question" [index]="i" [form]="submissionForm" *ngIf="question.questionType == 'SHORT_ANSWER'"></short-answer-question>
