@@ -34,17 +34,20 @@ export class SubmissionComponent implements OnInit {
     this.surveyService.getSurveyById(this.surveyId).subscribe(survey => {
       this.survey = survey;
       this.questions = survey.questions;
+      this.submissionForm = this.formBuilder.group({
+        batch: ['', Validators.required],
+        week: ['', Validators.required],
+        surveyUuid: this.surveyId,
+        responses: this.formBuilder.array([]),
+      });
+      // Populate the new form with each question
+      this.addResponse("Name (Optional)");
+      this.addResponse("Email (Optional)");
+      this.addResponse("Where is your training location?");
       this.questions.forEach(question => {
         this.addResponse(question.title);
       })
     })
-    this.submissionForm = this.formBuilder.group({
-      title: ['', [Validators.required]],
-      batch: ['', Validators.required],
-      week: ['', Validators.required],
-      surveyUuid: ['', Validators.required],
-      responses: this.formBuilder.array([]),
-    });
 
   }
 
@@ -61,10 +64,6 @@ export class SubmissionComponent implements OnInit {
 
   addResponse(question: string) {
     this.responses.push(this.newResponse(question));
-  }
-
-  removeResponse(i : number) {
-    this.responses.removeAt(i);
   }
 
   ngOnInit(): void {

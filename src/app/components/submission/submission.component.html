@@ -15,30 +15,32 @@
     <br><hr><br>
 
     <form [formGroup]="submissionForm" (ngSubmit)="submit()">
-      <div>
-        <div id="name-question">
+      <div formArrayName="responses">
+        <div id="name-question" [formGroupName]="0">
             <div class="mb-3">
                 <label for="name" class="form-label">Name (Optional)</label>
-                <input type="text" class="form-control" id="name">
+                <input type="text" class="form-control" id="name" formControlName="response">
               </div>
         </div>
 
-        <div id="email-question">
+        <div id="email-question" [formGroupName]="1">
           <div class="mb-3">
             <label for="email" class="form-label">Email (Optional)</label>
-            <input type="text" class="form-control" id="email">
+            <input type="text" class="form-control" id="email" formControlName="response">
           </div>
         </div>
 
         <br> <hr> <br>
 
-        <div id="location-question">
+        <div id="location-question" [formGroupName]="2">
           <div class="mb-3">
             <label for="location" class="form-label">Where is your training location? <span>*</span></label>
-            <select class="form-control" id="location" required></select>
+            <select class="form-control" id="location" formControlName="response" required></select>
           </div>
         </div>
+      </div>
 
+      <div>
         <div id="batch-question">
           <div class="mb-3">
             <label for="batch" class="form-label">What batch are you in? <span>*</span></label>
@@ -64,19 +66,21 @@
               <option value="9">Week 9</option>
             </select>
         </div>
-        <div [formGroup]="submissionForm">
-          <div class="survey-questions" *ngFor="let question of questions; index as i;" formArrayName="responses">
-            <div [formGroupName]="i">
-              <radio-question id="{{'question-'+i}}" [question]="question" [index]="i" [form]="submissionForm" *ngIf="question.questionType == 'RADIO'"></radio-question>
-              <multiple-choice-question id="{{'question-'+i}}" [question]="question" [index]="i" [form]="submissionForm" *ngIf="question.questionType == 'MULTIPLE_CHOICE'"></multiple-choice-question>
-              <short-answer-question id="{{'question-'+i}}" [question]="question" [index]="i" [form]="submissionForm" *ngIf="question.questionType == 'SHORT_ANSWER'"></short-answer-question>
-              <dropdown-question id="{{'question-'+i}}" [question]="question" [index]="i" [form]="submissionForm" *ngIf="question.questionType == 'DROPDOWN'"></dropdown-question>
-            </div>
+
+        <div class="survey-questions" *ngFor="let question of questions; index as i;">
+          <div>
+            <!-- index is passed in as i+3 to offset name, email, and training location questions -->
+            <radio-question id="{{'question-'+i+3}}" [question]="question" [index]="i+3" [form]="submissionForm" *ngIf="question.questionType == 'RADIO'"></radio-question>
+            <multiple-choice-question id="{{'question-'+i+3}}" [question]="question" [index]="i+3" [form]="submissionForm" *ngIf="question.questionType == 'MULTIPLE_CHOICE'"></multiple-choice-question>
+            <short-answer-question id="{{'question-'+i+3}}" [question]="question" [index]="i+3" [form]="submissionForm" *ngIf="question.questionType == 'SHORT_ANSWER'"></short-answer-question>
+            <dropdown-question id="{{'question-'+i+3}}" [question]="question" [index]="i+3" [form]="submissionForm" *ngIf="question.questionType == 'DROPDOWN'"></dropdown-question>
           </div>
         </div>
+
         <br><hr><br>
 
         <button id="submit-survey" type="submit" class="btn btn-lg btn-custom">Submit</button>
       </div>
+
     </form>
   </div>
