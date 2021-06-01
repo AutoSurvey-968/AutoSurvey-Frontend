@@ -10,29 +10,38 @@ import { Router } from '@angular/router';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  
-  constructor(public userService: UserService, public route: Router) { }
-  private isTest: boolean = false;
+  constructor(
+    public userService: UserService,
+    public route: Router
+  ) { }
+
   ngOnInit(): void {
   }
 
-  getNameFromCookie() : void {
-    let cookies = document.cookie
-    .split(';')
-    .map(c => c.split('='))
-    .reduce((accumulator,[key,value]) => ({...accumulator, [key.trim()]: decodeURIComponent(value)}),{});
-    console.log(cookies);
+  getSurveyId(): string {
+    return "/submit/"+0;
   }
 
-  setTest(isTest: boolean): void{
-    this.isTest = isTest;
+  getDisable(): void {
+    let urlList: string[] = ['/survey','/upload','/analytics','/sendemails','/submit'];
+    let idList: string[] = ['survey','upload','analytics','sendemails','submission'];
+    document.querySelectorAll('a').forEach(ni => {
+      let urlID = this.route.url;
+      if (this.route.url.substring(0,7) === '/submit'){
+        urlID = this.route.url.substring(0,7);
+      }
+      for (let i = 0; i< urlList.length ; i++){ 
+        if (urlID === urlList[i] && ni.id === idList[i] && ni.className === 'nav-link'){
+          ni.classList.remove('nav-link')
+          ni.classList.add('nav-link', 'disabled')
+          break;
+        } 
+        ni.className = 'nav-link';
+      }
+    });
   }
 
   isLoggedIn(): boolean{
-    return document.cookie != "";
-  }
-
-  isAdmin(): boolean{
-    return true;
+    return localStorage.getItem('token') != null;
   }
 }

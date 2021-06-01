@@ -15,7 +15,8 @@ import { SendemailsComponent } from './components/sendemails/sendemails.componen
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { WorkWeekSelectionStrategyDirective } from './directives/work-week-selection/work-week-selection-strategy.directive'
+import { WorkWeekSelectionStrategyDirective } from './directives/work-week-selection/work-week-selection-strategy.directive';
+import { AdminComponent } from './components/admin/admin.component'
 import {NgbModule, NgbPaginationModule, NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { MatSelectModule } from '@angular/material/select';
@@ -37,6 +38,7 @@ import { MatInputModule } from '@angular/material/input';
     NavbarComponent,
     SendemailsComponent,
     WorkWeekSelectionStrategyDirective,
+    AdminComponent,
     BarChartsComponent,
     PiechartsComponent
   ],

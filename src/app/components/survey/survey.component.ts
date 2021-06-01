@@ -6,6 +6,8 @@ import { CaliberService } from 'src/app/services/caliber/caliber.service';
 import {Batch} from '../../models/Caliber/batch';
 import { MatFormFieldControl } from '@angular/material/form-field';
 import { ISurvey } from 'src/app/models/isurvey-survey';
+import { Title } from '@angular/platform-browser';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-survey',
@@ -21,7 +23,12 @@ export class SurveyComponent implements OnInit {
   public batches!: Batch[];
   questionArray: IQuestion[] = [];
 
-  constructor(private surveyService: SurveyService, private formBuilder: FormBuilder, private caliberService: CaliberService ) {
+  constructor(
+    private surveyService: SurveyService,
+    private formBuilder: FormBuilder,
+    private caliberService: CaliberService,
+    private titleService: Title
+  ) {
     this.surveyForm = this.formBuilder.group({
       surveyName: [' ', [Validators.required]],
       description: [null, Validators.required],
@@ -30,6 +37,7 @@ export class SurveyComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    this.titleService.setTitle('Survey'+environment.titleSuffix);
     this.getAllBatches();
   }
 

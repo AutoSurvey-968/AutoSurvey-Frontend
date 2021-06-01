@@ -1,0 +1,23 @@
+        <div class="container bubble">
+            <div class="d-flex justify-content-center">
+                <h1>Create QC Account</h1>
+            </div>
+            <hr>
+            <br>
+            <div class="d-flex justify-content-center">
+                <p>Please enter the QC member's information below:</p>
+            </div>
+            <div class="d-flex justify-content-center">
+                <input class="form-control" type="text" id="firstName" [(ngModel)]="firstName" placeholder="First Name" autocomplete="off">
+            </div>
+            <div class="d-flex justify-content-center">
+                <input class="form-control" type="text" id="lastName" [(ngModel)]="lastName" placeholder="Last Name" autocomplete="off">
+            </div>
+            <div class="d-flex justify-content-center">
+                <input class="form-control" type="text" id="email" [(ngModel)]="email" placeholder="Email" autocomplete="off">
+            </div>
+
+            <div class="d-flex justify-content-center">
+                <button (click)="registerEmployee()" class="btn btn-lg btn-custom" style="width: 250px;" id="register">Register Employee</button>
+            </div>
+        </div>
