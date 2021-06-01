@@ -32,8 +32,7 @@ export class SurveyService implements SurveyServiceInterface {
   }
 
   addSurvey(survey: ISurvey):Observable<ISurvey> {
-    const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return this.http.post<ISurvey>(this.endpoint, survey, httpOptions);
+    return this.http.post<ISurvey>(this.endpoint, survey, this.httpOptions);
   }
 
   getSurveyById(surveyId: string): Observable<ISurvey> {
