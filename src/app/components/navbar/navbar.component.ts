@@ -16,23 +16,11 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  getNameFromCookie() : void {
-    let cookies = document.cookie
-    .split(';')
-    .map(c => c.split('='))
-    .reduce((accumulator,[key,value]) => ({...accumulator, [key.trim()]: decodeURIComponent(value)}),{});
-    console.log(cookies);
-  }
-
-  setTest(isTest: boolean): void{
-    this.isTest = isTest;
+  getSurveyId(): string {
+    return "/submit/"+0;
   }
 
   isLoggedIn(): boolean{
     return document.cookie != "";
-  }
-
-  isAdmin(): boolean{
-    return true;
   }
 }
