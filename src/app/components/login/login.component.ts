@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Title } from '@angular/platform-browser';
@@ -28,7 +29,9 @@ export class LoginComponent implements OnInit {
     this.titleService.setTitle('Login'+environment.titleSuffix);
   }
 
-
+  private openSnackbar(message: string) {
+    this.snackBar.open(message, undefined, {duration: 2000});
+  }
 
   login(): void {
     this.userService.login(this.email, this.password).subscribe(
@@ -37,8 +40,9 @@ export class LoginComponent implements OnInit {
         console.log(localStorage.getItem('token'));
         this.router.navigate(['analytics']);
       },
-      (error) => {
+      (error: HttpErrorResponse) => {
         this.snackBar.open("Username or password was incorrect.", undefined, {duration: 2000 } );
+        this.openSnackbar("Hello");
       });
   }
 }

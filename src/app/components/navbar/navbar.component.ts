@@ -27,7 +27,7 @@ export class NavbarComponent implements OnInit {
   }
 
   isLoggedIn(): boolean{
-    return document.cookie != "";
+    return localStorage.getItem('token') != null;
   }
 
   isAdmin(): boolean{
