@@ -17,7 +17,7 @@ import { IQuestion } from 'src/app/models/iquestion-question';
       <p style="margin-top: 9px; margin-left: 10px;">Very Satisfied</p>
     </div>
   `,
-  styleUrls: ['./submission.component.css']
+  styleUrls: ['../submission.component.css']
 })
 
 export class RadioQuestionComponent {

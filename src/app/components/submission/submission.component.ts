@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
 import { IQuestion } from 'src/app/models/iquestion-question';
 import { ISubmission } from 'src/app/models/isubmission-submission';
 import { ISurvey } from 'src/app/models/isurvey-survey';
@@ -15,7 +14,7 @@ import { SurveyService } from 'src/app/services/survey/survey.service';
 export class SubmissionComponent implements OnInit {
   surveyId!: string;
   @Input() submission!: ISubmission;
-  survey: Observable<ISurvey> = this.surveyService.getSurveyById(this.surveyId);
+  survey!: ISurvey;
   questions!: IQuestion[];
 
   constructor(
@@ -26,7 +25,8 @@ export class SubmissionComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.surveyId = params['surveyId'];
     })
-    this.survey.subscribe(survey => {
+    this.surveyService.getSurveyById(this.surveyId).subscribe(survey => {
+      this.survey = survey;
       this.questions = survey.questions;
     })
   }
