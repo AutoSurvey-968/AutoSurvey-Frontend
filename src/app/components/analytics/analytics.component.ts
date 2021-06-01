@@ -9,6 +9,8 @@ import {CaliberService} from '../../services/caliber/caliber.service';
 import { Batch } from 'src/app/models/Caliber/batch';
 import { DateAdapter } from '@angular/material/core';
 import { IReport } from 'src/app/models/ireport-report';
+import { Title } from '@angular/platform-browser';
+import { environment } from 'src/environments/environment';
 
 //still need to take care of dates
 
@@ -19,7 +21,13 @@ import { IReport } from 'src/app/models/ireport-report';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AnalyticsComponent implements OnInit {
-  constructor(private _dateAdapter: DateAdapter<Date>,private analyticsService: AnalyticsService, private surveyService: SurveyService, private caliberService: CaliberService) { }
+  constructor(
+    private _dateAdapter: DateAdapter<Date>,
+    private analyticsService: AnalyticsService,
+    private surveyService: SurveyService,
+    private caliberService: CaliberService,
+    private titleService: Title,
+  ) { }
 
   active = 1;
   range = new FormGroup({
@@ -51,6 +59,7 @@ export class AnalyticsComponent implements OnInit {
   parentReport?: IReport;
 
   ngOnInit(): void {
+    this.titleService.setTitle('Analytics'+environment.titleSuffix);
     this.setSurveys();//it should be set that if it does errors it doesn't break
     this.setUpBatches();
   }
