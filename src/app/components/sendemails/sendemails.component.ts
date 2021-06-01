@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { Associate } from 'src/app/models/Caliber/associate';
 import { IoService } from 'src/app/services/io/io.service';
+import { environment } from 'src/environments/environment';
 import {Batch} from '../../models/Caliber/batch';
 import { ISurvey } from '../../models/isurvey-survey';
 import {CaliberService} from '../../services/caliber/caliber.service';
@@ -19,12 +21,14 @@ export class SendemailsComponent implements OnInit {
   public selectedBatch!: Number;
   public selectedSurvey!: Number;
   constructor(
-    private caliberService: CaliberService, 
+    private caliberService: CaliberService,
     private surveyService: SurveyService,
-    private ioService: IoService
+    private ioService: IoService,
+    private titleService: Title
     ) { }
 
   ngOnInit(): void {
+    this.titleService.setTitle('Email'+environment.titleSuffix);
     this.getAllBatches();
   }
 
