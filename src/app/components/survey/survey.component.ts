@@ -43,15 +43,15 @@ export class SurveyComponent implements OnInit {
   }
 
   addSurvey(): void {
-    if(!this.surveyForm.valid){
-      return;
-    }
-    this.survey = Object.assign({}, this.surveyForm.value);
+    // if(!this.surveyForm.valid){
+    //   return;
+    // }
+    // this.survey = Object.assign({}, this.surveyForm.value);
 
     alert(this.survey.title);
-    this.surveyService.addSurvey(this.survey).subscribe((data) => {
-      console.log(data);
-    });
+    // this.surveyService.addSurvey(this.survey).subscribe((data) => {
+    //   console.log(data);
+    // });
   }
 
   getAllBatches():void{

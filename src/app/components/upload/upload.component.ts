@@ -3,7 +3,7 @@ import { MatSelectChange } from '@angular/material/select';
 import { Title } from '@angular/platform-browser';
 import { environment } from 'src/environments/environment';
 import { ISurvey } from '../../models/isurvey-survey';
-import { MockSurveyService, SurveyService } from '../../services/survey/survey.service';
+import {  SurveyService } from '../../services/survey/survey.service';
 import { UploadService } from '../../services/upload/upload.service';
 
 @Component({

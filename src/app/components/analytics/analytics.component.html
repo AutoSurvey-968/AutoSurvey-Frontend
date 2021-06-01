@@ -10,8 +10,8 @@
                         <mat-form-field appearance="outline" class="form-control form-control-sm">
                             <mat-label class="form-label">Survey</mat-label>
                             <mat-select name="survey-dropdown" [formControl]="surveyWeek">
-                              <mat-option *ngFor="let survey of getSurveys()" class="form-control" [value]=[survey.uuid]>
-                                  {{survey.title}}
+                              <mat-option *ngFor="let survey of surveys | keyvalue" class="form-control" [value]="[survey.key]">
+                                  {{survey.value}}
                             </mat-option>
                             </mat-select>
                         </mat-form-field>
@@ -44,8 +44,8 @@
                         <mat-form-field appearance="outline" class="form-control form-control-sm">
                             <mat-label class="form-label">Survey</mat-label>
                             <mat-select name="survey-dropdown" [formControl]="surveyWeekBatch">
-                              <mat-option *ngFor="let survey of getSurveys()" [value]=[survey.uuid]>
-                                  {{survey.title}}
+                              <mat-option *ngFor="let survey of surveys | keyvalue" [value]=[survey.key]>
+                                  {{survey.value}}
                             </mat-option>
                             </mat-select>
                         </mat-form-field>
@@ -62,7 +62,7 @@
                         <mat-form-field appearance="outline" class="form-control form-control-sm">
                             <mat-label>Batch</mat-label>
                             <mat-select (selectionChange)="selectedValueActionBatch($event)" [formControl]="batchSelect">
-                              <mat-option *ngFor="let batch of batches" [value]=batch.id>
+                              <mat-option *ngFor="let batch of batches" [value]=batch.batchId>
                                   {{batch.name}}
                               </mat-option>
                             </mat-select>
