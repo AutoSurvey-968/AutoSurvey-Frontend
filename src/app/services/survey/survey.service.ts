@@ -32,7 +32,7 @@ export class SurveyService implements SurveyServiceInterface {
   }
 
   addSurvey(survey: ISurvey):Observable<ISurvey> {
-    return this.http.post<ISurvey>(this.endpoint, survey, this.httpOptions);
+    return this.http.post<ISurvey>(this.endpoint, JSON.stringify(survey), this.httpOptions);
   }
 
   getSurveyById(surveyId: string): Observable<ISurvey> {

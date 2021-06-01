@@ -8,6 +8,7 @@ import { MatFormFieldControl } from '@angular/material/form-field';
 import { ISurvey } from 'src/app/models/isurvey-survey';
 import { Title } from '@angular/platform-browser';
 import { environment } from 'src/environments/environment';
+import { subscribeOn } from 'rxjs/operators';
 
 @Component({
   selector: 'app-survey',
@@ -43,24 +44,29 @@ export class SurveyComponent implements OnInit {
   }
 
   addSurvey(): void {
-    if(!this.surveyForm.valid){
+    if (!this.surveyForm.valid) {
       return;
     }
-      for(var question of this.surveyForm.value.questions){
-        question.title = this.surveyForm.value.questions.quest;
-        question.questionType = this.selectedValue;
-        question.choices = this.surveyForm.value.questions.response;
-        this.questionArray.push(question);
-      }
-    this.survey = Object.assign({}, this.surveyForm.value);
-    this.survey.title = this.surveyForm.value.surveyName;
-    this.survey.questions = this.questionArray;
-    this.survey.description = this.surveyForm.value.description;
 
-    alert(this.survey.title + " " + this.survey.description + " " + this.survey.questions);
-    this.surveyService.addSurvey(this.survey).subscribe((data) => {
-      console.log(data);
-    });
+    for (let question of this.surveyForm.value.questions) {
+      let exportQuestion = {} as IQuestion;
+      exportQuestion.title = "title";
+      exportQuestion.questionType = this.selectedValue[0];
+      exportQuestion.choices = ["choice 1", "choice 2"];
+      this.questionArray.push(exportQuestion);
+    }
+
+    this.survey = {} as ISurvey;
+    this.survey.title = this.surveyForm.value.surveyName;
+    this.survey.description = this.surveyForm.value.description;
+    this.survey.confirmation = 'Thank you for submitting the survey!';
+    this.survey.version = '1';
+    this.survey.questions = this.questionArray;
+
+    console.log(JSON.stringify(this.survey));
+    // this.surveyService.addSurvey(this.survey).subscribe((data) => {
+    //   console.log(data);
+    // });
   }
 
   getAllBatches():void{
