@@ -31,14 +31,12 @@ export class UserService {
       return EMPTY;
     } 
     this.httpOptions.headers = new HttpHeaders({ 'Content-Type': 'application/json' , 'Authorization' : 'Bearer ' + localStorage.getItem('token')});
-    console.log(this.httpOptions.headers);
     let body = {
       "firstName" : firstName,
       "lastName" : lastName,
       "email" : email,
       "password" : password
     };
-    console.log(body);
     return this.http.post(this.endpoint, body, this.httpOptions).pipe(
       map(response => {
         return response as string;
