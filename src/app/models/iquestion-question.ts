@@ -1,8 +1,8 @@
 export interface IQuestion {
   questionType: string;
   title: string;
-  helptText: String;
-  isrequired: boolean;
+  helpText: string;
+  isRequired: boolean;
   choices: string[];
-  hasotherOption: boolean;
+  hasOtherOption: boolean;
 }

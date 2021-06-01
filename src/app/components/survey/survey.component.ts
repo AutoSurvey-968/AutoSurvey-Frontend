@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SurveyService } from 'src/app/services/survey/survey.service';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { IQuestion } from 'src/app/models/iquestion.question';
+import { IQuestion } from 'src/app/models/iquestion-question';
 import { CaliberService } from 'src/app/services/caliber/caliber.service';
 import {Batch} from '../../models/Caliber/batch';
 import { MatFormFieldControl } from '@angular/material/form-field';
