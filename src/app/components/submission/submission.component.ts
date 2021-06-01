@@ -1,4 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { IQuestion } from 'src/app/models/iquestion-question';
+import { ISubmission } from 'src/app/models/isubmission-submission';
+import { ISurvey } from 'src/app/models/isurvey-survey';
+import { SubmissionService } from 'src/app/services/submission/submission.service';
+import { SurveyService } from 'src/app/services/survey/survey.service';
 import { Title } from '@angular/platform-browser';
 import { environment } from 'src/environments/environment';
 
@@ -8,10 +15,56 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./submission.component.css']
 })
 export class SubmissionComponent implements OnInit {
+  surveyId!: string;
+  submission!: ISubmission;
+  submissionForm!: FormGroup;
+  survey!: ISurvey;
+  questions!: IQuestion[];
 
   constructor(
+    private surveyService: SurveyService,
+    private submissionService: SubmissionService,
+    private route: ActivatedRoute,
+    private formBuilder: FormBuilder,
     private titleService: Title,
-  ) { }
+  ) {
+    this.route.params.subscribe(params => {
+      this.surveyId = params['surveyId'];
+    })
+    this.surveyService.getSurveyById(this.surveyId).subscribe(survey => {
+      this.survey = survey;
+      this.questions = survey.questions;
+      this.submissionForm = this.formBuilder.group({
+        batch: ['', Validators.required],
+        week: ['', Validators.required],
+        surveyUuid: this.surveyId,
+        responses: this.formBuilder.array([]),
+      });
+      // Populate the new form with each question
+      this.addResponse("Name (Optional)");
+      this.addResponse("Email (Optional)");
+      this.addResponse("Where is your training location?");
+      this.questions.forEach(question => {
+        this.addResponse(question.title);
+      })
+    })
+
+  }
+
+  get responses() : FormArray {
+    return this.submissionForm.get("responses") as FormArray;
+  }
+
+  newResponse(question: string) : FormGroup {
+    return this.formBuilder.group({
+      question: question,
+      response: '',
+    })
+  }
+
+  addResponse(question: string) {
+    this.responses.push(this.newResponse(question));
+  }
 
   ngOnInit(): void {
     this.titleService.setTitle('Submission'+environment.titleSuffix);
@@ -19,38 +72,39 @@ export class SubmissionComponent implements OnInit {
     this.populateLocations();
   }
 
-  populateBatches(){
+  submit() {
+    console.log(this.submissionForm);
+    // this.submissionService.submit(this.submission);
+  }
+
+  populateBatches() {
     let xhttp = new XMLHttpRequest();
-    var batchSelect = document.getElementById("batch") as HTMLSelectElement;
+    let batchSelect = document.getElementById("batch") as HTMLSelectElement;
     xhttp.onreadystatechange = function () {
       if(this.readyState == 4 && this.status == 200){
-        var batches = JSON.parse(this.responseText.valueOf());
-        console.log(batches);
-        for(let i = 0; i < batches.length; i++){
-          let batch = batches[i];
+        let batches = JSON.parse(this.responseText.valueOf());
+        for(let batch of batches){
           var option = document.createElement("option");
           option.value = batch.name;
-          option.text = batch.skill + " - " + batch.employeeAssignments.employee[0].firstName + " " + batch.employeeAssignments[0].employee.lastName;
-          console.log(option);
+          option.text = batch.skill + " - " + batch.employeeAssignments[0].employee.firstName + " " + batch.employeeAssignments[0].employee.lastName;
           batchSelect.add(option);
         }
       }
     }
-
+    // Change this to calilber
     xhttp.open("GET", "https://caliber2-mock.revaturelabs.com:443/mock/training/batch/current", true);
     xhttp.setRequestHeader("Content-Type","application/json")
     xhttp.setRequestHeader("Accept", "*/*");
     xhttp.send();
   }
 
-  populateLocations(){
+  populateLocations() {
     let xhttp = new XMLHttpRequest();
-    var locationSelect = document.getElementById("location") as HTMLSelectElement;
+    let locationSelect = document.getElementById("location") as HTMLSelectElement;
     xhttp.onreadystatechange = function () {
       if(this.readyState == 4 && this.status == 200){
-        var locations = JSON.parse(this.responseText);
-        for(let i = 0; i < this.responseText.length; i++){
-          let location = locations[i];
+        let locations = JSON.parse(this.responseText);
+        for(let location of locations){
           let option = document.createElement("option");
           option.value = location;
           option.text = location;
@@ -58,20 +112,10 @@ export class SubmissionComponent implements OnInit {
         }
       }
     }
-
+    // Change this to calilber
     xhttp.open("GET", "https://caliber2-mock.revaturelabs.com:443/mock/training/batch/locations", true);
     xhttp.setRequestHeader("Content-Type","application/json")
     xhttp.setRequestHeader("Accept", "*/*");
     xhttp.send();
   }
-
-
-  // Note for whoever does the JS for this:
-
-  // For the radio buttons, something like the following should
-  // theoretically pull the correct value selected even though they aren't in individual forms:
-
-  //document.querySelector('input[name="understanding"]:checked').value;
-  //document.querySelector('input[name="questionsEncouraged"]:checked').value;
-
 }

@@ -27,6 +27,10 @@ import { PiechartsComponent } from './components/analytics/charts/piecharts.comp
 import { MatInputModule } from '@angular/material/input';
 import { ChoicesComponent } from './components/survey/choices/choices.component';
 import { QuestionComponent } from './components/survey/question/question.component';
+import { RadioQuestionComponent } from './components/submission/questions/question-radio.component';
+import { MultipleChoiceQuestionComponent } from './components/submission/questions/question-multiple-choice.component';
+import { ShortAnswerQuestionComponent } from './components/submission/questions/question-short-answer.component';
+import { DropdownQuestionComponent } from './components/submission/questions/question-dropdown.component';
 
 
 @NgModule({
@@ -44,7 +48,11 @@ import { QuestionComponent } from './components/survey/question/question.compone
     BarChartsComponent,
     PiechartsComponent,
     ChoicesComponent,
-    QuestionComponent
+    QuestionComponent,
+    RadioQuestionComponent,
+    MultipleChoiceQuestionComponent,
+    ShortAnswerQuestionComponent,
+    DropdownQuestionComponent
   ],
   imports: [
     BrowserModule,
