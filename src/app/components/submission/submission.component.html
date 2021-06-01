@@ -2,13 +2,13 @@
   <div class="container bubble">
 
     <div class="d-flex justify-content-center">
-      <h1 class="display-4">{{survey.title}}</h1>
+      <h1 class="display-4">{{survey?.title}}</h1>
     </div>
     <hr>
     <div class="container">
 
       <br>
-      <p>{{survey.description}}</p>
+      <p>{{survey?.description}}</p>
       <span>* Required</span>
     </div>
 
@@ -64,15 +64,16 @@
               <option value="9">Week 9</option>
             </select>
         </div>
-
-        <div class="survey-questions" *ngFor="let question of questions; index as i;" formArrayName="responses">
-          <radio-question id="{{'question-'+i}}" [question]="question" [index]="i" [form]="submissionForm" *ngIf="question.questionType == 'RADIO'"></radio-question>
-          <multiple-choice-question id="{{'question-'+i}}" [question]="question" [index]="i" [form]="submissionForm" *ngIf="question.questionType == 'MULTIPLE_CHOICE'"></multiple-choice-question>
-          <short-answer-question id="{{'question-'+i}}" [question]="question" [index]="i" [form]="submissionForm" *ngIf="question.questionType == 'SHORT_ANSWER'"></short-answer-question>
-          <dropdown-question id="{{'question-'+i}}" [question]="question" [index]="i" [form]="submissionForm" *ngIf="question.questionType == 'DROPDOWN'"></dropdown-question>
-
+        <div [formGroup]="submissionForm">
+          <div class="survey-questions" *ngFor="let question of questions; index as i;" formArrayName="responses">
+            <div [formGroupName]="i">
+              <radio-question id="{{'question-'+i}}" [question]="question" [index]="i" [form]="submissionForm" *ngIf="question.questionType == 'RADIO'"></radio-question>
+              <multiple-choice-question id="{{'question-'+i}}" [question]="question" [index]="i" [form]="submissionForm" *ngIf="question.questionType == 'MULTIPLE_CHOICE'"></multiple-choice-question>
+              <short-answer-question id="{{'question-'+i}}" [question]="question" [index]="i" [form]="submissionForm" *ngIf="question.questionType == 'SHORT_ANSWER'"></short-answer-question>
+              <dropdown-question id="{{'question-'+i}}" [question]="question" [index]="i" [form]="submissionForm" *ngIf="question.questionType == 'DROPDOWN'"></dropdown-question>
+            </div>
+          </div>
         </div>
-
         <br><hr><br>
 
         <button id="submit-survey" type="submit" class="btn btn-lg btn-custom">Submit</button>

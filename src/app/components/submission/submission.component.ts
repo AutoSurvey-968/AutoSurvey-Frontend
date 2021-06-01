@@ -34,6 +34,9 @@ export class SubmissionComponent implements OnInit {
     this.surveyService.getSurveyById(this.surveyId).subscribe(survey => {
       this.survey = survey;
       this.questions = survey.questions;
+      this.questions.forEach(question => {
+        this.addResponse(question.title);
+      })
     })
     this.submissionForm = this.formBuilder.group({
       title: ['', [Validators.required]],
@@ -42,21 +45,22 @@ export class SubmissionComponent implements OnInit {
       surveyUuid: ['', Validators.required],
       responses: this.formBuilder.array([]),
     });
+
   }
 
   get responses() : FormArray {
     return this.submissionForm.get("responses") as FormArray;
   }
 
-  newResponse() : FormGroup {
+  newResponse(question: string) : FormGroup {
     return this.formBuilder.group({
-      question: '',
+      question: question,
       response: '',
     })
   }
 
-  addResponse() {
-    this.responses.push(this.newResponse());
+  addResponse(question: string) {
+    this.responses.push(this.newResponse(question));
   }
 
   removeResponse(i : number) {
@@ -70,7 +74,7 @@ export class SubmissionComponent implements OnInit {
   }
 
   submit() {
-    console.log(this.submission);
+    console.log(this.submissionForm);
     // this.submissionService.submit(this.submission);
   }
 
