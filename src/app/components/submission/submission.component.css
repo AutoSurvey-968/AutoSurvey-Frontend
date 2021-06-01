@@ -2,12 +2,16 @@
   padding-top: 10px;
 }
 
-.radioQuestionGroup {
+.form-check-label {
+  padding-left: 5px;
+}
+
+.question-group {
   display: inline-block;
   text-align:center;
 }
 
-.radioQuestionGroup label{
+.question-group label{
   display: block;
 }
 

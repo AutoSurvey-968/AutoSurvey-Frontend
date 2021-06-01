@@ -1,10 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
+import { IQuestion } from 'src/app/models/iquestion.question';
 import { ISubmission } from 'src/app/models/isubmission-submission';
 import { ISurvey } from 'src/app/models/isurvey-survey';
 import { SubmissionService } from 'src/app/services/submission/submission.service';
 import { SurveyService } from 'src/app/services/survey/survey.service';
-import { RadioQuestionComponent } from './radio-question.component';
 
 @Component({
   selector: 'app-submission',
@@ -14,7 +15,8 @@ import { RadioQuestionComponent } from './radio-question.component';
 export class SubmissionComponent implements OnInit {
   surveyId!: string;
   @Input() submission!: ISubmission;
-  survey: ISurvey = this.surveyService.getSurveyById(this.surveyId);
+  survey: Observable<ISurvey> = this.surveyService.getSurveyById(this.surveyId);
+  questions!: IQuestion[];
 
   constructor(
     private surveyService: SurveyService,
@@ -24,9 +26,10 @@ export class SubmissionComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.surveyId = params['surveyId'];
     })
+    this.survey.subscribe(survey => {
+      this.questions = survey.questions;
+    })
   }
-
-
 
   ngOnInit(): void {
     this.populateBatches();

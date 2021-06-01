@@ -12,14 +12,14 @@
       <p>We want to hear your feedback so we can keep improving our logistics and content. Please fill this quick survey out and let us know your thoughts. Please note that you will be using this SAME link EVERY week to give your feedback about training, so you may want to bookmark or pin this URL in your Slack channel.</p>
       <p>Survey responses are only accessible by the QC team and are collected anonymously unless you fill in your information below.</p>
       <p>Please note this survey is for the last completed week of training (e.g. if you are currently in Week 4, please fill out the survey for Week 3.)</p>
-      <p style="color:red;">* Required</p>
+      <span>* Required</span>
     </div>
 
     <br><hr><br>
 
     <form>
 
-        <div id="emailQuestion">
+        <div id="email-question">
             <div class="mb-3">
                 <label for="name" class="form-label">Name (Optional)</label>
                 <input type="text" class="form-control" id="name">
@@ -35,14 +35,14 @@
 
         <br> <hr> <br>
 
-        <div id="locationQuestion">
+        <div id="location-question">
           <div class="mb-3">
             <label for="location" class="form-label">Where is your training location? <span>*</span></label>
             <select class="form-control" id="location" required></select>
           </div>
         </div>
 
-        <div id="batchQuestion">
+        <div id="batch-question">
           <div class="mb-3">
             <label for="batch" class="form-label">What batch are you in? <span>*</span></label>
             <select class="form-control" id="batch" required></select>
@@ -51,7 +51,7 @@
 
         <br> <hr> <br>
 
-        <div id="weekQuestion">
+        <div id="week-question">
             <label for="week" class="form-label">What was your most recently completed week of training? (Extended batches start with Week A, normal batches start with Week 1)<span>*</span></label>
             <select class="form-control" id="week" required>
               <option value="A">Week A</option>
@@ -68,15 +68,14 @@
             </select>
         </div>
 
-        <br> <hr> <br>
+        <div class="survey-questions" *ngFor="let question of questions; index as i">
+          <radio-question id="{{'question-'+i}}" [question]="question" [index]="i" *ngIf="question.questionType == 'RADIO'"></radio-question>
+          <multiple-choice-question id="{{'question-'+i}}" [question]="question" [index]="i" *ngIf="question.questionType == 'MULTIPLE_CHOICE'"></multiple-choice-question>
+          <short-answer-question id="{{'question-'+i}}" [question]="question" [index]="i" *ngIf="question.questionType == 'SHORT_ANSWER'"></short-answer-question>
 
-        <div class="surveyQuestions">
-          <ul>
-            <li *ngFor="let question of survey.questions">
-              <radio-question></radio-question>
-            </li>
-          </ul>
         </div>
+
+        <br><hr><br>
 
         <button id="submitSurvey" type="button" class="btn btn-lg btn-custom">Submit</button>
 
