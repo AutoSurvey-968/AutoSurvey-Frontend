@@ -44,4 +44,8 @@ export class NavbarComponent implements OnInit {
   isLoggedIn(): boolean{
     return localStorage.getItem('token') != null;
   }
+
+  logoff(): void{
+    localStorage.clear();
+  }
 }
