@@ -10,9 +10,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  
-  constructor(public userService: UserService, public route: Router) { }
-  private isTest: boolean = false;
+
+  constructor(
+    public userService: UserService,
+    public route: Router
+  ) { }
   ngOnInit(): void {
   }
 
@@ -24,12 +26,8 @@ export class NavbarComponent implements OnInit {
     console.log(cookies);
   }
 
-  setTest(isTest: boolean): void{
-    this.isTest = isTest;
-  }
-
   isLoggedIn(): boolean{
-    return document.cookie != "";
+    return localStorage.getItem('token') != null;
   }
 
   isAdmin(): boolean{
