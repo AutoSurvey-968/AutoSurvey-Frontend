@@ -5,12 +5,12 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li  class="nav-item">
-        <a *ngIf="isLoggedIn()" id="survey" (click)="getDisable()" [class]="getDisable()" routerLink="/survey">
+        <a *ngIf="isLoggedIn()" id="survey" (click)="getDisable()" class="nav-link" routerLink="/survey">
             Survey
         </a>
       </li>
         <li  class="nav-item">
-          <a *ngIf="isLoggedIn()" id="submission" (click)="getDisable()" class="nav-link" [routerLink]="[getSurveyId()]">
+          <a *ngIf="isLoggedIn()" id="submission" (click)="getDisable()" [class]="getDisable()" [routerLink]="[getSurveyId()]">
             Submit
           </a>
         </li>

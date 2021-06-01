@@ -30,7 +30,7 @@ export class NavbarComponent implements OnInit {
         urlID = this.route.url.substring(0,7);
       }
       for (let i = 0; i< urlList.length ; i++){ 
-        if (urlID === urlList[i] && ni.id === idList[i] && ni.className === 'nav-link'){
+        if (urlID === urlList[i] && ni.id === idList[i]){
           ni.classList.remove('nav-link')
           ni.classList.add('nav-link', 'disabled')
           break;
