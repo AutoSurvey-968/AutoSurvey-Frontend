@@ -1,0 +1,14 @@
+.container.bubble {
+    margin-top: 2%;
+    width: 800px;
+}
+
+.d-flex.justify-content-center {
+    padding-bottom: 20px;
+}
+
+.form-control {
+    border-color: black; 
+    border-color:#474c5583; 
+    width: 300px;
+}

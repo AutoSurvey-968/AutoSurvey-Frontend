@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { environment } from 'src/environments/environment';
 import { ISurvey } from '../../models/isurvey-survey';
+import { IUser } from '../../models/iuser-user';
 import { SurveyService } from '../../services/survey/survey.service';
 import { UserService } from '../../services/user/user.service';
 
