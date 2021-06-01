@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { IQuestion } from 'src/app/models/iquestion-question';
 
 @Component({
@@ -10,7 +11,7 @@ import { IQuestion } from 'src/app/models/iquestion-question';
       <!-- Need to see how we grab these labels from questions -->
       <p style="margin-top: 9px; margin-right: 10px;">Not Satisfied</p>
       <div class="question-group form-check form-check-inline" *ngFor="let choice of question.choices; index as i">
-        <input type="radio" name="{{'question-'+index}}" id="{{'question-'+index+'-'+'choice-'+i}}" value="{{choice}}">
+        <input type="radio" id="{{'question-'+index+'-'+'choice-'+i}}" value="{{choice}}">
         <label for="{{'question-'+index+'-'+'choice-'+i}}">{{choice}}</label>
       </div>
 
@@ -23,4 +24,5 @@ import { IQuestion } from 'src/app/models/iquestion-question';
 export class RadioQuestionComponent {
   @Input() question!: IQuestion;
   @Input() index!: number;
+  @Input() form!: FormGroup;
 }

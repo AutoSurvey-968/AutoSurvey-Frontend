@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IQuestion } from 'src/app/models/iquestion-question';
 import { ISubmission } from 'src/app/models/isubmission-submission';
 import { ISurvey } from 'src/app/models/isurvey-survey';
@@ -13,14 +14,16 @@ import { SurveyService } from 'src/app/services/survey/survey.service';
 })
 export class SubmissionComponent implements OnInit {
   surveyId!: string;
-  @Input() submission!: ISubmission;
+  submission!: ISubmission;
+  submissionForm!: FormGroup;
   survey!: ISurvey;
   questions!: IQuestion[];
 
   constructor(
     private surveyService: SurveyService,
     private submissionService: SubmissionService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private formBuilder: FormBuilder
   ) {
     this.route.params.subscribe(params => {
       this.surveyId = params['surveyId'];
@@ -29,6 +32,32 @@ export class SubmissionComponent implements OnInit {
       this.survey = survey;
       this.questions = survey.questions;
     })
+    this.submissionForm = this.formBuilder.group({
+      title: ['', [Validators.required]],
+      batch: ['', Validators.required],
+      week: ['', Validators.required],
+      surveyUuid: ['', Validators.required],
+      responses: this.formBuilder.array([]),
+    });
+  }
+
+  get responses() : FormArray {
+    return this.submissionForm.get("responses") as FormArray;
+  }
+
+  newResponse() : FormGroup {
+    return this.formBuilder.group({
+      question: '',
+      response: '',
+    })
+  }
+
+  addResponse() {
+    this.responses.push(this.newResponse());
+  }
+
+  removeResponse(i : number) {
+    this.responses.removeAt(i);
   }
 
   ngOnInit(): void {
@@ -36,8 +65,9 @@ export class SubmissionComponent implements OnInit {
     this.populateLocations();
   }
 
-  submitSubmission() {
-    this.submissionService.submit(this.submission);
+  submit() {
+    console.log(this.submission);
+    // this.submissionService.submit(this.submission);
   }
 
   populateBatches() {
@@ -54,7 +84,7 @@ export class SubmissionComponent implements OnInit {
         }
       }
     }
-
+    // Change this to calilber
     xhttp.open("GET", "https://caliber2-mock.revaturelabs.com:443/mock/training/batch/current", true);
     xhttp.setRequestHeader("Content-Type","application/json")
     xhttp.setRequestHeader("Accept", "*/*");
@@ -75,18 +105,10 @@ export class SubmissionComponent implements OnInit {
         }
       }
     }
-
+    // Change this to calilber
     xhttp.open("GET", "https://caliber2-mock.revaturelabs.com:443/mock/training/batch/locations", true);
     xhttp.setRequestHeader("Content-Type","application/json")
     xhttp.setRequestHeader("Accept", "*/*");
     xhttp.send();
   }
-  // Note for whoever does the JS for this:
-
-  // For the radio buttons, something like the following should
-  // theoretically pull the correct value selected even though they aren't in individual forms:
-
-  //document.querySelector('input[name="understanding"]:checked').value;
-  //document.querySelector('input[name="questionsEncouraged"]:checked').value;
-
 }

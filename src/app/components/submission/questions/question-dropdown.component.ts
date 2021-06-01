@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { IQuestion } from 'src/app/models/iquestion-question';
 
 @Component({
@@ -16,4 +17,5 @@ import { IQuestion } from 'src/app/models/iquestion-question';
 export class DropdownQuestionComponent {
   @Input() question!: IQuestion;
   @Input() index!: number;
+  @Input() form!: FormGroup;
 }
