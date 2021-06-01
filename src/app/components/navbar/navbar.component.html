@@ -5,28 +5,28 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li  class="nav-item">
-        <a *ngIf="route.url !== '/survey' && isLoggedIn()" id="survey" class="nav-link" routerLink="/survey">
-          Survey
+        <a *ngIf="isLoggedIn()" id="survey" (click)="getDisable()" [class]="getDisable()" routerLink="/survey">
+            Survey
         </a>
       </li>
         <li  class="nav-item">
-          <a *ngIf="route.url !== '/submission' && isLoggedIn()" id="submission" class="nav-link" routerLink="/submission">
+          <a *ngIf="isLoggedIn()" id="submission" (click)="getDisable()" class="nav-link" [routerLink]="[getSurveyId()]">
             Submit
           </a>
         </li>
         <li  class="nav-item">
-          <a *ngIf="route.url !== '/upload' && isLoggedIn()" id="upload" class="nav-link" routerLink="/upload">
+          <a *ngIf="isLoggedIn()" id="upload" (click)="getDisable()" class="nav-link" routerLink="/upload">
             Upload
           </a>
         </li>
         <li  class="nav-item">
-          <a *ngIf="route.url !== '/analytics' && isAdmin()" id="analytics" class="nav-link" routerLink="/analytics">
+          <a *ngIf="isLoggedIn()" id="analytics" (click)="getDisable()" class="nav-link" routerLink="/analytics">
             Analytics
           </a>
       </li>
         <li class="nav-item">
-          <a *ngIf="route.url !== '/sendemails' && isLoggedIn()" id="sendemails" class="nav-link" routerLink="/sendemails">
-            Emails
+          <a *ngIf="isLoggedIn()" id="sendemails" (click)="getDisable()" class="nav-link" routerLink="/sendemails">
+            Email
           </a>
           <!--
           <span *ngIf="route.url==='/survey'" id="survey" class="nav-link font-weight-bold">
@@ -35,12 +35,12 @@
           -->
         </li>
         <li  class="nav-item">
-          <a *ngIf="route.url !== '/login' && !isLoggedIn()" id="login" class="nav-link" routerLink="/login">
+          <a *ngIf="!isLoggedIn()" id="login" (click)="getDisable()" class="nav-link" routerLink="/login">
             Login
           </a>
       </li>
       <li  class="nav-item">
-        <a *ngIf="route.url !== '/login' && isLoggedIn()" id="logout" class="nav-link" routerLink="/login">
+        <a *ngIf="isLoggedIn()" id="logout" (click)="getDisable()" class="nav-link" routerLink="/login">
           Logout
         </a>
       </li>

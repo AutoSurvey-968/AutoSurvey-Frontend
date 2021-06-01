@@ -6,6 +6,8 @@ import { ISubmission } from 'src/app/models/isubmission-submission';
 import { ISurvey } from 'src/app/models/isurvey-survey';
 import { SubmissionService } from 'src/app/services/submission/submission.service';
 import { SurveyService } from 'src/app/services/survey/survey.service';
+import { Title } from '@angular/platform-browser';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-submission',
@@ -23,7 +25,8 @@ export class SubmissionComponent implements OnInit {
     private surveyService: SurveyService,
     private submissionService: SubmissionService,
     private route: ActivatedRoute,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private titleService: Title,
   ) {
     this.route.params.subscribe(params => {
       this.surveyId = params['surveyId'];
@@ -61,6 +64,7 @@ export class SubmissionComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.titleService.setTitle('Submission'+environment.titleSuffix);
     this.populateBatches();
     this.populateLocations();
   }
