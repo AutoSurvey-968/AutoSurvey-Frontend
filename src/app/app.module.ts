@@ -25,6 +25,8 @@ import { NgApexchartsModule } from 'ng-apexcharts';
 import { BarChartsComponent } from './components/analytics/charts/barcharts.component';
 import { PiechartsComponent } from './components/analytics/charts/piecharts.component';
 import { MatInputModule } from '@angular/material/input';
+import { ChoicesComponent } from './components/survey/choices/choices.component';
+import { QuestionComponent } from './components/survey/question/question.component';
 
 
 @NgModule({
@@ -40,7 +42,9 @@ import { MatInputModule } from '@angular/material/input';
     WorkWeekSelectionStrategyDirective,
     AdminComponent,
     BarChartsComponent,
-    PiechartsComponent
+    PiechartsComponent,
+    ChoicesComponent,
+    QuestionComponent
   ],
   imports: [
     BrowserModule,
