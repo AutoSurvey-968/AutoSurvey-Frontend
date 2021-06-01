@@ -44,7 +44,7 @@
        <td>
         <mat-form-field class="text-center d-flex justify-content-center" appearance="fill">
           <mat-label> Question Type </mat-label>
-          <mat-select matSelect formControlName="questionType" name="questionType" required>
+          <mat-select [(ngModel)]="selectedValue[i]" matSelect formControlName="questionType" name="questionType" required>
           <mat-option value="CHECKBOX">Check Box</mat-option>
           <mat-option value="DROPDOWN">Drop Down</mat-option>
           <mat-option value="MULTIPLE_CHOICE">Multiple Choice</mat-option>
@@ -57,7 +57,51 @@
        <td>
         <button id="removeButton" type="button" (click)="removeQuestion(i)" class="mat-raised-button btn">Remove</button>
       </td>
-      </tr>
+      <div class="row" *ngIf="selectedValue[i] == 'MULTIPLE_CHOICE'">
+        <div class="col-sm">
+          <mat-form-field appearance="fill" class="formField">
+            <mat-label> Response
+            </mat-label>
+            <input matInput class="form-control form-control-lg" formControlName="response" placeholder="Response" name="response" required />
+            <mat-error *ngIf="surveyForm.controls.surveyName.touched">
+              <span *ngIf="surveyForm.controls.surveyName.errors?.required">This field is mandatory.</span>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-sm">
+          <mat-form-field appearance="fill" class="formField">
+            <mat-label> Response
+            </mat-label>
+            <input matInput class="form-control form-control-lg" formControlName="response" placeholder="Response" name="response" required />
+            <mat-error *ngIf="surveyForm.controls.surveyName.touched">
+              <span *ngIf="surveyForm.controls.surveyName.errors?.required">This field is mandatory.</span>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row" *ngIf="selectedValue[i] == 'MULTIPLE_CHOICE'">
+        <div class="col-sm">
+          <mat-form-field appearance="fill" class="formField">
+            <mat-label> Response
+            </mat-label>
+            <input matInput class="form-control form-control-lg" formControlName="response" placeholder="Response" name="response" required />
+            <mat-error *ngIf="surveyForm.controls.surveyName.touched">
+              <span *ngIf="surveyForm.controls.surveyName.errors?.required">This field is mandatory.</span>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-sm">
+          <mat-form-field appearance="fill" class="formField">
+            <mat-label> Response
+            </mat-label>
+            <input matInput class="form-control form-control-lg" formControlName="response" placeholder="Response" name="response" required />
+            <mat-error *ngIf="surveyForm.controls.surveyName.touched">
+              <span *ngIf="surveyForm.controls.surveyName.errors?.required">This field is mandatory.</span>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </tr>
       </table>
       <button mat-raised-button class="mat-raised-button btn addQuestion" type="submit">Submit</button>
     </form>

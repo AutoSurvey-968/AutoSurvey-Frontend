@@ -22,6 +22,7 @@ export class SurveyComponent implements OnInit {
   surveyForm: FormGroup;
   public batches!: Batch[];
   questionArray: IQuestion[] = [];
+  selectedValue: string[] = [];
 
   constructor(
     private surveyService: SurveyService,
@@ -47,7 +48,8 @@ export class SurveyComponent implements OnInit {
     }
       for(var question of this.surveyForm.value.questions){
         question.title = this.surveyForm.value.questions.quest;
-        question.questionType = this.surveyForm.value.questions.questionType;
+        question.questionType = this.selectedValue;
+        question.choices = this.surveyForm.value.questions.response;
         this.questionArray.push(question);
       }
     this.survey = Object.assign({}, this.surveyForm.value);
@@ -75,6 +77,7 @@ export class SurveyComponent implements OnInit {
     return this.formBuilder.group({
       quest: '',
       questionType: '',
+      response: [],
     })
   }
 
