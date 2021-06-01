@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatSelectChange } from '@angular/material/select';
+import { Title } from '@angular/platform-browser';
+import { environment } from 'src/environments/environment';
 import { ISurvey } from '../../models/isurvey-survey';
 import { MockSurveyService, SurveyService } from '../../services/survey/survey.service';
 import { UploadService } from '../../services/upload/upload.service';
@@ -16,10 +18,12 @@ export class UploadComponent implements OnInit {
 
   constructor(
     private surveyService: SurveyService,
-    private uploadService: UploadService
+    private uploadService: UploadService,
+    private titleService: Title
   ) { }
 
   ngOnInit(): void {
+    this.titleService.setTitle('Upload'+environment.titleSuffix);
     this.setSurveys();
   }
 
@@ -32,6 +36,7 @@ export class UploadComponent implements OnInit {
   setSurveys() : void {
     this.surveyService.getSurveys().subscribe(
       data => {
+        console.log(data)
         this.surveys = data as Map<string, ISurvey>;
       }
     );

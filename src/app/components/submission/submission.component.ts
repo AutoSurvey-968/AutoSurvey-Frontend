@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-submission',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SubmissionComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private titleService: Title,
+  ) { }
 
   ngOnInit(): void {
+    this.titleService.setTitle('Submission'+environment.titleSuffix);
     this.populateBatches();
     this.populateLocations();
   }

@@ -15,7 +15,13 @@ interface SurveyServiceInterface {
 })
 export class SurveyService implements SurveyServiceInterface {
   endpoint: string = environment.apiUrl+'/surveys';
-  private httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }), withCredentials: true };
+  private httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer '+localStorage.getItem('token')
+    }),
+    withCredentials: true
+  };
 
   constructor(private http: HttpClient) { }
 
