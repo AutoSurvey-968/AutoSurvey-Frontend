@@ -19,6 +19,7 @@ export class SurveyComponent implements OnInit {
   survey!: ISurvey;
   surveyForm: FormGroup;
   public batches!: Batch[];
+  questionArray: IQuestion[] = [];
 
   constructor(private surveyService: SurveyService, private formBuilder: FormBuilder, private caliberService: CaliberService ) {
     this.surveyForm = this.formBuilder.group({
@@ -27,7 +28,7 @@ export class SurveyComponent implements OnInit {
       questions: this.formBuilder.array([]),
     });
    }
-   
+
   ngOnInit(): void {
     this.getAllBatches();
   }
@@ -36,10 +37,14 @@ export class SurveyComponent implements OnInit {
     if(!this.surveyForm.valid){
       return;
     }
-
+      for(var question of this.surveyForm.value.questions){
+        question.title = this.surveyForm.value.questions.quest;
+        question.questionType = this.surveyForm.value.questions.questionType;
+        this.questionArray.push(question);
+      }
     this.survey = Object.assign({}, this.surveyForm.value);
     this.survey.title = this.surveyForm.value.surveyName;
-    this.survey.questions = this.surveyForm.value.questions;
+    this.survey.questions = this.questionArray;
     this.survey.description = this.surveyForm.value.description;
 
     alert(this.survey.title + " " + this.survey.description + " " + this.survey.questions);
