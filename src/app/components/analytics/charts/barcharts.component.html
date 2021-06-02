@@ -1,10 +1,6 @@
 
-
-
-<button class="btn btn-lg btn-custom" (click)="changeData()">Change Data</button>
-
 <div id="chart" *ngIf="barChartOptions!==undefined&& barChartOptions.series!==undefined&& barChartOptions.chart!== undefined && barChartOptions.dataLabels!==undefined&&barChartOptions.plotOptions!==undefined">
-    <apx-chart
+  <apx-chart
       [series]="barChartOptions.series"
       [chart]="barChartOptions.chart"
       [dataLabels]="barChartOptions.dataLabels"
