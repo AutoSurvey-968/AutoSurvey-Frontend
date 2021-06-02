@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit,} from '@angular/core';
 import {FormGroup, FormControl, Validators} from '@angular/forms';
 import { MatSelectChange } from '@angular/material/select';
 import { AnalyticsService } from '../../services/analytics/analytics.service';
@@ -58,6 +58,7 @@ export class AnalyticsComponent implements OnInit {
   originalBatches: Batch[] = [];
   batches: Batch[] = [];
   weeks: Date[] = [];
+  dataDefined:boolean=false;//just here for testing, after can just use whether the report
 
   parentReport?: IReport;
 

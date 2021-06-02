@@ -10,7 +10,7 @@ import { WeekDay } from '@angular/common';
   providedIn: 'root'
 })
 export class AnalyticsService {
-  endpoint: string = environment.apiUrl+'/reports/';
+  endpoint: string = environment.apiUrl+'/reports';
   private httpOptions = { headers: new HttpHeaders({'Content-Type': 'application/json','Authorization': 'Bearer '+localStorage.getItem('token')}), withCredentials:true};
   constructor(private http: HttpClient) { }
 

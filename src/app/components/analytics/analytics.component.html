@@ -1,10 +1,10 @@
 <div class="row">
     
-    <div class=" bubble col-4">
+    <div class=" bubble col" [ngClass]="{'col-3': dataDefined}">
         <div class="container-fluid align-items-center">
             <!--ngb nav gives tabs, active is what we ref in ts to see what's on top-->
             <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs nav-justified">
-                <li [ngbNavItem]="1">
+                <li [ngbNavItem]="1" class="btn-outline-dark btn">
                     <a ngbNavLink>By Week</a>
                     <ng-template ngbNavContent>
                         <mat-form-field appearance="outline" class="form-control form-control-sm">
@@ -37,7 +37,7 @@
                         </div>
                     </ng-template>
                   </li>
-                  <li [ngbNavItem]="2">
+                  <li [ngbNavItem]="2" class="btn-outline-dark btn">
                     <a ngbNavLink>By Batch and Week</a>
                     <ng-template ngbNavContent>
                         
@@ -79,7 +79,7 @@
     
                         <div class="row">
                             <div class="col d-flex justify-content-center">
-                                <button class="btn btn-lg btn-custom submitBtn" (click)="getData()" [disabled]="!form2.valid">Search</button>
+                                <button class="btn btn-lg btn-custom submitBtn" (click)=" dataDefined=true;" [disabled]="!form2.valid">Search</button>
                             </div>
                         </div>
                     </ng-template>
@@ -92,7 +92,8 @@
              
          </div>    
     </div>
-    <app-barcharts [nestedReport]="parentReport" class="col-8"></app-barcharts>
+    <!-- *ngIf="parentReport!==undefined" -->
+    <app-barcharts *ngIf="dataDefined==true" [nestedReport]="parentReport" class="col-9"></app-barcharts>
 </div>
 
 <app-piecharts [nestedReport]="parentReport"></app-piecharts>
