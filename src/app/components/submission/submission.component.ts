@@ -99,8 +99,9 @@ export class SubmissionComponent implements OnInit {
       return;
     }
     this.submission = Object.assign({}, this.submissionForm.value);
-    console.log(this.submissionService.submit(this.submission)); // Send body as JSON to submission service
-    this.submissionForm.reset(); // Clear form
+    this.submissionService.submit(this.submission).subscribe(data => console.log(data)); // Send body as JSON to submission service
+    this.submissionForm.reset(); // Clear form. If you try to submit again, questions will be null as this happens when we subscribe to the Survey Observable.
+    // Probably better to refresh here.
   }
 
   setUpBatches(): void {
