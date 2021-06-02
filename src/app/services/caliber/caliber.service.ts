@@ -10,7 +10,7 @@ import { Associate } from 'src/app/models/Caliber/associate';
 })
 export class CaliberService {
 
-    endpoint: string = "https://caliber2-mock.revaturelabs.com/mock/training/batch?quarter=1&year=2020";
+    endpoint: string = "https://caliber2-mock.revaturelabs.com/mock/training/batch";
     private httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }), withCredentials:true};
   
     constructor(private http: HttpClient) { }
@@ -22,6 +22,6 @@ export class CaliberService {
     getAssociatesByBatch(
       id:Number
     ):Observable<Associate[]>{
-      return this.http.get<Associate[]>("https://caliber2-mock.revaturelabs.com/mock/training/batch/TR-1079/associates");
+      return this.http.get<Associate[]>("https://caliber2-mock.revaturelabs.com/mock/training/batch/" + id +"/associates");
     }
   }
