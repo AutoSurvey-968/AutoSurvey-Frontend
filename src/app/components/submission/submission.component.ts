@@ -98,7 +98,17 @@ export class SubmissionComponent implements OnInit {
       alert("Please fill out the entire form.");
       return;
     }
+    // Convert submissionForm into a submission object. Originally used Object.assign, but this caused issues in the JSON for the responses map.
+    // It would look like "responses":{"question":"question":"response":"response"} instead of "responses":{"question":"response"}
+    console.log(this.submissionForm.get('surveyUuid')?.value);
     this.submission = Object.assign({}, this.submissionForm.value);
+
+    this.submission.surveyUuid = this.submissionForm.get('surveyUuid')?.value;
+    this.submission.batch = this.submissionForm.get('batch')?.value;
+    this.submission.week = this.submissionForm.get('week')?.value;
+    let responses = this.submissionForm.get('responses')?.value;
+
+    console.log(JSON.stringify(this.submission));
     this.submissionService.submit(this.submission).subscribe(data => console.log(data)); // Send body as JSON to submission service
     this.submissionForm.reset(); // Clear form. If you try to submit again, questions will be null as this happens when we subscribe to the Survey Observable.
     // Probably better to refresh here.
