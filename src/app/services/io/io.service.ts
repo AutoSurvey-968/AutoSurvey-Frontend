@@ -1,5 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 
 @Injectable({
@@ -7,7 +8,14 @@ import { environment } from '../../../environments/environment';
 })
 export class IoService {
 
-  endpoint: string = environment.apiUrl+'/io';
+  endpoint: string = environment.apiUrl+'/email';
+  private httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer '+localStorage.getItem('token')
+    }),
+    withCredentials: true
+  };
 
   constructor(private http:HttpClient) { }
 
@@ -15,11 +23,8 @@ export class IoService {
     email: String, 
     message:String, 
     subject: String, 
-    ):void{ 
-
-    let parameters: String = 
-    '?recipient='+email+'&subject=' + 
-    subject+'&message='+ message;
-    this.http.post(this.endpoint + parameters, "");
+    ):Observable<Object>{ 
+    let url:string = this.endpoint + "?recipient=" + email + "&subject="+ subject+ "&message=" + message;
+    return this.http.post(url, "",this.httpOptions);
    }
 }

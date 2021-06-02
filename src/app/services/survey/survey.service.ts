@@ -39,6 +39,12 @@ export class SurveyService implements SurveyServiceInterface {
     return this.http.get<ISurvey>(this.endpoint + "/" + surveyId);
   }
 
+  getSurveysString(): Observable<Map<string, string>> {
+    return this.http.get<any>(this.endpoint+'/', this.httpOptions).pipe(
+      map(response => response as Map<string, string> )
+    );
+  }
+
 }
 
 @Injectable({
