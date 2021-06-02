@@ -59,7 +59,7 @@ export class SendemailsComponent implements OnInit {
         console.log(associate.firstName);
         this.ioService.sendEmail(
           associate.email,
-          "Hi "+ associate.firstName+", you got invited to fill out a survey: locahost:4200/submit/574ffb00-c2e9-11eb-8918-2fdb812f26a5",
+          "Hi "+ associate.firstName+", you got invited to fill out a survey: http://locahost:4200/submit/574ffb00-c2e9-11eb-8918-2fdb812f26a5",
           "Survey request"
           ).subscribe();
       });
