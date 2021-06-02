@@ -2,5 +2,8 @@ btn{
     margin-top: 20px
 }
 bubble{
-    max-width: 750px;
+    max-width: 20px; 
+}
+.differentcolor{ 
+    color: rgb(155, 63, 63);
 }

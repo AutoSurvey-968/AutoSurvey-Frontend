@@ -10,7 +10,7 @@ import { Associate } from 'src/app/models/Caliber/associate';
 })
 export class CaliberService {
 
-    endpoint: string = "https://caliber2-mock.revaturelabs.com/mock/training/batch";
+    endpoint: string = "https://caliber2-mock.revaturelabs.com/mock/training/batch?quarter=1&year=2020";
     private httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }), withCredentials:true};
   
     constructor(private http: HttpClient) { }

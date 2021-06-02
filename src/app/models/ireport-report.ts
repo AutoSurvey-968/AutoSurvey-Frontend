@@ -3,10 +3,10 @@ export interface IReport {
   surveyId: string;
   weekEnum: string;
   batchString: string;
-  averages: Map<string, data>;
-  percentages: Map<string, Map<string, data>>;
+  averages: Map<string, reportData>;
+  percentages: Map<string, Map<string, reportData>>;
 }
-interface data{
+export interface reportData{
   datum: number;
-  delta: number
+  delta: number;
 }

@@ -30,6 +30,11 @@ export class SurveyService implements SurveyServiceInterface {
       map(response => response as Map<string, ISurvey> )
     );
   }
+  getSurveysString(): Observable<Map<string, string>> {
+    return this.http.get<any>(this.endpoint+'/', this.httpOptions).pipe(
+      map(response => response as Map<string, string> )
+    );
+  }
 
   addSurvey(survey: ISurvey):Observable<ISurvey> {
     return this.http.post<ISurvey>(this.endpoint, JSON.stringify(survey), this.httpOptions);
