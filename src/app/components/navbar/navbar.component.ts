@@ -16,6 +16,7 @@ export class NavbarComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.getDisable();
   }
 
   getSurveyId(): string {
@@ -23,25 +24,30 @@ export class NavbarComponent implements OnInit {
   }
 
   getDisable(): void {
-    let urlList: string[] = ['/survey','/upload','/analytics','/sendemails','/submit'];
-    let idList: string[] = ['survey','upload','analytics','sendemails','submission'];
+    let urlList: string[] = ['/survey','/upload','/analytics','/sendemails','/submit', '/admin'];
+    let idList: string[] = ['survey','upload','analytics','sendemails','submission', 'admin'];
     document.querySelectorAll('a').forEach(ni => {
       let urlID = this.route.url;
       if (this.route.url.substring(0,7) === '/submit'){
         urlID = this.route.url.substring(0,7);
       }
-      for (let i = 0; i< urlList.length ; i++){ 
+      for (let i = 0; i< urlList.length ; i++){
         if (urlID === urlList[i] && ni.id === idList[i] && ni.className === 'nav-link'){
           ni.classList.remove('nav-link')
           ni.classList.add('nav-link', 'disabled')
           break;
-        } 
+        }
         ni.className = 'nav-link';
       }
     });
   }
 
+  logout() {
+    this.getDisable();
+    localStorage.setItem('token', '');
+  }
+
   isLoggedIn(): boolean{
-    return localStorage.getItem('token') != null;
+    return localStorage.getItem('token') != null && localStorage.getItem('token') != '';
   }
 }

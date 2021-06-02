@@ -17,7 +17,9 @@ import { SurveyService } from '../../services/survey/survey.service';
 export class SendemailsComponent implements OnInit {
 
   public batches!: Batch[];
-  surveys: Map<string, ISurvey> = new Map();
+  surveys: Map<string, string> = new Map();
+  public surveyIDs: string[] = [];
+  public surveyTitles: string[] = [];
   public selectedBatch!: Number;
   public selectedSurvey!: Number;
   constructor(
@@ -39,22 +41,10 @@ export class SendemailsComponent implements OnInit {
   }
 
   setSurveys() : void {
-    this.surveyService.getSurveys().subscribe(
+    this.surveyService.getSurveysString().subscribe(
       data => {
-        this.surveys = data as Map<string, ISurvey>;
-      }
-    );
-  }
-
-  getSurveys(): ISurvey[]{
-    let result: ISurvey[] = [];
-    if(this.surveys.size === undefined) return result;
-    this.surveys.forEach(
-      survey => {
-        result.push(survey);
-      }
-    )
-    return result;
+       this.surveys=data as Map<string,string>
+      });
   }
 
   send(
@@ -62,14 +52,15 @@ export class SendemailsComponent implements OnInit {
     surveyId:Number
   ):void{
 
+    console.log(batchId)
     this.caliberService.getAssociatesByBatch(batchId)
     .subscribe(associateData =>{
       associateData.forEach(associate =>{
         this.ioService.sendEmail(
           associate.email,
-          "Hi " + associate.firstname + ", you got invited to fill out a survey",
+          "Hi MockUser, you got invited to fill out a survey: locahost:4200/submit/574ffb00-c2e9-11eb-8918-2fdb812f26a5",
           "Survey request"
-          )
+          ).subscribe();
       });
     })
   }

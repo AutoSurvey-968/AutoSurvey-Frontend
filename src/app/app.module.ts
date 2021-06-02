@@ -25,6 +25,8 @@ import { NgApexchartsModule } from 'ng-apexcharts';
 import { BarChartsComponent } from './components/analytics/charts/barcharts.component';
 import { PiechartsComponent } from './components/analytics/charts/piecharts.component';
 import { MatInputModule } from '@angular/material/input';
+import { ChoicesComponent } from './components/survey/choices/choices.component';
+import { QuestionComponent } from './components/survey/question/question.component';
 import { RadioQuestionComponent } from './components/submission/questions/question-radio.component';
 import { MultipleChoiceQuestionComponent } from './components/submission/questions/question-multiple-choice.component';
 import { ShortAnswerQuestionComponent } from './components/submission/questions/question-short-answer.component';
@@ -46,6 +48,8 @@ import { CheckboxQuestionComponent } from './components/submission/questions/que
     AdminComponent,
     BarChartsComponent,
     PiechartsComponent,
+    ChoicesComponent,
+    QuestionComponent,
     RadioQuestionComponent,
     MultipleChoiceQuestionComponent,
     ShortAnswerQuestionComponent,
