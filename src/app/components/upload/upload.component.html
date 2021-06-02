@@ -12,10 +12,12 @@
 
   <div class="d-flex justify-content-center">
     <div class="d-flex justify-content-center flex-column">
-      <mat-form-field appearance="fill">
+      <mat-form-field appearance="outline" class="form-control form-control-sm">
         <mat-label class="form-label">Survey</mat-label>
-        <mat-select name="survey-dropdown" (selectionChange)="selectedValueAction($event)">
-          <mat-option *ngFor="let survey of getSurveys()" class="form-control" id={{survey.title}} [value]=[survey.uuid]>{{survey.title}}</mat-option>
+        <mat-select name="survey-dropdown" [formControl]="surveyWeek">
+          <mat-option *ngFor="let survey of surveys | keyvalue" class="form-control" [value]="[survey.key]">
+              {{survey.value}}
+        </mat-option>
         </mat-select>
       </mat-form-field>
       <input type="file" name="upload-file" class="form-control" id="uploadedCSV" accept=".csv">
