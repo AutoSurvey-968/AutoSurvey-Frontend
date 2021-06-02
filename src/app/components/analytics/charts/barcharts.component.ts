@@ -19,7 +19,7 @@ export type ChartOptions = {
   selector: 'app-barcharts',
   templateUrl: './barcharts.component.html',
   styleUrls: ['./barcharts.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  //changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class BarChartsComponent{
@@ -28,18 +28,7 @@ export class BarChartsComponent{
   set nestedReport(nestedReport: IReport|undefined){
     this._nestedReport=nestedReport;
     this.setChartValues(nestedReport);
-    this.barChartOptions = {
-      series: this.dataBars,
-      chart: this.barsHeight,
-      plotOptions: {
-        bar: {
-          horizontal: false
-        }
-      },
-      dataLabels: {
-        enabled: true
-      }
-    };
+    
   }
   private _nestedReport?: IReport;
 
@@ -50,58 +39,30 @@ export class BarChartsComponent{
   public barChartOptions?: Partial<ChartOptions>;
   public pieChartOptions?: Partial<ChartOptions>[];
 
-  constructor() {
-    
-
-  }
-  data1: ChartOptions["series"]=[
-    {
-      name: "blue",
-      data: [
-        {
-          x: "Team A",
-          y: [1, 5]
-        },
-        {
-          x: "Team B",
-          y: [4, 6]
-        },
-        {
-          x: "Team C",
-          y: [5, 8]
-        },
-        {
-          x: "Team D",
-          y: [3, 11]
-        }
-      ]
+  constructor() {  }
+ 
+  
+  breakString = (str:string, limit:number) => {
+    let brokenString = '';
+    let stringArray:string[]=[]
+    for(let i = 0, count = 0; i < str.length; i++){
+       if(count >= limit && str[i] === ' '){
+          count = 0;
+          stringArray.push(brokenString);
+          brokenString ='';
+       }else{
+          count++;
+          brokenString += str[i];
+       }
     }
-  ]
-  changeData():void{
-    
-    this.barChartOptions = {
-      series: this.data1,
-      chart: {
-        type: "rangeBar",
-        height: 350
-      },
-      plotOptions: {
-        bar: {
-          horizontal: false
-        }
-      },
-      dataLabels: {
-        enabled: true
-      }
-    };
-  }
-
+    return stringArray;
+ }
   setChartValues(nestedReport: IReport | undefined): void{
     if (nestedReport!==undefined){
       if (nestedReport.averages!==undefined){
-        let tempdata =[]
+        let tempdata:{ x: any; y: any; fillColor?: string | undefined}[]=[]
         //it seems a little silly to calculate height this way, but it avoids going through the map more than once
-        let height=1;
+        let height=350;
 
         Object.entries(nestedReport.averages).forEach(([key,value])=>{
           let color='';
@@ -114,24 +75,32 @@ export class BarChartsComponent{
           }else{
             color="##FEB019";//yellow
           }
-          tempdata.push({x: key, y:[((value.delta===undefined ||value.delta===value.datum)? 0: value.datum-value.delta),value.datum],fillColor:color});
+          tempdata.push({x: this.breakString(key,20), y:[((value.delta===undefined ||value.delta===value.datum)? 0: value.delta),value.datum],fillColor:color});
 
           //fast dynamic height generation
-          if((value.delta===undefined? 0: value.datum-value.delta)>height){
-            height=(value.delta===undefined? 0: value.datum-value.delta);
-          }if (value.datum>height){
-            height=value.datum;
-          }
+          // if((value.delta===undefined? 0: value.datum-value.delta)>height){
+          //   height=(value.delta===undefined? 0: value.datum-value.delta);
+          // }if (value.datum>height){
+          //   height=value.datum;
+          // }
         });
-        this.dataBars=[{name:'Averages of this Week versus Previous', data:[]}];
+        let testData=tempdata
+        this.dataBars=[{name:'Averages of this Week versus Previous', data:testData}];
         this.barsHeight={type: "rangeBar", height:(Math.round(1.5*height))}
       }
-
-      if(nestedReport.percentages!=undefined){
-
-      }
     }
-    
+    this.barChartOptions = {
+      series: this.dataBars,
+      chart: this.barsHeight,
+      plotOptions: {
+        bar: {
+          horizontal: false
+        }
+      },
+      dataLabels: {
+        enabled: true
+      }
+    };
   }
 
 

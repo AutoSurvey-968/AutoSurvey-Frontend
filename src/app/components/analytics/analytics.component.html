@@ -1,6 +1,6 @@
 <div class="row">
     
-    <div class=" bubble col" [ngClass]="{'col-3': parentReport!==undefined}">
+    <div class=" bubble col" [ngClass]="{'col-4': parentReport!==undefined}">
         <div class="container-fluid align-items-center">
             <!--ngb nav gives tabs, active is what we ref in ts to see what's on top-->
             <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs nav-justified">
@@ -90,10 +90,9 @@
     
     
              
-         </div>    
+         </div>   
     </div>
-    <!-- *ngIf="parentReport!==undefined" -->
-    <app-barcharts *ngIf="parentReport!==undefined" [nestedReport]="parentReport" class="col-9"></app-barcharts>
+    <app-barcharts  *ngIf="parentReport!==undefined" [nestedReport]="parentReport" class="col-8"></app-barcharts>
 </div>
 
 <app-piecharts [nestedReport]="parentReport"></app-piecharts>

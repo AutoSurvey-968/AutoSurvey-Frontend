@@ -8,5 +8,5 @@ export interface IReport {
 }
 export interface reportData{
   datum: number;
-  delta: number
+  delta: number;
 }

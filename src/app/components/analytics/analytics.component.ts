@@ -10,7 +10,6 @@ import { DateAdapter } from '@angular/material/core';
 import { IReport } from 'src/app/models/ireport-report';
 import { Title } from '@angular/platform-browser';
 import { environment } from 'src/environments/environment';
-import { SubmissionComponent } from '../submission/submission.component';
 import { SubmissionService } from 'src/app/services/submission/submission.service';
 
 //still need to take care of dates
@@ -19,7 +18,7 @@ import { SubmissionService } from 'src/app/services/submission/submission.servic
   selector: 'app-analytics',
   templateUrl: './analytics.component.html',
   styleUrls: ['./analytics.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AnalyticsComponent implements OnInit {
   constructor(
@@ -77,6 +76,7 @@ export class AnalyticsComponent implements OnInit {
           averages: data.averages,
           percentages: data.percentages
         }
+        console.log(this.parentReport)
       });
     }
     else if (this.active==2){
