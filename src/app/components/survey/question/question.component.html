@@ -1,0 +1,29 @@
+
+<!--
+<div class="col-sm">
+  <mat-form-field appearance="fill" class="questionField">
+    <mat-label> Question </mat-label>
+    <input matInput class="form-control form-control-lg" formControlName="title" placeholder="Question" name="title" required />
+    <mat-error *ngIf="questionForm.controls.surveyName.touched">
+      <span *ngIf="questionForm.controls.surveyName.errors?.required">This field is mandatory.</span>
+   </mat-error>
+  </mat-form-field>
+</div>
+
+<div class="col-sm">
+  <mat-form-field class="text-center d-flex justify-content-center" appearance="fill">
+    <mat-label> Question Type </mat-label>
+    <mat-select [(ngModel)]="selectedType" matSelect formControlName="questionType" name="questionType" required>
+      <mat-option *ngFor="let option of questionOptions" [value]="option.type">
+        {{option}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<div class="col-sm">
+  <button id="removeButton" type="button" (click)="removeQuestion()" class="mat-raised-button btn">Remove</button>
+</div>
+
+<app-choices></app-choices>
+-->

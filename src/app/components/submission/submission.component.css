@@ -2,21 +2,16 @@
   padding-top: 10px;
 }
 
-.satisfactionQuestionGroup{
+.form-check-label {
+  padding-left: 5px;
+}
+
+.question-group {
   display: inline-block;
   text-align:center;
 }
 
-.satisfactionQuestionGroup label{
-  display: block;
-}
-
-.understandingQuestionGroup{
-  display: inline-block;
-  text-align: center;
-}
-
-.understandingQuestionGroup label{
+.question-group label{
   display: block;
 }
 

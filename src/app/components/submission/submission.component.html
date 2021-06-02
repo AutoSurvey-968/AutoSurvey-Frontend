@@ -2,75 +2,92 @@
   <div class="container bubble">
 
     <div class="d-flex justify-content-center">
-      <h1 class="display-4">Training Feedback</h1>
+      <h1 class="display-4">{{survey?.title}}</h1>
     </div>
     <hr>
     <div class="container">
 
       <br>
-      <p>Thank you for being a part of Revature. We hope you are having as much fun attending as we do organizing.</p>
-      <p>We want to hear your feedback so we can keep improving our logistics and content. Please fill this quick survey out and let us know your thoughts. Please note that you will be using this SAME link EVERY week to give your feedback about training, so you may want to bookmark or pin this URL in your Slack channel.</p>
-      <p>Survey responses are only accessible by the QC team and are collected anonymously unless you fill in your information below.</p>
-      <p>Please note this survey is for the last completed week of training (e.g. if you are currently in Week 4, please fill out the survey for Week 3.)</p>
-      <p style="color:red;">* Required</p>
+      <p>{{survey?.description}}</p>
+      <span>* Required</span>
     </div>
 
     <br><hr><br>
 
-    <form>
-
-        <div id="emailQuestion">
+    <form [formGroup]="submissionForm" (ngSubmit)="submit()">
+      <div formArrayName="responses">
+        <div id="name-question" [formGroupName]="1">
             <div class="mb-3">
                 <label for="name" class="form-label">Name (Optional)</label>
-                <input type="text" class="form-control" id="name">
+                <input type="text" class="form-control" id="name" formControlName="response">
               </div>
         </div>
 
-        <div id="emailQuestion">
+        <div id="email-question" [formGroupName]="2">
           <div class="mb-3">
             <label for="email" class="form-label">Email (Optional)</label>
-            <input type="text" class="form-control" id="email">
+            <input type="text" class="form-control" id="email" formControlName="response">
           </div>
         </div>
 
         <br> <hr> <br>
 
-        <div id="locationQuestion">
+        <div id="location-question" [formGroupName]="3">
           <div class="mb-3">
-            <label for="location" class="form-label">Where is your training location? <span style="color: red">*</span></label>
-            <select class="form-control" id="location" required></select>
+            <label for="location" class="form-label">Where is your training location? <span>*</span></label>
+            <select class="form-control" id="location" formControlName="response" required>
+              <option *ngFor="let location of locations" [value]="location">{{location}}</option>
+
+            </select>
           </div>
         </div>
+      </div>
 
-        <div id="batchQuestion">
+      <div>
+        <div id="batch-question">
           <div class="mb-3">
-            <label for="batch" class="form-label">What batch are you in? <span style="color: red">*</span></label>
-            <select class="form-control" id="batch" required></select>
+            <label for="batch" class="form-label">What batch are you in? <span>*</span></label>
+            <select class="form-control" id="batch" formControlName="batch" required>
+              <option *ngFor="let batch of batches" [value]="batch.id">{{batch.name}}</option>
+            </select>
           </div>
         </div>
 
         <br> <hr> <br>
 
-        <div id="weekQuestion">
-            <label for="week" class="form-label">What was your most recently completed week of training? (Extended batches start with Week A, normal batches start with Week 1)<span >*</span></label>
-            <select class="form-control" id="week" required>
-              <option value="A">Week A</option>
-              <option value="B">Week B</option>
-              <option value="1">Week 1</option>
-              <option value="2">Week 2</option>
-              <option value="3">Week 3</option>
-              <option value="4">Week 4</option>
-              <option value="5">Week 5</option>
-              <option value="6">Week 6</option>
-              <option value="7">Week 7</option>
-              <option value="8">Week 8</option>
-              <option value="9">Week 9</option>
+        <div id="week-question">
+            <label for="week" class="form-label">What was your most recently completed week of training? (Extended batches start with Week A, normal batches start with Week 1)<span>*</span></label>
+            <select class="form-control" id="week" formControlName="week" required>
+              <option value="Week A">Week A</option>
+              <option value="Week B">Week B</option>
+              <option value="Week 1">Week 1</option>
+              <option value="Week 2">Week 2</option>
+              <option value="Week 3">Week 3</option>
+              <option value="Week 4">Week 4</option>
+              <option value="Week 5">Week 5</option>
+              <option value="Week 6">Week 6</option>
+              <option value="Week 7">Week 7</option>
+              <option value="Week 8">Week 8</option>
+              <option value="Week 9">Week 9</option>
             </select>
         </div>
 
-        <br> <hr> <br>
+        <div class="survey-questions" *ngFor="let question of questions; index as i;">
+          <div>
+            <!-- index is passed in as i+4 to offset timestamp, name, email, and training location questions -->
+            <checkbox-question id="{{'question-'+i+4}}" [question]="question" [index]="i+4" [form]="submissionForm" *ngIf="question.questionType == 'CHECKBOX'"></checkbox-question>
+            <dropdown-question id="{{'question-'+i+4}}" [question]="question" [index]="i+4" [form]="submissionForm" *ngIf="question.questionType == 'DROPDOWN'"></dropdown-question>
+            <multiple-choice-question id="{{'question-'+i+4}}" [question]="question" [index]="i+4" [form]="submissionForm" *ngIf="question.questionType == 'MULTIPLE_CHOICE'"></multiple-choice-question>
+            <short-answer-question id="{{'question-'+i+4}}" [question]="question" [index]="i+4" [form]="submissionForm" *ngIf="question.questionType == 'PARAGRAPH'"></short-answer-question>
+            <radio-question id="{{'question-'+i+4}}" [question]="question" [index]="i+4" [form]="submissionForm" *ngIf="question.questionType == 'RADIO'"></radio-question>
+            <short-answer-question id="{{'question-'+i+4}}" [question]="question" [index]="i+4" [form]="submissionForm" *ngIf="question.questionType == 'SHORT_ANSWER'"></short-answer-question>
+          </div>
+        </div>
 
-        <button id="submitSurvey" type="button" class="btn btn-lg btn-custom">Submit</button>
+        <br><hr><br>
 
-      </form>
+        <button id="submit-survey" type="submit" class="btn btn-lg btn-custom">Submit</button>
+      </div>
+
+    </form>
   </div>
