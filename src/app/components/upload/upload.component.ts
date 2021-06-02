@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { MatSelectChange } from '@angular/material/select';
 import { Title } from '@angular/platform-browser';
 import { environment } from 'src/environments/environment';
@@ -15,6 +16,7 @@ export class UploadComponent implements OnInit {
   @Input() selectedSurveyUuid!: string;
   @Input() file!: File;
   surveys: Map<string, ISurvey> = new Map();
+  surveyWeek = new FormControl('',Validators.required);
 
   constructor(
     private surveyService: SurveyService,
@@ -28,7 +30,7 @@ export class UploadComponent implements OnInit {
   }
 
   upload(): void {
-    this.uploadService.upload(this.selectedSurveyUuid, this.surveys).subscribe(
+    this.uploadService.upload(this.surveyWeek.value[0], this.surveys).subscribe(
        data => {}
     );
   }

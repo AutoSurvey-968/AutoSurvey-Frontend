@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Title } from '@angular/platform-browser';
 import { Associate } from 'src/app/models/Caliber/associate';
 import { IoService } from 'src/app/services/io/io.service';
@@ -22,16 +24,25 @@ export class SendemailsComponent implements OnInit {
   public surveyTitles: string[] = [];
   public selectedBatch!: Number;
   public selectedSurvey!: Number;
+  surveyWeek = new FormControl('',Validators.required);
+
+
   constructor(
     private caliberService: CaliberService,
     private surveyService: SurveyService,
     private ioService: IoService,
-    private titleService: Title
+    private titleService: Title,
+    private snackBar: MatSnackBar
     ) { }
+
+  private openSnackbar(message : string) {
+    this.snackBar.open(message, undefined, {duration: 2000});
+  }
 
   ngOnInit(): void {
     this.titleService.setTitle('Email'+environment.titleSuffix);
     this.getAllBatches();
+    this.setSurveys();
   }
 
   getAllBatches(): void{
@@ -58,10 +69,11 @@ export class SendemailsComponent implements OnInit {
       associateData.forEach(associate =>{
         this.ioService.sendEmail(
           associate.email,
-          "Hi MockUser, you got invited to fill out a survey: locahost:4200/submit/574ffb00-c2e9-11eb-8918-2fdb812f26a5",
+          "Hi MockUser, you got invited to fill out a survey: http://localhost:4200/submit/"+this.surveyWeek.value[0],
           "Survey request"
           ).subscribe();
       });
     })
+    this.openSnackbar("Email sent!");
   }
 }

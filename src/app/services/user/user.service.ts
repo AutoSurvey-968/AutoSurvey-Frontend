@@ -20,22 +20,21 @@ export class UserService {
       "password": password
     };
     return this.http.put(this.endpoint, body, this.httpOptions).pipe(
-      map(response => { 
+      map(response => {
         return response as IUser;
       })
     );
   }
 
-  register(firstName: string, lastName: string, email: string, password: string): Observable<string> {
+  register(firstName: string, lastName: string, email: string): Observable<string> {
     if (localStorage.getItem("token") === null) {
       return EMPTY;
-    } 
+    }
     this.httpOptions.headers = new HttpHeaders({ 'Content-Type': 'application/json' , 'Authorization' : 'Bearer ' + localStorage.getItem('token')});
     let body = {
       "firstName" : firstName,
       "lastName" : lastName,
       "email" : email,
-      "password" : password
     };
     return this.http.post(this.endpoint, body, this.httpOptions).pipe(
       map(response => {
