@@ -8,7 +8,8 @@
     <br><hr><br>
 
     <form>
-        <div id="SurveySelection">
+        <div class="d-flex justify-content-around">
+          <div id="SurveySelection">
             <div class="mb-3">
                 <h3>Survey to Email</h3>
                 <mat-form-field appearance="fill">
@@ -22,8 +23,6 @@
                 </mat-form-field>
               </div>
         </div>
-
-        <br><hr><br>
 
         <div id="BatchSelection">
             <div class="mb-3">
@@ -41,13 +40,19 @@
               </div>
         </div>
 
+
+        </div>
+
        <!-- <br> <hr> <br> -->
 
         <br><hr><br>
+        <div class="d-flex justify-content-center">
+          <button mat-button id="submitSurvey" type="button" 
+          class="btn btn-lg btn-custom" 
+          (click)="send(selectedBatch, selectedSurvey)">Submit</button>
+        </div>
 
-        <button mat-button id="submitSurvey" type="button" 
-        class="btn btn-lg btn-custom" 
-        (click)="send(selectedBatch, selectedSurvey)">Submit</button>
+        
 
       </form>
 </div>
