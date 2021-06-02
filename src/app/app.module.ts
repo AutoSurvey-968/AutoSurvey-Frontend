@@ -31,6 +31,7 @@ import { RadioQuestionComponent } from './components/submission/questions/questi
 import { MultipleChoiceQuestionComponent } from './components/submission/questions/question-multiple-choice.component';
 import { ShortAnswerQuestionComponent } from './components/submission/questions/question-short-answer.component';
 import { DropdownQuestionComponent } from './components/submission/questions/question-dropdown.component';
+import { CheckboxQuestionComponent } from './components/submission/questions/question-checkbox.component';
 
 
 @NgModule({
@@ -52,7 +53,8 @@ import { DropdownQuestionComponent } from './components/submission/questions/que
     RadioQuestionComponent,
     MultipleChoiceQuestionComponent,
     ShortAnswerQuestionComponent,
-    DropdownQuestionComponent
+    DropdownQuestionComponent,
+    CheckboxQuestionComponent
   ],
   imports: [
     BrowserModule,

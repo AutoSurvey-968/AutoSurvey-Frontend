@@ -16,14 +16,14 @@
 
     <form [formGroup]="submissionForm" (ngSubmit)="submit()">
       <div formArrayName="responses">
-        <div id="name-question" [formGroupName]="0">
+        <div id="name-question" [formGroupName]="1">
             <div class="mb-3">
                 <label for="name" class="form-label">Name (Optional)</label>
                 <input type="text" class="form-control" id="name" formControlName="response">
               </div>
         </div>
 
-        <div id="email-question" [formGroupName]="1">
+        <div id="email-question" [formGroupName]="2">
           <div class="mb-3">
             <label for="email" class="form-label">Email (Optional)</label>
             <input type="text" class="form-control" id="email" formControlName="response">
@@ -32,10 +32,13 @@
 
         <br> <hr> <br>
 
-        <div id="location-question" [formGroupName]="2">
+        <div id="location-question" [formGroupName]="3">
           <div class="mb-3">
             <label for="location" class="form-label">Where is your training location? <span>*</span></label>
-            <select class="form-control" id="location" formControlName="response" required></select>
+            <select class="form-control" id="location" formControlName="response" required>
+              <option *ngFor="let location of locations" [value]="location">{{location}}</option>
+
+            </select>
           </div>
         </div>
       </div>
@@ -44,7 +47,9 @@
         <div id="batch-question">
           <div class="mb-3">
             <label for="batch" class="form-label">What batch are you in? <span>*</span></label>
-            <select class="form-control" id="batch" formControlName="batch" required></select>
+            <select class="form-control" id="batch" formControlName="batch" required>
+              <option *ngFor="let batch of batches" [value]="batch.id">{{batch.name}}</option>
+            </select>
           </div>
         </div>
 
@@ -53,27 +58,29 @@
         <div id="week-question">
             <label for="week" class="form-label">What was your most recently completed week of training? (Extended batches start with Week A, normal batches start with Week 1)<span>*</span></label>
             <select class="form-control" id="week" formControlName="week" required>
-              <option value="A">Week A</option>
-              <option value="B">Week B</option>
-              <option value="1">Week 1</option>
-              <option value="2">Week 2</option>
-              <option value="3">Week 3</option>
-              <option value="4">Week 4</option>
-              <option value="5">Week 5</option>
-              <option value="6">Week 6</option>
-              <option value="7">Week 7</option>
-              <option value="8">Week 8</option>
-              <option value="9">Week 9</option>
+              <option value="Week A">Week A</option>
+              <option value="Week B">Week B</option>
+              <option value="Week 1">Week 1</option>
+              <option value="Week 2">Week 2</option>
+              <option value="Week 3">Week 3</option>
+              <option value="Week 4">Week 4</option>
+              <option value="Week 5">Week 5</option>
+              <option value="Week 6">Week 6</option>
+              <option value="Week 7">Week 7</option>
+              <option value="Week 8">Week 8</option>
+              <option value="Week 9">Week 9</option>
             </select>
         </div>
 
         <div class="survey-questions" *ngFor="let question of questions; index as i;">
           <div>
-            <!-- index is passed in as i+3 to offset name, email, and training location questions -->
-            <radio-question id="{{'question-'+i+3}}" [question]="question" [index]="i+3" [form]="submissionForm" *ngIf="question.questionType == 'RADIO'"></radio-question>
-            <multiple-choice-question id="{{'question-'+i+3}}" [question]="question" [index]="i+3" [form]="submissionForm" *ngIf="question.questionType == 'MULTIPLE_CHOICE'"></multiple-choice-question>
-            <short-answer-question id="{{'question-'+i+3}}" [question]="question" [index]="i+3" [form]="submissionForm" *ngIf="question.questionType == 'SHORT_ANSWER'"></short-answer-question>
-            <dropdown-question id="{{'question-'+i+3}}" [question]="question" [index]="i+3" [form]="submissionForm" *ngIf="question.questionType == 'DROPDOWN'"></dropdown-question>
+            <!-- index is passed in as i+4 to offset timestamp, name, email, and training location questions -->
+            <checkbox-question id="{{'question-'+i+4}}" [question]="question" [index]="i+4" [form]="submissionForm" *ngIf="question.questionType == 'CHECKBOX'"></checkbox-question>
+            <dropdown-question id="{{'question-'+i+4}}" [question]="question" [index]="i+4" [form]="submissionForm" *ngIf="question.questionType == 'DROPDOWN'"></dropdown-question>
+            <multiple-choice-question id="{{'question-'+i+4}}" [question]="question" [index]="i+4" [form]="submissionForm" *ngIf="question.questionType == 'MULTIPLE_CHOICE'"></multiple-choice-question>
+            <short-answer-question id="{{'question-'+i+4}}" [question]="question" [index]="i+4" [form]="submissionForm" *ngIf="question.questionType == 'PARAGRAPH'"></short-answer-question>
+            <radio-question id="{{'question-'+i+4}}" [question]="question" [index]="i+4" [form]="submissionForm" *ngIf="question.questionType == 'RADIO'"></radio-question>
+            <short-answer-question id="{{'question-'+i+4}}" [question]="question" [index]="i+4" [form]="submissionForm" *ngIf="question.questionType == 'SHORT_ANSWER'"></short-answer-question>
           </div>
         </div>
 
