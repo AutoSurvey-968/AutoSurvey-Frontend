@@ -1,7 +1,7 @@
 import {Flag} from "./flag";
 export class Associate {
     email!: String;
-    firstname?: String;
+    firstName?: String;
     lastName?: String;
     flag?: Flag;
     saledForceId?: String;

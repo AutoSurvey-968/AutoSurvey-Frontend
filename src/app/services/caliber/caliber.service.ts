@@ -22,7 +22,6 @@ export class CaliberService {
     getAssociatesByBatch(
       id:Number
     ):Observable<Associate[]>{
-      alert("getting associates")
       return this.http.get<Associate[]>("https://caliber2-mock.revaturelabs.com/mock/training/batch/TR-1079/associates");
     }
   }
