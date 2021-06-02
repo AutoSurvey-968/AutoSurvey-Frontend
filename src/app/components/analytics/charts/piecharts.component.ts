@@ -5,7 +5,7 @@ import {
   ApexResponsive,
   ApexTitleSubtitle
 } from "ng-apexcharts";
-import { IReport } from "src/app/models/ireport-report";
+import { IReport, reportData } from "src/app/models/ireport-report";
 
 export type ChartOptions = {
   series: ApexNonAxisChartSeries;
@@ -65,17 +65,27 @@ export class PiechartsComponent{
         let tempTitles:string[]=[];
         let tempData:number[][]=[];
         let tempLabels:string[][]=[];
-        nestedReport.percentages.forEach((value,key)=>{
+        console.log("we were here")
+        Object.keys(nestedReport.percentages).forEach((key: string)=>{
           tempTitles.push(key);
+        });
+        Object.values(nestedReport.percentages).forEach((value:Map<string,reportData>)=>{
           let tempTempData:number[]=[];
           let tempTempLabels:string[]=[];
-          value.forEach((subValue,subKey)=>{
-            tempTempLabels.push(subKey);
-            tempTempData.push(subValue.datum);
+          Object.keys(value).forEach((nestedKey: string)=>{
+            tempTempLabels.push(nestedKey);
           })
-          tempData.push(tempTempData);
           tempLabels.push(tempTempLabels);
+          Object.values(value).forEach((nestedValue:reportData)=>{
+            tempTempData.push(nestedValue.datum)
+          })
+          tempLabels.push(tempTempLabels)
+          tempData.push(tempTempData)
         })
+        this.pieTitles=tempTitles;
+        this.pieData=tempData;
+        this.pieLabels=tempLabels;
+        
         this.pieData=tempData;
         this.pieLabels=tempLabels;
         this.pieTitles=tempTitles;

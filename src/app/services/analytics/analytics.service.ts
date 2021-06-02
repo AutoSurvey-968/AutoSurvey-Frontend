@@ -20,7 +20,6 @@ export class AnalyticsService {
     );
   }
   getDataWeekBatch(surveyId: string, startDate: string, batchId: string){
-    console.log(this.httpOptions.headers)
     return this.http.get(this.endpoint+"?surveyId="+surveyId+"&weekDay="+startDate+"&batchId="+batchId,this.httpOptions).pipe(
       map(response => response as IReport)
     );

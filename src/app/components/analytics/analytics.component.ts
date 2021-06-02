@@ -58,7 +58,6 @@ export class AnalyticsComponent implements OnInit {
   originalBatches: Batch[] = [];
   batches: Batch[] = [];
   weeks: Date[] = [];
-  dataDefined:boolean=false;//just here for testing, after can just use whether the report
 
   parentReport?: IReport;
 
@@ -70,7 +69,7 @@ export class AnalyticsComponent implements OnInit {
   pipe = new DatePipe('en-US');
   getData(){
     if (this.active==1){
-      this.analyticsService.getDataWeek("12345678-1234-1234-1234-123456789abc",this.pipe.transform(this.range.get('start')?.value, 'yyyy-MM-dd')||"").subscribe((data: IReport)=>{
+      this.analyticsService.getDataWeek(this.surveyWeek.value,this.pipe.transform(this.range.get('start')?.value, 'yyyy-MM-dd')||"").subscribe((data: IReport)=>{
         this.parentReport= {
           surveyId: data.surveyId,
           weekEnum: data.weekEnum,
@@ -81,7 +80,7 @@ export class AnalyticsComponent implements OnInit {
       });
     }
     else if (this.active==2){
-      this.analyticsService.getDataWeekBatch("12345678-1234-1234-1234-123456789abc", this.pipe.transform(this.weekSelect.value, 'yyyy-MM-dd')||"", this.batchSelect.value).subscribe((data: IReport)=>{
+      this.analyticsService.getDataWeekBatch(this.surveyWeekBatch.value, this.pipe.transform(this.weekSelect.value, 'yyyy-MM-dd')||"", this.batchSelect.value).subscribe((data: IReport)=>{
         this.parentReport= {
           surveyId: data.surveyId,
           weekEnum: data.weekEnum,

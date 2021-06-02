@@ -102,7 +102,8 @@ export class BarChartsComponent{
         let tempdata =[]
         //it seems a little silly to calculate height this way, but it avoids going through the map more than once
         let height=1;
-        nestedReport.averages.forEach((value,key)=>{
+
+        Object.entries(nestedReport.averages).forEach(([key,value])=>{
           let color='';
           if(value.delta===undefined){
             color="#008FFB";//blue
