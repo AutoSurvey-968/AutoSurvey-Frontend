@@ -22,7 +22,7 @@ export class AdminComponent implements OnInit {
   }
 
   registerEmployee(): void {
-      this.userService.register(this.firstName, this.lastName, this.email,  "").subscribe((data) => {
+      this.userService.register(this.firstName, this.lastName, this.email).subscribe((data) => {
         this.openSnackbar("User added.");
       },
       (error : HttpErrorResponse) => {

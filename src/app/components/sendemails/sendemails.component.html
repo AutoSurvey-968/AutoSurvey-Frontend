@@ -2,7 +2,7 @@
 <div class="container bubble" style="margin-top: 2%; width:800px;">
 
     <div class="d-flex justify-content-center">
-      <h1 class="display-4" style="padding-bottom:10px; padding-top: 10px;">Training Feedback</h1>
+      <h1 class="display-4" style="padding-bottom:10px; padding-top: 10px;">Send Email</h1>
     </div>
 
     <br><hr><br>
@@ -12,14 +12,13 @@
           <div id="SurveySelection">
             <div class="mb-3">
                 <h3>Survey to Email</h3>
-                <mat-form-field appearance="fill">
-                    <mat-label class="form-label">Survey</mat-label>
-                    <mat-select name="survey-dropdown">
-                      <mat-option *ngFor="let survey of surveys | keyvalue" [value]=[survey.key]>
-                          {{survey.value}}
-                    </mat-option>
-                    </mat-select>
-                    <br>
+                <mat-form-field appearance="outline" class="form-control form-control-sm">
+                  <mat-label class="form-label">Survey</mat-label>
+                  <mat-select name="survey-dropdown" [formControl]="surveyWeek">
+                    <mat-option *ngFor="let survey of surveys | keyvalue" class="form-control" [value]="[survey.key]">
+                        {{survey.value}}
+                  </mat-option>
+                  </mat-select>
                 </mat-form-field>
               </div>
         </div>
@@ -27,7 +26,7 @@
         <div id="BatchSelection">
             <div class="mb-3">
                 <h3>Batch</h3>
-                <mat-form-field appearance="fill">
+                <mat-form-field appearance="outline" class="form-control form-control-sm">
                     <mat-label class="form-label">Batch</mat-label>
                     <mat-select [(value)]="selectedBatch">
                       <mat-option class="form-control" *ngFor="let batch of batches" id={{batch.id}} value={{batch.batchId}}>
@@ -46,8 +45,8 @@
 
         <br><hr><br>
         <div class="d-flex justify-content-center">
-          <button mat-button id="submitSurvey" type="button" 
-          class="btn btn-lg btn-custom" 
+          <button mat-button id="submitSurvey" type="button"
+          class="btn btn-lg btn-custom"
           (click)="send(selectedBatch, selectedSurvey)">Submit</button>
         </div>
       </form>
