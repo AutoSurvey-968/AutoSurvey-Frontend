@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class SubmissionService {
-  private endpoint: string = environment.apiUrl+'/submissions'
+  private endpoint: string = environment.apiUrl+'/responses'
   private httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -19,6 +19,6 @@ export class SubmissionService {
   constructor(private http: HttpClient) { }
 
   submit(body: ISubmission) {
-    return this.http.put(this.endpoint+'/', body, this.httpOptions).pipe();
+    return this.http.post(this.endpoint+'/', body, this.httpOptions).pipe();
   }
 }
