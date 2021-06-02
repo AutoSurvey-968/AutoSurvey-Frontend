@@ -1,53 +1,43 @@
 .display-4 {
-    padding-bottom:10px;
-  }
-  
-  .align-items-center {
-    margin-top:8%;
-  }
-  
-  .form {
-    margin:auto;
-    max-width: 360px;
-  }
-  
-  .bubble {
-    width: 500px;
-  }
-  
-  .btn-custom {
-    height:auto;
-    margin-top:25px;
-  }
-  
-  .formField{
-    width:90%;
-  }
-  
-  .questionField{
-    width:100%;
-  }
-  
-  button.addQuestion{
-    color: #fff;
-    background-color: #0d6efd;
-    border-color: #0d6efd;
-  }
-  
-  button.addQuestion:hover{
-    color: #fff;
-    background-color: #0b5ed7;
-    border-color: #0a58ca;
-  }
-  
-  button#removeButton.button-remove {
-    color: #fff;
-    background-color: #dc3545;
-    border-color: #dc3545;
-  }
-  
-  button.button-remove:hover {
-    color: #fff;
-    background-color: #bb2d3b;
-    border-color: #b02a37;
-  }
+  padding-bottom:10px;
+}
+
+.align-items-center {
+  margin-top:8%;
+}
+
+.form {
+  margin:auto;
+  max-width: 360px;
+}
+
+.bubble {
+  width: 500px;
+}
+
+.btn-custom {
+  height:auto;
+  margin-top:25px;
+}
+
+.formField{
+  width:90%;
+}
+
+.questionField{
+  width:100%;
+}
+
+.btn.addQuestion{
+  color: #fff;
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+}
+
+.btn.addQuestion:hover{
+  color: #fff;
+  background-color: #0b5ed7;
+  border-color: #0a58ca;
+}
+
+
