@@ -70,10 +70,12 @@
         <div class="survey-questions" *ngFor="let question of questions; index as i;">
           <div>
             <!-- index is passed in as i+3 to offset name, email, and training location questions -->
-            <radio-question id="{{'question-'+i+3}}" [question]="question" [index]="i+3" [form]="submissionForm" *ngIf="question.questionType == 'RADIO'"></radio-question>
-            <multiple-choice-question id="{{'question-'+i+3}}" [question]="question" [index]="i+3" [form]="submissionForm" *ngIf="question.questionType == 'MULTIPLE_CHOICE'"></multiple-choice-question>
-            <short-answer-question id="{{'question-'+i+3}}" [question]="question" [index]="i+3" [form]="submissionForm" *ngIf="question.questionType == 'SHORT_ANSWER'"></short-answer-question>
+            <checkbox-question id="{{'question-'+i+3}}" [question]="question" [index]="i+3" [form]="submissionForm" *ngIf="question.questionType == 'CHECKBOX'"></checkbox-question>
             <dropdown-question id="{{'question-'+i+3}}" [question]="question" [index]="i+3" [form]="submissionForm" *ngIf="question.questionType == 'DROPDOWN'"></dropdown-question>
+            <multiple-choice-question id="{{'question-'+i+3}}" [question]="question" [index]="i+3" [form]="submissionForm" *ngIf="question.questionType == 'MULTIPLE_CHOICE'"></multiple-choice-question>
+            <short-answer-question id="{{'question-'+i+3}}" [question]="question" [index]="i+3" [form]="submissionForm" *ngIf="question.questionType == 'PARAGRAPH'"></short-answer-question>
+            <radio-question id="{{'question-'+i+3}}" [question]="question" [index]="i+3" [form]="submissionForm" *ngIf="question.questionType == 'RADIO'"></radio-question>
+            <short-answer-question id="{{'question-'+i+3}}" [question]="question" [index]="i+3" [form]="submissionForm" *ngIf="question.questionType == 'SHORT_ANSWER'"></short-answer-question>
           </div>
         </div>
 

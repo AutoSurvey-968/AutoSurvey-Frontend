@@ -6,17 +6,19 @@ import { IQuestion } from 'src/app/models/iquestion-question';
   selector: 'radio-question',
   template: `
     <br><hr><br>
-    <p>{{ question.title }}<span style="color:red" *ngIf="question.isRequired">*</span></p>
-    <div class="d-flex justify-content-center">
-      <!-- Need to see how we grab these labels from questions -->
-      <p style="margin-top: 9px; margin-right: 10px;">Not Satisfied</p>
-      <div class="question-group form-check form-check-inline" *ngFor="let choice of question.choices; index as i">
-        <!--id is formatted as question-index-choice-i, example: question-0-choice-0-->
-        <input type="radio" id="{{'question-'+index+'-'+'choice-'+i}}" value="{{choice}}">
-        <label for="{{'question-'+index+'-'+'choice-'+i}}">{{choice}}</label>
-      </div>
+    <div [formGroup]=form>
+      <p>{{ question.title }}<span style="color:red" *ngIf="question.isRequired">*</span></p>
+      <div class="d-flex justify-content-center" formArrayName="responses">
+        <!-- Need to see how we grab these labels from questions -->
+        <p style="margin-top: 9px; margin-right: 10px;">Not Satisfied</p>
+        <div class="question-group form-check form-check-inline" [formGroupName]="index" *ngFor="let choice of question.choices; index as i">
+          <!--id is formatted as question-index-choice-i, example: question-0-choice-0-->
+          <input type="radio" formControlName="response" name="response" id="{{'question-'+index+'-'+'choice-'+i}}" value="{{choice}}">
+          <label for="{{'question-'+index+'-'+'choice-'+i}}">{{choice}}</label>
+        </div>
 
-      <p style="margin-top: 9px; margin-left: 10px;">Very Satisfied</p>
+        <p style="margin-top: 9px; margin-left: 10px;">Very Satisfied</p>
+      </div>
     </div>
   `,
   styleUrls: ['../submission.component.css']
