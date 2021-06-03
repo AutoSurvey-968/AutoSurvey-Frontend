@@ -7,3 +7,6 @@ bubble{
 .differentcolor{ 
     color: rgb(155, 63, 63);
 }
+.container-fluid{
+    margin-top: 15%;
+}
