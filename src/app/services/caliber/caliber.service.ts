@@ -16,7 +16,7 @@ export class CaliberService {
     constructor(private http: HttpClient) { }
   
     getAllBatches(): Observable<Batch[]> {
-      return this.http.get<Batch[]>(this.endpoint+ "?quarter=1&year=2020");
+      return this.http.get<Batch[]>(this.endpoint);
     }
 
     getAssociatesByBatch(

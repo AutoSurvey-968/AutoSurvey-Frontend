@@ -35,10 +35,6 @@ export class PiechartsComponent {
 
 
   public pieChartOptionsArray: Partial<ChartOptions>[] = [];
-  data1 = [44, 55, 13, 43, 22]
-  data2 = [7, 99, 150]
-  labels1 = ["Team A", "Team B", "Team C", "Team D", "Team E"]
-  labels2 = ["Team 1", "Team 2", "Team 3"]
   constructor() {
 
     this.pieChartOptionsArray = [];
@@ -50,14 +46,19 @@ export class PiechartsComponent {
 
 
 
-  changeData(): void {
-    this.pieChartOptionsArray = []
-    this.chartMaker(this.data1, this.labels1, "test1")
-    this.chartMaker(this.data2, this.labels2, "title2")
-    for (let i = 0; i < 8; i++) {
-      this.chartMaker([1, 99], ["my knowledge", "my sheer force of will"], `for loop chart:${i}`)
+  breakString = (str:string, limit:number) => {
+    let brokenString = '';
+    for(let i = 0, count = 0; i < str.length; i++){
+       if(count >= limit && str[i] === ' '){
+          count = 0;
+          brokenString +='\n'
+       }else{
+          count++;
+          brokenString += str[i];
+       }
     }
-  }
+    return brokenString;
+ }
 
   setChartValues(nestedReport: IReport | undefined): void {
     if (nestedReport !== undefined) {
