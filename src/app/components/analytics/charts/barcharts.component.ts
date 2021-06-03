@@ -66,18 +66,23 @@ export class BarChartsComponent{
         let height=350;
 
         Object.entries(nestedReport.averages as Map<string,reportData>).forEach(([key,value])=>{
+          
           let color='';
           let tempVal:reportData=value as reportData
+          let tempDelta:number= tempVal.delta
+          let tempDatum:number=tempVal.datum
+          tempDelta=Math.round(tempDelta*1000)/1000
+          tempDatum=Math.round(tempDatum*1000)/1000
           if(tempVal.delta===undefined){
             color="#008FFB";//blue
-          }else if(tempVal.delta<0){
+          }else if(tempDelta<0){
             color="#FF2020";//red
-          }else if(tempVal.delta>0){
+          }else if(tempDelta>0){
             color="#00E375";//green
           }else{
             color="#FEB019";//yellow
           }
-          tempdata.push({x: this.breakString(key,20), y:[((tempVal.delta===undefined ||tempVal.delta===0)? 0: tempVal.datum-tempVal.delta),tempVal.datum],fillColor:color});
+          tempdata.push({x: this.breakString(key,20), y:[((tempDelta===undefined ||tempDelta===0)? 0: Math.round((tempDatum-tempDelta)*1000)/1000),Math.round(tempDatum*1000)/1000],fillColor:color});
 
           //fast dynamic height generation
           // if((value.delta===undefined? 0: value.datum-value.delta)>height){
