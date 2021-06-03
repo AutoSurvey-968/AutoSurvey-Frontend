@@ -20,7 +20,6 @@ export class SubmissionService {
 
   submit(body: ISubmission) {
     let jsonBody = JSON.stringify(body);
-    console.log(body);
     jsonBody = jsonBody.substring(0, jsonBody.length-2);
 
     for (let response of body.responses) {
@@ -28,7 +27,6 @@ export class SubmissionService {
     }
     jsonBody = jsonBody.substring(0, jsonBody.length-1);
     jsonBody = jsonBody + '}}';
-    console.log(jsonBody);
     return this.http.post(this.endpoint+'/', jsonBody, this.httpOptions).pipe();
   }
 }
