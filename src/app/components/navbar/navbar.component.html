@@ -1,17 +1,19 @@
 <nav class="navbar navbar-expand-md navbar-light bg-dark sticky-top py-0">
   <div class="container-fluid">
-      <a class="navbar-brand"> <img src="../../assets/img/rev-logo-alt.png" width="200px"></a>
+      <a class="navbar-brand" href="https://connect.revature.net/"> <img src="../../assets/img/rev-logo-alt.png" width="200px"></a>
   </div>
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <div *ngIf="checkNavbar()" class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
 
       <li  class="nav-item">
         <a *ngIf="isLoggedIn()" id="survey" (click)="getDisable()" [class]="getDisable()" routerLink="/survey">Survey</a>
       </li>
 
+      <!--
       <li  class="nav-item">
         <a *ngIf="isLoggedIn()" id="submission" (click)="getDisable()" class="nav-link" [routerLink]="[getSurveyId()]">Submit</a>
       </li>
+      -->
 
       <li  class="nav-item">
         <a *ngIf="isLoggedIn()" id="upload" (click)="getDisable()" class="nav-link" routerLink="/upload">Upload</a>

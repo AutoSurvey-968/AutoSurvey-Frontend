@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IQuestion } from 'src/app/models/iquestion-question';
 import { ISubmission } from 'src/app/models/isubmission-submission';
@@ -37,6 +37,7 @@ export class SubmissionComponent implements OnInit {
     private titleService: Title,
     private datePipe: DatePipe,
     private snackBar: MatSnackBar,
+    private router: Router,
   ) {
     this.route.params.subscribe(params => {
       this.surveyId = params['surveyId'];
@@ -122,11 +123,12 @@ export class SubmissionComponent implements OnInit {
     this.submissionService.submit(this.submission).subscribe(
       data => {
         console.log(data);
-        this.snackBar.open(this.survey.confirmation, undefined, { duration: 2000 });
+        this.snackBar.open("Survey submitted", undefined, { duration: 2000 });
         }
       ); // Send body as JSON to submission service
     this.submissionForm.reset(); // Clear form. If you try to submit again, questions will be null as this happens when we subscribe to the Survey Observable.
     // Probably better to refresh here.
+    this.router.navigate(['/confirmation']);
   }
 
   setUpBatches(): void {

@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 export class NavbarComponent implements OnInit {
   constructor(
     public userService: UserService,
-    public route: Router
+    public router: Router
   ) { }
 
   ngOnInit(): void {
@@ -27,9 +27,9 @@ export class NavbarComponent implements OnInit {
     let urlList: string[] = ['/survey','/upload','/analytics','/sendemails','/submit', '/admin'];
     let idList: string[] = ['survey','upload','analytics','sendemails','submission', 'admin'];
     document.querySelectorAll('a').forEach(ni => {
-      let urlID = this.route.url;
-      if (this.route.url.substring(0,7) === '/submit'){
-        urlID = this.route.url.substring(0,7);
+      let urlID = this.router.url;
+      if (this.router.url.substring(0,7) === '/submit'){
+        urlID = this.router.url.substring(0,7);
       }
       for (let i = 0; i< urlList.length ; i++){
         if (urlID === urlList[i] && ni.id === idList[i] && ni.className === 'nav-link'){
@@ -49,5 +49,15 @@ export class NavbarComponent implements OnInit {
 
   isLoggedIn(): boolean{
     return localStorage.getItem('token') != null && localStorage.getItem('token') != '';
+  }
+
+  checkNavbar(): boolean {
+    if (/^\/submit(\/|$)/.test(this.router.url)) {
+      return false;
+    };
+    if (/^\/confirmation(\/|$)/.test(this.router.url)) {
+      return false;
+    };
+    return true;
   }
 }
