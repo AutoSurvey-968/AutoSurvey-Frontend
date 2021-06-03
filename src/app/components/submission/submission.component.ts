@@ -123,7 +123,7 @@ export class SubmissionComponent implements OnInit {
     this.submissionService.submit(this.submission).subscribe(
       data => {
         console.log(data);
-        this.snackBar.open("Survey submitted", undefined, { duration: 2000 });
+        this.snackBar.open("Survey submitted 🙂", undefined, { duration: 2000 });
         }
       ); // Send body as JSON to submission service
     this.submissionForm.reset(); // Clear form. If you try to submit again, questions will be null as this happens when we subscribe to the Survey Observable.
