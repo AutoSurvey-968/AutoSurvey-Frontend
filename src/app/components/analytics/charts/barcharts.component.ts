@@ -84,12 +84,7 @@ export class BarChartsComponent{
           }
           tempdata.push({x: this.breakString(key,20), y:[((tempDelta===undefined ||tempDelta===0)? 0: tempDatum-tempDelta),tempDatum],fillColor:color});
 
-          //fast dynamic height generation
-          // if((value.delta===undefined? 0: value.datum-value.delta)>height){
-          //   height=(value.delta===undefined? 0: value.datum-value.delta);
-          // }if (value.datum>height){
-          //   height=value.datum;
-          // }
+         
         });
         console.log(tempdata)
         let testData=tempdata
