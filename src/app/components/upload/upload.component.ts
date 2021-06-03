@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSelectChange } from '@angular/material/select';
 import { Title } from '@angular/platform-browser';
 import { environment } from 'src/environments/environment';
@@ -17,22 +17,39 @@ export class UploadComponent implements OnInit {
   @Input() file!: File;
   surveys: Map<string, ISurvey> = new Map();
   surveyWeek = new FormControl('',Validators.required);
+  uploadForm!: FormGroup;
 
   constructor(
     private surveyService: SurveyService,
     private uploadService: UploadService,
-    private titleService: Title
-  ) { }
+    private titleService: Title,
+    private formBuilder: FormBuilder,
+  ) {
+    this.uploadForm = this.formBuilder.group({
+      file: [null]
+    })
+  }
 
   ngOnInit(): void {
     this.titleService.setTitle('Upload'+environment.titleSuffix);
     this.setSurveys();
   }
 
-  upload(): void {
-    this.uploadService.upload(this.surveyWeek.value[0], this.surveys).subscribe(
-       data => {}
-    );
+  upload(event: Event) {
+    let file = (event?.target as any)?.files[0];
+    this.uploadForm.patchValue({
+      file: file
+    })
+    console.log(file);
+  }
+
+  submit() {
+    let formData: any = new FormData();
+
+    formData.append("file", JSON.stringify(this.uploadForm.get("file")?.value));
+    console.log(this.uploadForm.get("file")?.value);
+
+    this.uploadService.upload(this.surveyWeek.value[0], formData);
   }
 
   setSurveys() : void {
