@@ -71,8 +71,8 @@ export class BarChartsComponent{
           let tempVal:reportData=value as reportData
           let tempDelta:number= tempVal.delta
           let tempDatum:number=tempVal.datum
-          tempDelta=Math.round(tempDelta*1000)/1000
-          tempDatum=Math.round(tempDatum*1000)/1000
+          tempDelta=Number(tempDelta.toFixed(4))
+          tempDatum=Number(tempDatum.toFixed(4))
           if(tempVal.delta===undefined){
             color="#008FFB";//blue
           }else if(tempDelta<0){
@@ -82,7 +82,7 @@ export class BarChartsComponent{
           }else{
             color="#FEB019";//yellow
           }
-          tempdata.push({x: this.breakString(key,20), y:[((tempDelta===undefined ||tempDelta===0)? 0: Math.round((tempDatum-tempDelta)*1000)/1000),Math.round(tempDatum*1000)/1000],fillColor:color});
+          tempdata.push({x: this.breakString(key,20), y:[((tempDelta===undefined ||tempDelta===0)? 0: tempDatum-tempDelta),tempDatum],fillColor:color});
 
           //fast dynamic height generation
           // if((value.delta===undefined? 0: value.datum-value.delta)>height){
