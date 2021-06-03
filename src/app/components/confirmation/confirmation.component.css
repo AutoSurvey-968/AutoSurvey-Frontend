@@ -1,0 +1,25 @@
+.container.bubble {
+  margin-top:2%;
+  max-width: 800px;
+}
+
+.d-flex.justify-content-center {
+  max-width: 800px;
+}
+
+.form-control#uploadedCSV {
+  border-radius:5px;
+  border-color:#474c5583;
+  border-style:solid;
+}
+
+.btn.btn-custom#uploadButton {
+  height:auto;
+  margin-left:10px;
+  min-width:fit-content;
+}
+
+img {
+  text-align: center;
+  margin: 0 auto;
+}

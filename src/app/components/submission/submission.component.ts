@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IQuestion } from 'src/app/models/iquestion-question';
 import { ISubmission } from 'src/app/models/isubmission-submission';
@@ -11,6 +11,7 @@ import { environment } from 'src/environments/environment';
 import { Batch } from 'src/app/models/Caliber/batch';
 import { CaliberService } from 'src/app/services/caliber/caliber.service';
 import { DatePipe } from '@angular/common';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-submission',
@@ -35,6 +36,8 @@ export class SubmissionComponent implements OnInit {
     private formBuilder: FormBuilder,
     private titleService: Title,
     private datePipe: DatePipe,
+    private snackBar: MatSnackBar,
+    private router: Router,
   ) {
     this.route.params.subscribe(params => {
       this.surveyId = params['surveyId'];
@@ -103,19 +106,29 @@ export class SubmissionComponent implements OnInit {
     // It would look like "responses":{"question":"question":"response":"response"} instead of "responses":{"question":"response"}
     let formResponses = this.responses.value;
 
+    let dateString = this.datePipe.transform(new Date(), 'yyyy-MM-dd') || '0000-00-00';
+
     this.submission = {
       uuid: '',
       surveyUuid: this.submissionForm.get('surveyUuid')?.value,
-      batch: formResponses[4]['response'], // Fourth response stored in response map
-      week: formResponses[5]['response'], // Fifth response
+      batch: 'Mock Batch ' + formResponses[4]['response'], // Fourth response stored in response map
+      date: dateString,//formResponses[5]['response'], // Fifth response
       responses: new Map(),
     };
+
     for(let response of formResponses) {
       this.submission.responses.set(response.question, response.response);
     }
-    this.submissionService.submit(this.submission).subscribe(data => console.log(data)); // Send body as JSON to submission service
+
+    this.submissionService.submit(this.submission).subscribe(
+      data => {
+        console.log(data);
+        this.snackBar.open("Survey submitted 🙂", undefined, { duration: 2000 });
+        }
+      ); // Send body as JSON to submission service
     this.submissionForm.reset(); // Clear form. If you try to submit again, questions will be null as this happens when we subscribe to the Survey Observable.
     // Probably better to refresh here.
+    this.router.navigate(['/confirmation']);
   }
 
   setUpBatches(): void {

@@ -11,6 +11,7 @@ import { environment } from 'src/environments/environment';
 import { subscribeOn } from 'rxjs/operators';
 import { MatSelectChange } from '@angular/material/select';
 import { ChangeDetectionStrategy } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-survey',
@@ -41,6 +42,7 @@ export class SurveyComponent implements OnInit {
     private formBuilder: FormBuilder,
     private caliberService: CaliberService,
     private titleService: Title,
+    private snackBar: MatSnackBar,
   ) {}
 
   ngOnInit(): void {
@@ -58,6 +60,7 @@ export class SurveyComponent implements OnInit {
     this.surveyService.addSurvey(this.surveyForm.value as ISurvey).subscribe((data) => {
       console.log(data);
     });
+    this.snackBar.open("Survey created!", undefined, { duration: 2000 });
   }
 
   getQuestionTitle(index: number) {

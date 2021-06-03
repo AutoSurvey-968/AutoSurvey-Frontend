@@ -7,6 +7,7 @@ import { SendemailsComponent } from './components/sendemails/sendemails.componen
 import { SubmissionComponent } from './components/submission/submission.component';
 import { SurveyComponent } from './components/survey/survey.component';
 import { UploadComponent } from './components/upload/upload.component';
+import { ConfirmationComponent } from './components/confirmation/confirmation.component';
 
 
 const routes: Routes = [
@@ -17,7 +18,8 @@ const routes: Routes = [
   { path: 'survey', component: SurveyComponent },
   { path: 'submit/:surveyId', component: SubmissionComponent },
   { path: 'upload', component: UploadComponent },
-  { path: 'admin', component: AdminComponent }
+  { path: 'admin', component: AdminComponent },
+  { path: 'confirmation', component: ConfirmationComponent },
 ]
 
 @NgModule({

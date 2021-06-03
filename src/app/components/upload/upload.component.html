@@ -12,17 +12,17 @@
 
   <div class="d-flex justify-content-center">
     <div class="d-flex justify-content-center flex-column">
-      <mat-form-field appearance="outline" class="form-control form-control-sm">
-        <mat-label class="form-label">Survey</mat-label>
-        <mat-select name="survey-dropdown" [formControl]="surveyWeek">
-          <mat-option *ngFor="let survey of surveys | keyvalue" class="form-control" [value]="[survey.key]">
-              {{survey.value}}
-        </mat-option>
-        </mat-select>
-      </mat-form-field>
-      <input type="file" name="upload-file" class="form-control" id="uploadedCSV" accept=".csv">
-      <br>
-      <button id="uploadButton" name="submit" class="btn btn-custom" (click)="upload()">Upload</button>
+      <form [formGroup]="uploadForm" (ngSubmit)="submit()">
+        <mat-form-field appearance="outline" class="form-control form-control-sm">
+          <mat-label class="form-label">Survey</mat-label>
+          <mat-select name="survey-dropdown" [formControl]="surveyWeek">
+            <mat-option *ngFor="let survey of surveys | keyvalue" class="form-control" [value]="[survey.key]">{{survey.value}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <input type="file" name="upload-file" class="form-control" id="uploadedCSV" accept=".csv" (change)="upload($event)">
+        <br>
+        <button id="uploadButton" name="submit" class="btn btn-custom" type="submit">Upload</button>
+      </form>
     </div>
   </div>
   <br>
