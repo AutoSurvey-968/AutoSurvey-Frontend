@@ -1,3 +1,4 @@
+import { stringify } from "@angular/compiler/src/util";
 import { ChangeDetectionStrategy, Component, Input} from "@angular/core";
 import {
   ApexAxisChartSeries,
@@ -5,7 +6,7 @@ import {
   ApexDataLabels,
   ApexPlotOptions
 } from "ng-apexcharts";
-import { IReport } from "src/app/models/ireport-report";
+import { IReport, reportData } from "src/app/models/ireport-report";
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -64,18 +65,19 @@ export class BarChartsComponent{
         //it seems a little silly to calculate height this way, but it avoids going through the map more than once
         let height=350;
 
-        Object.entries(nestedReport.averages).forEach(([key,value])=>{
+        Object.entries(nestedReport.averages as Map<string,reportData>).forEach(([key,value])=>{
           let color='';
-          if(value.delta===undefined){
+          let tempVal:reportData=value as reportData
+          if(tempVal.delta===undefined){
             color="#008FFB";//blue
-          }else if(value.delta>value.datum){
+          }else if(tempVal.delta<0){
             color="#FF2020";//red
-          }else if(value.delta<value.datum){
-            color="#00E3c5";//green
+          }else if(tempVal.delta>0){
+            color="#00E375";//green
           }else{
-            color="##FEB019";//yellow
+            color="#FEB019";//yellow
           }
-          tempdata.push({x: this.breakString(key,20), y:[((value.delta===undefined ||value.delta===value.datum)? 0: value.delta),value.datum],fillColor:color});
+          tempdata.push({x: this.breakString(key,20), y:[((tempVal.delta===undefined ||tempVal.delta===0)? 0: tempVal.datum-tempVal.delta),tempVal.datum],fillColor:color});
 
           //fast dynamic height generation
           // if((value.delta===undefined? 0: value.datum-value.delta)>height){
@@ -84,14 +86,16 @@ export class BarChartsComponent{
           //   height=value.datum;
           // }
         });
+        console.log(tempdata)
         let testData=tempdata
         this.dataBars=[{name:'Averages of this Week versus Previous', data:testData}];
-        this.barsHeight={type: "rangeBar", height:(Math.round(1.5*height))}
       }
     }
+    console.log('log')
+    console.log(this.dataBars)
     this.barChartOptions = {
       series: this.dataBars,
-      chart: this.barsHeight,
+      chart: {type: "rangeBar", height:(Math.round(525))},
       plotOptions: {
         bar: {
           horizontal: false
