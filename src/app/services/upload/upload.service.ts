@@ -14,7 +14,6 @@ export class UploadService {
   private endpoint: string = environment.apiUrl+'/responses';
   private httpOptions = {
     headers: new HttpHeaders({
-      'Content-Type': 'application/csv',
       'Authorization': 'Bearer '+localStorage.getItem('token')
     }),
     withCredentials: true
@@ -25,16 +24,12 @@ export class UploadService {
     private http:  HttpClient,
     private snackBar: MatSnackBar
   ) {}
-
-  upload(surveyId: string, formData: FormData) {
+  upload(formData: FormData) {
     this.snackBar.open("CSV uploaded", undefined, {duration: 2000});
-    this.endpoint += surveyId;
-    console.log(this.endpoint);
-    console.log(formData);
-    // this.http.post(this.endpoint, formData).subscribe(
-    //   (response) => console.log(response),
-    //   (error) => console.log(error)
-    // )
+    this.httpOptions.headers.delete('Content-Type');
+    this.http.post(this.endpoint, formData, this.httpOptions).subscribe(
+      (response) => console.log(response),
+      (error) => console.log(error)
+    )
   }
-
 }

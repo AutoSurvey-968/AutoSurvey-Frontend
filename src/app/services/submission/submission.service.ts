@@ -19,6 +19,16 @@ export class SubmissionService {
   constructor(private http: HttpClient) { }
 
   submit(body: ISubmission) {
-    return this.http.post(this.endpoint+'/', body, this.httpOptions).pipe();
+    let jsonBody = JSON.stringify(body);
+    console.log(body);
+    jsonBody = jsonBody.substring(0, jsonBody.length-2);
+
+    for (let response of body.responses) {
+      jsonBody = jsonBody+ '"' +response[0]+ '"' + ': ' + '"'+response[1]+'",';
+    }
+    jsonBody = jsonBody.substring(0, jsonBody.length-1);
+    jsonBody = jsonBody + '}}';
+    console.log(jsonBody);
+    return this.http.post(this.endpoint+'/', jsonBody, this.httpOptions).pipe();
   }
 }

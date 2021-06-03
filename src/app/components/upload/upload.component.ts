@@ -45,11 +45,9 @@ export class UploadComponent implements OnInit {
 
   submit() {
     let formData: any = new FormData();
-
-    formData.append("file", JSON.stringify(this.uploadForm.get("file")?.value));
-    console.log(this.uploadForm.get("file")?.value);
-
-    this.uploadService.upload(this.surveyWeek.value[0], formData);
+    formData.append("surveyId", this.surveyWeek.value[0]);
+    formData.append("file", this.uploadForm.get("file")?.value);
+    this.uploadService.upload(formData);
   }
 
   setSurveys() : void {
