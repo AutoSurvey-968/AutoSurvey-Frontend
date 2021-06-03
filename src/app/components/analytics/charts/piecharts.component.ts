@@ -96,13 +96,21 @@ export class PiechartsComponent {
     if (data.filter((n)=>n!==0).length===0){
       return;
     }
+    let filteredData: number[] =[]
+    let filteredLabels:string[]=[]
+    for (let j=0;j<data.length;j++){
+      if (data[j]!==0){
+        filteredLabels.push(labels[j])
+        filteredData.push(data[j])
+      }
+    }
     this.pieChartOptionsArray.push({
-      series: data,
+      series: filteredData,
       chart: {
         width: 380,
         type: "pie"
       },
-      labels: labels,
+      labels: filteredLabels,
       title: {
         text: title
       },
