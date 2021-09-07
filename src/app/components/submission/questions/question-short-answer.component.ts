@@ -10,7 +10,9 @@ import { IQuestion } from 'src/app/models/iquestion-question';
       <div class="mb-3" formArrayName="responses">
         <div [formGroupName]="index">
           <label for="{{'question-'+index+'-'+'form'}}" class="form-label">{{ question.title }}<span *ngIf="question.isRequired">*</span></label>
+          
           <!--id is formatted as question-index-choice-i, example: question-0-choice-0-->
+          
           <textarea class="form-control" id="{{'question-'+index+'-'+'form'}}" rows="3" formControlName="response"></textarea>
         </div>
       </div>
