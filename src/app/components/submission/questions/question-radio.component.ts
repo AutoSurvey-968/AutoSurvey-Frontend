@@ -12,6 +12,7 @@ import { IQuestion } from 'src/app/models/iquestion-question';
         <!-- Need to see how we grab these labels from questions -->
         <p style="margin-top: 9px; margin-right: 10px;">Not Satisfied</p>
         <div class="question-group form-check form-check-inline" [formGroupName]="index">
+        
           <!--id is formatted as question-index-choice-i, example: question-0-choice-0
               There also needs to be a name, but it needs to match formControlName, so
               it gets messy when there are multiple radio questions. For now, you can
@@ -19,6 +20,7 @@ import { IQuestion } from 'src/app/models/iquestion-question';
               the form on submit. The next person will need to figure this out.
               Because of the Survey service side of the front-end, these options are no
               longer populated by choices. This is hard coded 1 through 5.-->
+
           <input type="radio" formControlName="response" id="{{'question-'+index+'-'+'choice-1'}}" value="1">
           <label for="{{'question-'+index+'-'+'choice-1'}}">1</label>
         </div>
