@@ -64,12 +64,18 @@ export class SendemailsComponent implements OnInit {
   ):void{
 
     console.log(batchId)
+    let batch = this.batches.find(bat => {
+      if (bat.batchId){
+        return batchId.toString() == bat.batchId;
+      }
+      return false;
+    });
     this.caliberService.getAssociatesByBatch(batchId)
     .subscribe(associateData =>{
       associateData.forEach(associate =>{
         this.ioService.sendEmail(
           associate.email,
-          "Hi MockUser, you got invited to fill out a survey: http://localhost:4200/submit/"+this.surveyWeek.value[0],
+          `Hi MockUser, you got invited to fill out a survey: http://localhost:4200/submit/${this.surveyWeek.value[0]}?batchId=${batchId}&location=+${batch?.location}`,
           "Survey request"
           ).subscribe();
       });

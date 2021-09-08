@@ -1,6 +1,6 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://3.215.77.200',
+  apiUrl: 'http://localhost:8080',
   titleSuffix: ' | AutoSurvey',
 };

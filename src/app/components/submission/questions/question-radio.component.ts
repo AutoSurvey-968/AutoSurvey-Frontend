@@ -21,23 +21,23 @@ import { IQuestion } from 'src/app/models/iquestion-question';
               Because of the Survey service side of the front-end, these options are no
               longer populated by choices. This is hard coded 1 through 5.-->
 
-          <input type="radio" formControlName="response" id="{{'question-'+index+'-'+'choice-1'}}" value="1">
+          <input type="radio" name="{{'question-'+index}}" formControlName="response" id="{{'question-'+index+'-'+'choice-1'}}" value="1">
           <label for="{{'question-'+index+'-'+'choice-1'}}">1</label>
         </div>
         <div class="question-group form-check form-check-inline" [formGroupName]="index">
-          <input type="radio" formControlName="response" id="{{'question-'+index+'-'+'choice-2'}}" value="2">
+          <input type="radio" name="{{'question-'+index}}" formControlName="radio" id="{{'question-'+index+'-'+'choice-2'}}" value="2">
           <label for="{{'question-'+index+'-'+'choice-2'}}">2</label>
         </div>
         <div class="question-group form-check form-check-inline" [formGroupName]="index">
-          <input type="radio" formControlName="response" id="{{'question-'+index+'-'+'choice-3'}}" value="3">
+          <input type="radio" name="{{'question-'+index}}" formControlName="response" id="{{'question-'+index+'-'+'choice-3'}}" value="3">
           <label for="{{'question-'+index+'-'+'choice-3'}}">3</label>
         </div>
         <div class="question-group form-check form-check-inline" [formGroupName]="index">
-          <input type="radio" formControlName="response" id="{{'question-'+index+'-'+'choice-4'}}" value="4">
+          <input type="radio" name="{{'question-'+index}}" formControlName="response" id="{{'question-'+index+'-'+'choice-4'}}" value="4">
           <label for="{{'question-'+index+'-'+'choice-4'}}">4</label>
         </div>
         <div class="question-group form-check form-check-inline" [formGroupName]="index">
-          <input type="radio" formControlName="response" id="{{'question-'+index+'-'+'choice-5'}}" value="5">
+          <input type="radio" name="{{'question-'+index}}" formControlName="response" id="{{'question-'+index+'-'+'choice-5'}}" value="5">
           <label for="{{'question-'+index+'-'+'choice-5'}}">5</label>
         </div>
 
