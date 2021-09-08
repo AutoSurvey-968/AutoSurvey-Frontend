@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -77,9 +78,14 @@ export class SendemailsComponent implements OnInit {
           associate.email,
           `Hi MockUser, you got invited to fill out a survey: http://localhost:4200/submit/${this.surveyWeek.value[0]}?batchId=${batchId}&location=+${batch?.location}`,
           "Survey request"
-          ).subscribe();
+          ).subscribe(data =>{
+            this.openSnackbar("Email sent!");
+          }),
+          (error: HttpErrorResponse) =>{
+            this.openSnackbar("Email did not send. Please try again.");
+          };
       });
     })
-    this.openSnackbar("Email sent!");
+    
   }
 }
