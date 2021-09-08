@@ -21,6 +21,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class SubmissionComponent implements OnInit {
   surveyId!: string;
+  batchId!: string;
+  defaultLocation!: string;
   submission!: ISubmission;
   submissionForm!: FormGroup;
   survey!: ISurvey;
@@ -42,6 +44,10 @@ export class SubmissionComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.surveyId = params['surveyId'];
     })
+    this.route.queryParams.subscribe(params => {
+      this.batchId = params["batchId"];
+      this.defaultLocation = params['location'];
+    });
     this.surveyService.getSurveyById(this.surveyId).subscribe(survey => {
       this.survey = survey;
       this.questions = survey.questions;
@@ -56,13 +62,13 @@ export class SubmissionComponent implements OnInit {
         question: "Timestamp",
         response: this.datePipe.transform(new Date(), 'yyyy-MM-dd hh:mm:ss'),
       }));
-      this.addResponse("Name (Optional)", false);
-      this.addResponse("Email (Optional)", false);
-      this.addResponse("Where is your training location?", true);
-      this.addResponse("What batch are you in?", true);
-      this.addResponse("What was your most recently completed week of training? (Extended batches start with Week A, normal batches start with Week 1)", true);
+      this.addResponse("Name (Optional)", false, '');
+      this.addResponse("Email (Optional)", false, '');
+      this.addResponse("Where is your training location?", true, this.defaultLocation);
+      this.addResponse("What batch are you in?", true, this.batchId);
+      this.addResponse("What was your most recently completed week of training? (Extended batches start with Week A, normal batches start with Week 1)", true, '');
       this.questions.forEach(question => {
-        this.addResponse(question.title, question.isRequired);
+        this.addResponse(question.title, question.isRequired, '');
       })
     })
 
@@ -72,24 +78,24 @@ export class SubmissionComponent implements OnInit {
     return this.submissionForm.get("responses") as FormArray;
   }
 
-  newResponse(question: string, required: boolean) : FormGroup {
+  newResponse(question: string, required: boolean, defaultValue: string) : FormGroup {
     if(required) {
       return this.formBuilder.group({
         question: question,
-        response: ['', Validators.required] // Include validator if the field is required
+        response: [defaultValue, Validators.required] // Include validator if the field is required
       })
     }
     else {
       return this.formBuilder.group({
         question: question,
-        response: '',
+        response: defaultValue,
       })
     }
 
   }
 
-  addResponse(question: string, required: boolean) {
-    this.responses.push(this.newResponse(question, required));
+  addResponse(question: string, required: boolean, defaultValue: string) {
+    this.responses.push(this.newResponse(question, required, defaultValue));
   }
 
   ngOnInit(): void {
