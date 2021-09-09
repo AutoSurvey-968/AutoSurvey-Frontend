@@ -19,14 +19,14 @@
         <div id="name-question" [formGroupName]="1">
             <div class="mb-3">
                 <label for="name" class="form-label">Name (Optional)</label>
-                <input type="text" class="form-control" id="name" formControlName="response">
+                <input type="text" class="form-control" id="name" formControlName="response1">
               </div>
         </div>
 
         <div id="email-question" [formGroupName]="2">
           <div class="mb-3">
             <label for="email" class="form-label">Email (Optional)</label>
-            <input type="text" class="form-control" id="email" formControlName="response">
+            <input type="text" class="form-control" id="email" formControlName="response2">
           </div>
         </div>
 
@@ -35,7 +35,7 @@
         <div id="location-question" [formGroupName]="3">
           <div class="mb-3">
             <label for="location" class="form-label">Where is your training location? <span>*</span></label>
-            <select class="form-control" id="location" formControlName="response" required>
+            <select class="form-control" id="location" formControlName="response3" required>
               <option *ngFor="let location of locations" [value]="location">{{location}}</option>
 
             </select>
@@ -46,7 +46,7 @@
         <div id="batch-question" [formGroupName]="4">
           <div class="mb-3">
             <label for="batch" class="form-label">What batch are you in? <span>*</span></label>
-            <select class="form-control" id="batch" formControlName="response" required>
+            <select class="form-control" id="batch" formControlName="response4" required>
               <option *ngFor="let batch of batches" [value]="batch.id">{{batch.name}}</option>
             </select>
           </div>
@@ -56,7 +56,7 @@
 
         <div id="week-question" [formGroupName]="5">
             <label for="week" class="form-label">What was your most recently completed week of training? (Extended batches start with Week A, normal batches start with Week 1)<span>*</span></label>
-            <select class="form-control" id="week" formControlName="response" required>
+            <select class="form-control" id="week" formControlName="response5" required>
               <option value="Week A">Week A</option>
               <option value="Week B">Week B</option>
               <option value="Week 1">Week 1</option>
