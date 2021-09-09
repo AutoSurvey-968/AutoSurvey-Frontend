@@ -28,15 +28,6 @@
       <!-- <app-question [question]="question" [index]="i"></app-question> -->
       <hr>
 
-       
-      <!-- <div id="question-type-field" class="mb-3">
-        <label for="question-type" class="form-label">Type</label>
-        <mat-select id="question-dropdown" class="form-control" (selectionChange)="onSelected($event)">
-          <mat-option *ngFor="let type of typeOptions" class="form-control" value={{type}}>{{type}}</mat-option>
-        </mat-select>
-      </div> -->
- 
-
       <div id="question-text" class="form-group mb-3">
         <label for="title" class="form-label">Question Text</label>
         <input type="text" class="form-control" id="question-text" [formControl]="getQuestionTitle(i)">
