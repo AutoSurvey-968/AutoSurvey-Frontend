@@ -1,13 +1,13 @@
 .display-4 {
-  padding-bottom:10px;
+  padding-bottom: 10px;
 }
 
 .align-items-center {
-  margin-top:8%;
+  margin-top: 8%;
 }
 
 .form {
-  margin:auto;
+  margin: auto;
   max-width: 360px;
 }
 
@@ -16,28 +16,26 @@
 }
 
 .btn-custom {
-  height:auto;
-  margin-top:25px;
+  height: auto;
+  margin-top: 25px;
 }
 
-.formField{
-  width:90%;
+.formField {
+  width: 90%;
 }
 
-.questionField{
-  width:100%;
+.questionField {
+  width: 100%;
 }
 
-.btn.addQuestion{
+.btn.addQuestion {
   color: #fff;
   background-color: #0d6efd;
   border-color: #0d6efd;
 }
 
-.btn.addQuestion:hover{
+.btn.addQuestion:hover {
   color: #fff;
   background-color: #0b5ed7;
   border-color: #0a58ca;
 }
-
-

@@ -1,41 +1,57 @@
+<app-searchbar> </app-searchbar>
 <div class="container bubble">
   <div class="d-flex justify-content-center">
     <h1 class="display-4">Create Survey</h1>
   </div>
 
-  <br>
-  <hr>
-  <br>
+  <br />
+  <hr />
+  <br />
 
   <form [formGroup]="surveyForm" (ngSubmit)="submit()">
-
     <div id="title-field" class="mb-3">
       <label for="title" class="form-label">Survey Title</label>
-      <input type="text" class="form-control" id="title" [formControl]="title">
+      <input
+        type="text"
+        class="form-control"
+        id="title"
+        [formControl]="title"
+      />
     </div>
-
 
     <div class="mb-3">
       <label for="description" class="form-label">Description</label>
-      <input type="text" class="form-control" id="description" [formControl]="description">
+      <input
+        type="text"
+        class="form-control"
+        id="description"
+        [formControl]="description"
+      />
     </div>
 
     <div class="mb-3">
-      <button type="button" (click)="addQuestion()" class="btn addQuestion">New Question</button>
+      <button type="button" (click)="addQuestion()" class="btn addQuestion">
+        New Question
+      </button>
     </div>
 
     <div formArrayName="questions" *ngFor="let control of questions.controls; let i = index">
       <hr>
-
       <div id="question-text" class="form-group mb-3">
         <label for="title" class="form-label">Question Text</label>
-        <input type="text" class="form-control" id="question-text" [formControl]="getQuestionTitle(i)">
+        <input
+          type="text"
+          class="form-control"
+          id="question-text"
+          [formControl]="getQuestionTitle(i)"
+        />
       </div>
 
       <div id="question-type-field" class="mb-3">
         <mat-label class="form-label">Type</mat-label>
         <mat-select id="question-dropdown" class="form-control" name="survey-dropdown" [formControl]="getQuestionTypeAsFormControl(i)" (selectionChange)="onSelected($event, i)">
           <mat-option *ngFor="let type of typeOptions; let v = index" class="form-control" value={{type}}>{{typeOptions[v]}}</mat-option>
+
         </mat-select>
       </div>
 
@@ -43,12 +59,19 @@
       <app-choices [choice] = "getQuestionTypeAsString(i)" (choiceData) = "update($event, i)"></app-choices>
 
       <div class="mb-3">
-        <button class="mat-raised-button btn removeButton" id="removeButton" type="button" (click)="removeQuestion(i)">Remove</button>
+        <button
+          class="mat-raised-button btn removeButton"
+          id="removeButton"
+          type="button"
+          (click)="removeQuestion(i)"
+        >
+          Remove
+        </button>
       </div>
     </div>
 
-
-    <button mat-raised-button class="btn addQuestion" type="submit">Submit</button>
-    </form>
+    <button mat-raised-button class="btn addQuestion" type="submit">
+      Submit
+    </button>
+  </form>
 </div>
-
