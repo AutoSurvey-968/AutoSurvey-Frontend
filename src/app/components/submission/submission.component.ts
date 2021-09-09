@@ -60,15 +60,17 @@ export class SubmissionComponent implements OnInit {
       // These first six responses are hardcoded for now.
       this.responses.push(this.formBuilder.group({
         question: "Timestamp",
-        response: this.datePipe.transform(new Date(), 'yyyy-MM-dd hh:mm:ss'),
+        response0: this.datePipe.transform(new Date(), 'yyyy-MM-dd hh:mm:ss'),
       }));
-      this.addResponse("Name (Optional)", false, '');
-      this.addResponse("Email (Optional)", false, '');
-      this.addResponse("Where is your training location?", true, this.defaultLocation);
-      this.addResponse("What batch are you in?", true, this.batchId);
-      this.addResponse("What was your most recently completed week of training? (Extended batches start with Week A, normal batches start with Week 1)", true, '');
+      this.addResponse("Name (Optional)", false, '', 'response1');
+      this.addResponse("Email (Optional)", false, '', 'response2');
+      this.addResponse("Where is your training location?", true, this.defaultLocation, 'response3');
+      this.addResponse("What batch are you in?", true, this.batchId, 'response4');
+      this.addResponse("What was your most recently completed week of training? (Extended batches start with Week A, normal batches start with Week 1)", true, '', 'response5');
+      let i = 6;
       this.questions.forEach(question => {
-        this.addResponse(question.title, question.isRequired, '');
+        this.addResponse(question.title, question.isRequired, '', `response${i}`);
+        i++;
       })
     })
 
@@ -78,24 +80,24 @@ export class SubmissionComponent implements OnInit {
     return this.submissionForm.get("responses") as FormArray;
   }
 
-  newResponse(question: string, required: boolean, defaultValue: string) : FormGroup {
+  newResponse(question: string, required: boolean, defaultValue: string, responseName: string) : FormGroup {
     if(required) {
       return this.formBuilder.group({
         question: question,
-        response: [defaultValue, Validators.required] // Include validator if the field is required
+        [responseName]: [defaultValue, Validators.required] // Include validator if the field is required
       })
     }
     else {
       return this.formBuilder.group({
         question: question,
-        response: defaultValue,
+        [responseName]: defaultValue,
       })
     }
 
   }
 
-  addResponse(question: string, required: boolean, defaultValue: string) {
-    this.responses.push(this.newResponse(question, required, defaultValue));
+  addResponse(question: string, required: boolean, defaultValue: string, responseName: string) {
+    this.responses.push(this.newResponse(question, required, defaultValue, responseName));
   }
 
   ngOnInit(): void {
@@ -111,19 +113,19 @@ export class SubmissionComponent implements OnInit {
     // Convert submissionForm into a submission object. Originally Object.assign, but this caused issues in the JSON for the responses map.
     // It would look like "responses":{"question":"question":"response":"response"} instead of "responses":{"question":"response"}
     let formResponses = this.responses.value;
-
     let dateString = this.datePipe.transform(new Date(), 'yyyy-MM-dd') || '0000-00-00';
 
     this.submission = {
       uuid: '',
       surveyUuid: this.submissionForm.get('surveyUuid')?.value,
-      batch: 'Mock Batch ' + formResponses[4]['response'], // Fourth response stored in response map
+      batch: 'Mock Batch ' + formResponses[4]['response4'], // Fourth response stored in response map
       date: dateString,//formResponses[5]['response'], // Fifth response
       responses: new Map(),
     };
-
+    let i = 0;
     for(let response of formResponses) {
-      this.submission.responses.set(response.question, response.response);
+      this.submission.responses.set(response.question, response['response'+i]);
+      i++
     }
 
     this.submissionService.submit(this.submission).subscribe(

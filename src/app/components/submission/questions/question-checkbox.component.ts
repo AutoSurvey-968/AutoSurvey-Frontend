@@ -16,7 +16,7 @@ import { IQuestion } from 'src/app/models/iquestion-question';
               a boolean rather than an array of values. The next person will need to
               figure this out.-->
               
-          <input type="checkbox" formControlName="response" id="{{'question-'+index+'-'+'choice-'+i}}" value="{{choice}}">
+          <input type="checkbox" formControlName="response{{index}}" id="{{'question-'+index+'-'+'choice-'+i}}" value="{{choice}}">
           <label class="form-check-label" for="{{'question-'+index+'-'+'choice-'+i}}">{{choice}}</label>
         </div>
       </div>

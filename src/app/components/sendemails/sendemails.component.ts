@@ -80,10 +80,10 @@ export class SendemailsComponent implements OnInit {
           "Survey request"
           ).subscribe(data =>{
             this.openSnackbar("Email sent!");
-          }),
+          },
           (error: HttpErrorResponse) =>{
             this.openSnackbar("Email did not send. Please try again.");
-          };
+          });
       });
     })
     

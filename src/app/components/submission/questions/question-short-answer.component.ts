@@ -13,7 +13,7 @@ import { IQuestion } from 'src/app/models/iquestion-question';
           
           <!--id is formatted as question-index-choice-i, example: question-0-choice-0-->
           
-          <textarea class="form-control" id="{{'question-'+index+'-'+'form'}}" rows="3" formControlName="response"></textarea>
+          <textarea class="form-control" id="{{'question-'+index+'-'+'form'}}" rows="3" formControlName="response{{index}}"></textarea>
         </div>
       </div>
     </div>
