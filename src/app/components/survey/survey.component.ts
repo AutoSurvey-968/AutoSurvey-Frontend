@@ -108,8 +108,11 @@ export class SurveyComponent implements OnInit {
     );
   }
 
-  removeQuestion(index: number) {
+  update(choiceData:FormArray, i: number){
+    this.questions.value[i].choices = choiceData;
+  }
 
+  removeQuestion(index: number) {
     this.questions.removeAt(index);
   }
 
