@@ -68,7 +68,12 @@ export class SurveyComponent implements OnInit {
     return formGroup.get("title") as FormControl;
   }
 
-  getQuestionType(index: number) {
+  getQuestionTypeAsString(index: number) {
+    let formGroup = this.questions.controls[index] as FormGroup;
+    return formGroup.get("questionType")?.value;
+  }
+
+  getQuestionTypeAsFormControl(index: number) {
     let formGroup = this.questions.controls[index] as FormGroup;
     return formGroup.get("questionType") as FormControl;
   }
@@ -82,11 +87,12 @@ export class SurveyComponent implements OnInit {
   }
 
 
-  onSelected(event: MatSelectChange) {
+  onSelected(event: MatSelectChange, i: number) {
 
-    //let formGroup = this.questions.controls[index] as FormGroup;
-    console.log("HELLO");
-   // formGroup.get("type")?.setValue(event);
+    let formGroup = this.questions.controls[i] as FormGroup;
+    console.log(event.value);
+    formGroup.get("type")?.setValue(event);
+    document.getElementById("appChoices"+i)?.setAttribute("choice",event.value);
   }
 
   addQuestion() {

@@ -16,7 +16,7 @@ export class ChoicesComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder
   ) {
-    this.choiceForm = this.formBuilder.array([]);;
+    this.choiceForm = this.formBuilder.array([]);
   }
 
   ngOnInit(): void {}
