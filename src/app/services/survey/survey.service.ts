@@ -31,8 +31,22 @@ export class SurveyService implements SurveyServiceInterface {
     );
   }
 
+  replacerFunc = () => {
+    const visited = new WeakSet();
+    return (key: any, value: object | null) => {
+      if (typeof value === "object" && value !== null) {
+        if (visited.has(value)) {
+          return;
+        }
+        visited.add(value);
+      }
+      return value;
+    };
+  };
+
+
   addSurvey(survey: ISurvey):Observable<ISurvey> {
-    return this.http.post<ISurvey>(this.endpoint, JSON.stringify(survey), this.httpOptions);
+    return this.http.post<ISurvey>(this.endpoint, JSON.stringify(survey, this.replacerFunc()), this.httpOptions);
   }
 
   getSurveyById(surveyId: string): Observable<ISurvey> {
