@@ -56,7 +56,10 @@ export class SurveyComponent implements OnInit {
 
   submit() {
     console.log(this.surveyForm.value as ISurvey);
-    if (this.surveyForm.invalid) return;
+    if (this.surveyForm.invalid) {
+      console.log("invalid");
+      return;
+    }
     this.surveyService.addSurvey(this.surveyForm.value as ISurvey).subscribe((data) => {
       console.log(data);
     });

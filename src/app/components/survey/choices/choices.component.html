@@ -1,8 +1,8 @@
-<div class="row" *ngIf="choice == 'MULTIPLE_CHOICE'">
+<div class="row" *ngIf="choice == 'MULTIPLE_CHOICE'" [formGroup] = "choiceGroup">
   <div class="col-sm">
     <mat-form-field appearance="fill" class="formField">
       <mat-label>Response</mat-label>
-      <input matInput class="form-control form-control-lg" formControlName="response" placeholder="Response" name="response" required />
+      <input matInput class="form-control form-control-lg" formControlName="response0" placeholder="Response" name="response" required />
       <mat-error *ngIf="choiceForm.touched">
         <span *ngIf="choiceForm.errors?.required">This field is mandatory.</span>
       </mat-error>
@@ -11,7 +11,7 @@
   <div class="col-sm">
     <mat-form-field appearance="fill" class="formField">
       <mat-label>Response</mat-label>
-      <input matInput class="form-control form-control-lg" formControlName="response" placeholder="Response" name="response" required />
+      <input matInput class="form-control form-control-lg" formControlName="response1" placeholder="Response" name="response" required />
       <mat-error *ngIf="choiceForm.touched">
         <span *ngIf="choiceForm.errors?.required">This field is mandatory.</span>
       </mat-error>
@@ -20,7 +20,7 @@
   <div class="col-sm">
     <mat-form-field appearance="fill" class="formField">
       <mat-label>Response</mat-label>
-      <input matInput class="form-control form-control-lg" formControlName="response" placeholder="Response" name="response" required />
+      <input matInput class="form-control form-control-lg" formControlName="response2" placeholder="Response" name="response" required />
       <mat-error *ngIf="choiceForm.touched">
         <span *ngIf="choiceForm.errors?.required">This field is mandatory.</span>
       </mat-error>
@@ -29,7 +29,7 @@
   <div class="col-sm">
     <mat-form-field appearance="fill" class="formField">
       <mat-label>Response</mat-label>
-      <input matInput class="form-control form-control-lg" formControlName="response" placeholder="Response" name="response" required />
+      <input matInput class="form-control form-control-lg" formControlName="response3" placeholder="Response" name="response" required />
       <mat-error *ngIf="choiceForm.touched">
         <span *ngIf="choiceForm.errors?.required">This field is mandatory.</span>
       </mat-error>
