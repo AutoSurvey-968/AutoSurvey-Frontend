@@ -182,5 +182,19 @@ export class SurveyComponent implements OnInit {
     return survey;
   }
 
+  changeQuestionStatus(status: boolean, id: string) {
+    this.isQuestion = status;
+
+    let elements = document.getElementsByClassName("tab");
+    for (let i = 0; i < elements.length; i++){
+      elements[i].className = elements[i].className.replace(' active', '');
+    }
+
+    let activeTab = document.getElementById(id);
+    if (activeTab){
+      activeTab.className += ' active';
+    }
+    
+  }
 }
 

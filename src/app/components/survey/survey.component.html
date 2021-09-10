@@ -5,8 +5,8 @@
   </div>
   <br />
   <div class = "tabs">
-    <button class="btn tab" (click) = "isQuestion = true" >Create Questions</button>
-    <button class="btn tab" (click) = "isQuestion = false">Upload Questions</button>
+    <button id="createTab" class="btn tab active" (click) = "changeQuestionStatus(true, 'createTab')" >Create Questions</button>
+    <button id="uploadTab" class="btn tab" (click) = "changeQuestionStatus(false, 'uploadTab')">Upload Questions</button>
   </div>
   <hr />
   <br />

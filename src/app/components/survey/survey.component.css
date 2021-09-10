@@ -11,8 +11,21 @@
   max-width: 360px;
 }
 
-button.tab{
+.btn.tab{
   background-color: inherit;
+  border-style: solid;
+  border-color: #404144;
+  border-width: 1px;
+
+  margin-right: 3px;
+}
+
+.btn.tab.active{
+  background-color:#a3ccee;
+}
+
+button.tab.active:hover{
+  background-color: inherit
 }
 
 button.tab:hover{
