@@ -29,6 +29,7 @@ export class SurveyComponent implements OnInit {
   questions: FormArray = new FormArray([]);
   questionType: FormControl = new FormControl('', Validators.required);
   fileUpload: FormGroup;
+  isQuestion: boolean = true;
   typeOptions = [
     'CHECKBOX',
     'DROPDOWN',
@@ -61,11 +62,15 @@ export class SurveyComponent implements OnInit {
 
   submit() {
     console.log(this.surveyForm.value as ISurvey);
-    if (this.surveyForm.invalid) return;
-    this.surveyService.addSurvey(this.surveyForm.value as ISurvey).subscribe((data) => {
-      console.log(data);
-    });
-    this.snackBar.open("Survey created!", undefined, { duration: 2000 });
+    if (this.isQuestion){
+      if (this.surveyForm.invalid) return;
+      this.surveyService.addSurvey(this.surveyForm.value as ISurvey).subscribe((data) => {
+        console.log(data);
+      });
+      this.snackBar.open("Survey created!", undefined, { duration: 2000 });
+    } else {
+
+    }
   }
 
   getQuestionTitle(index: number) {
@@ -92,9 +97,6 @@ export class SurveyComponent implements OnInit {
       file: file
     })
     console.log(file);
-    for (let i = 0; i < this.questions.length; i++){
-      this.removeQuestion(i);
-    }
   }
 
   onSelected(event: MatSelectChange) {
