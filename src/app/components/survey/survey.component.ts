@@ -28,6 +28,7 @@ export class SurveyComponent implements OnInit {
   confirmation = new FormControl('Thanks for taking this survey!',  Validators.required);
   questions: FormArray = new FormArray([]);
   questionType: FormControl = new FormControl('', Validators.required);
+  fileUpload: FormGroup;
   typeOptions = [
     'CHECKBOX',
     'DROPDOWN',
@@ -43,7 +44,11 @@ export class SurveyComponent implements OnInit {
     private caliberService: CaliberService,
     private titleService: Title,
     private snackBar: MatSnackBar,
-  ) {}
+  ) {
+    this.fileUpload = this.formBuilder.group({
+      file: null
+    })
+  }
 
   ngOnInit(): void {
     this.surveyForm = this.formBuilder.group({
@@ -81,6 +86,16 @@ export class SurveyComponent implements OnInit {
     return this.surveyForm.get('questions')?.value[index] as FormControl;
   }
 
+  upload(event: Event) {
+    let file = (event?.target as any)?.files[0];
+    this.fileUpload.patchValue({
+      file: file
+    })
+    console.log(file);
+    for (let i = 0; i < this.questions.length; i++){
+      this.removeQuestion(i);
+    }
+  }
 
   onSelected(event: MatSelectChange) {
 

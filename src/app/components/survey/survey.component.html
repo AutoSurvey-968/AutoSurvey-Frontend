@@ -30,7 +30,7 @@
     </div>
 
     <div class="mb-3">
-      <button type="button" (click)="addQuestion()" class="btn addQuestion">
+      <button type="button" (click)="addQuestion()" class="btn addQuestion" [disabled]="fileUpload.value.file">
         New Question
       </button>
     </div>
