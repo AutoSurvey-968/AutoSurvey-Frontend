@@ -36,22 +36,11 @@
     <div class="mb-3" *ngIf="!isQuestion">
       <input type="file" name="upload-file" class="form-control" id="uploadedCSV" accept=".csv" (change)="upload($event)">
     </div>
-
-
-    <!--
-    <div id="question-type-field" class="mb-3">
-      <label for="question-type" class="form-label">Type</label>
-      <mat-select id="question-dropdown" class="form-control" (selectionChange)="onSelected($event)">
-        <mat-option *ngFor="let type of typeOptions" class="form-control">{{type}}</mat-option>
-      </mat-select>
-    </div>
-  -->
+    
     <div *ngIf="isQuestion">
     <div
       formArrayName="questions"
       *ngFor="let control of questions.controls; let i = index"
-    >
-      <!--<app-question [question]="question" [index]="i"></app-question>-->
       <hr />
 
       <div id="question-text" class="form-group mb-3">
