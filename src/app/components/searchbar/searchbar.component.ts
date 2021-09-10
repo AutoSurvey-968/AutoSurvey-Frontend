@@ -39,25 +39,10 @@ export class SearchbarComponent implements OnInit {
       this.surveyService
         .getSurveyByTitle(this.searchInput)
         .subscribe((data) => this.searchResult = [data.title, data.createdOn, data.description,
-        // data.questions.toString, 
         data.confirmation]);
     } catch (Exception) {
       console.log(Exception);
     }
-    // this.surveyService.getSurveyByTitle(this.searchInput)
-    //   .subscribe((data) => {
-    //     this.searchResult = [data.title, data.createdOn, data.description,
-    //     // data.questions.toString, 
-    //     data.confirmation]
-    //   })
   }
 
-  viewResults(): void {
-    // what do i want it to do??
-    /*
-      take the results from search
-      display it in the div
-    */
-
-  }
 }

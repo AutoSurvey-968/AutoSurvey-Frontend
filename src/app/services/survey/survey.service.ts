@@ -53,7 +53,7 @@ export class SurveyService implements SurveyServiceInterface {
   }
 
   getSurveyByTitle(surveys: String): Observable<ISurvey> {
-    return this.http.get<ISurvey>(environment.apiUrl + '/title/' + surveys);
+    return this.http.get<ISurvey>(this.endpoint + '/title/' + surveys);
   }
 
   getSurveysString(): Observable<Map<string, string>> {
