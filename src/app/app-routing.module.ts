@@ -9,7 +9,6 @@ import { SurveyComponent } from './components/survey/survey.component';
 import { UploadComponent } from './components/upload/upload.component';
 import { ConfirmationComponent } from './components/confirmation/confirmation.component';
 
-
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
@@ -20,12 +19,11 @@ const routes: Routes = [
   { path: 'upload', component: UploadComponent },
   { path: 'admin', component: AdminComponent },
   { path: 'confirmation', component: ConfirmationComponent },
-]
+  { path: 'search/:searchInput', component: SurveyComponent },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
-
-
+export class AppRoutingModule {}
