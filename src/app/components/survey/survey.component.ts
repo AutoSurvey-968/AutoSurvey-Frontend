@@ -83,16 +83,27 @@ export class SurveyComponent implements OnInit {
         }
       });
     } else {
-      if (this.title.invalid || this.description.invalid || this.confirmation.invalid || !this.fileUpload.value){
+      if (this.title.invalid || this.description.invalid || this.confirmation.invalid || !this.fileUpload.get('file')?.value){
         this.snackBar.open("Make sure all fields are filled out then submit again.", undefined, { duration: 2000 });
         return;
       }
       let formData = new FormData();
-      console.log(this.title.value);
       formData.append("title", this.title.value);
       formData.append("description", this.description.value);
       formData.append("confirmation", this.confirmation.value);
-      formData.append("file", this.fileUpload.value);
+      formData.append("file", this.fileUpload.get('file')?.value);
+
+      this.surveyService.upload(formData).subscribe(data =>{
+        this.snackBar.open("The survey has been uploaded!", undefined, { duration: 2000 });
+      }, 
+      (error: HttpErrorResponse) =>{
+        if (error.status >= 500){
+          this.snackBar.open("Problem with server. Please try again.", undefined, { duration: 2000 });
+        } else {
+          this.snackBar.open("The survey is invalid. Please fix and try again.", undefined, { duration: 2000 });
+          console.log(error);
+        }
+      });
     }
   }
 
