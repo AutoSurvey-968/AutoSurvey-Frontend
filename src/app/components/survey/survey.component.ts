@@ -82,6 +82,17 @@ export class SurveyComponent implements OnInit {
           this.snackBar.open("Problem with the survey, please try again.", undefined, { duration: 2000 });
         }
       });
+    } else {
+      if (this.title.invalid || this.description.invalid || this.confirmation.invalid || !this.fileUpload.value){
+        this.snackBar.open("Make sure all fields are filled out then submit again.", undefined, { duration: 2000 });
+        return;
+      }
+      let formData = new FormData();
+      console.log(this.title.value);
+      formData.append("title", this.title.value);
+      formData.append("description", this.description.value);
+      formData.append("confirmation", this.confirmation.value);
+      formData.append("file", this.fileUpload.value);
     }
   }
 
