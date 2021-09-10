@@ -19,11 +19,11 @@ const routes: Routes = [
   { path: 'upload', component: UploadComponent },
   { path: 'admin', component: AdminComponent },
   { path: 'confirmation', component: ConfirmationComponent },
-  { path: 'search/:searchInput', component: SurveyComponent },
+  { path: 'search', component: SurveyComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
