@@ -1,4 +1,4 @@
-<div class="row" *ngIf="choice == 'MULTIPLE_CHOICE'" [formGroup] = "choiceGroup">
+<div class="row" *ngIf="choice == 'MULTIPLE_CHOICE' || choice == 'CHECKBOX' || choice == 'DROPDOWN'" [formGroup] = "choiceGroup">
   <div class="col-sm">
     <mat-form-field appearance="fill" class="formField">
       <mat-label>Response</mat-label>

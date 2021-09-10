@@ -64,8 +64,13 @@ export class SurveyComponent implements OnInit {
   submit() {
     console.log(this.surveyForm.value as ISurvey);
     if (this.isQuestion){
-     
+      if (this.surveyForm.invalid) {
+        this.snackBar.open("Please make sure fields are fill out.", undefined, { duration: 2000 });
+        console.log("invalid");
+        return;
+      }
       let survey = this.getChoices(this.surveyForm.value as ISurvey);
+      console.log(survey);
       
       if (this.surveyForm.invalid) {
         this.snackBar.open("Please make sure fields are fill out.", undefined, { duration: 2000 });
