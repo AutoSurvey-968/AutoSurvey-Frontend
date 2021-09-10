@@ -22,7 +22,7 @@ export class SurveyService implements SurveyServiceInterface {
     withCredentials: true,
   };
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getSurveys(): Observable<Map<string, ISurvey>> {
     return this.http
@@ -53,7 +53,7 @@ export class SurveyService implements SurveyServiceInterface {
   }
 
   getSurveyByTitle(surveys: String): Observable<ISurvey> {
-    return this.http.get<ISurvey>(this.endpoint + '/' + surveys);
+    return this.http.get<ISurvey>(this.endpoint + '/title/' + surveys);
   }
 
   getSurveysString(): Observable<Map<string, string>> {
@@ -67,7 +67,7 @@ export class SurveyService implements SurveyServiceInterface {
   providedIn: 'root',
 })
 export class MockSurveyService implements SurveyServiceInterface {
-  constructor() {}
+  constructor() { }
   getSurveys(): Observable<Map<string, ISurvey>> {
     let survey0: ISurvey = {
       uuid: '000',
