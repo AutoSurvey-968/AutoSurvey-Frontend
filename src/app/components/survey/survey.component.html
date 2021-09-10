@@ -4,8 +4,10 @@
     <h1 class="display-4">Create Survey</h1><br>
   </div>
   <br />
-  <button class="btn addQuestion" (click) = "isQuestion = true">Create Questions</button>
-  <button class="btn addQuestion" (click) = "isQuestion = false">Upload Questions</button>
+  <div class = "tabs">
+    <button class="btn tab" (click) = "isQuestion = true" >Create Questions</button>
+    <button class="btn tab" (click) = "isQuestion = false">Upload Questions</button>
+  </div>
   <hr />
   <br />
   <form [formGroup]="surveyForm" (ngSubmit)="submit()">

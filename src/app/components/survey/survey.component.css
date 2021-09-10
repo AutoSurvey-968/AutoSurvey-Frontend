@@ -11,6 +11,18 @@
   max-width: 360px;
 }
 
+button.tab{
+  background-color: inherit;
+}
+
+button.tab:hover{
+  background-color:#c0c3ca;
+}
+
+button.tab:active{
+  background-color:#404144;
+}
+
 .bubble {
   width: 500px;
 }
