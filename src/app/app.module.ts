@@ -34,7 +34,7 @@ import { DropdownQuestionComponent } from './components/submission/questions/que
 import { CheckboxQuestionComponent } from './components/submission/questions/question-checkbox.component';
 import { ConfirmationComponent } from './components/confirmation/confirmation.component';
 import { SearchbarComponent } from './components/searchbar/searchbar.component';
-import { SearchresultsComponent } from './searchresults/searchresults.component';
+import { SearchresultsComponent } from './components/searchbar/searchresults/searchresults.component';
 
 
 @NgModule({

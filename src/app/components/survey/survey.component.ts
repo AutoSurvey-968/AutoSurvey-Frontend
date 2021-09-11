@@ -33,7 +33,6 @@ export class SurveyComponent implements OnInit {
     'CHECKBOX',
     'DROPDOWN',
     'MULTIPLE_CHOICE',
-    'PARAGRAPH',
     'RADIO',
     'SHORT_ANSWER',
   ]

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { SurveyService } from 'src/app/services/survey/survey.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -13,8 +13,10 @@ import { ISurvey } from 'src/app/models/isurvey-survey';
   styleUrls: ['./searchbar.component.css'],
 })
 export class SearchbarComponent implements OnInit {
-  @Input() searchInput!: string;
-  searchResult: String[] = [];
+  @Input() 
+  searchInput!: string;
+  searchResult!: String[];
+  itemId!: Number;
 
 
   constructor(
@@ -44,5 +46,23 @@ export class SearchbarComponent implements OnInit {
       console.log(Exception);
     }
   }
+
+  onClick(e: any, i: number) {
+    var item = document.getElementById(i.toString());
+    console.log(item);
+    // make the searchresult component with the buttons go off
+    this.itemId = i;
+  }
+
+  // get that edit
+  edit(i: Number){
+
+  }
+
+  // get that delete
+  delete(i: Number) {
+
+  }
+
 
 }

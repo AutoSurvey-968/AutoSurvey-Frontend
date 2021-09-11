@@ -4,7 +4,10 @@
     <button (click)="search()">Search</button>
   </div>
   <br>
-  <div class="resultsDiv">
-    {{this.searchResult}}
+  <div class="resultsDiv" *ngIf="this.searchResult != null">
+    <!-- ul populated by searchResult -->
+    <ul id="resultDisplay">
+      <li *ngFor="let item of searchResult; index as i; trackByFn" (click)="onClick($event, i)" id=i></li>
+    </ul>
   </div>
 </div>
