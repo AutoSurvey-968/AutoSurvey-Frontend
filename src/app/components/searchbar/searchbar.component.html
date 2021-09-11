@@ -3,11 +3,17 @@
     <input type="text" [(ngModel)]="searchInput" (change)="search()" placeholder="Search Survey" />
     <button (click)="search()">Search</button>
   </div>
-  <br>
-  <div class="resultsDiv" *ngIf="this.searchResult != null">
-    <!-- ul populated by searchResult -->
-    <ul id="resultDisplay">
-      <li *ngFor="let item of searchResult; index as i; trackByFn" (click)="onClick($event, i)" id=i></li>
-    </ul>
+  <div class="resultsDiv" (change)="search()">
+
+    <tbody>
+      <tr *ngFor="let question of resultQuestions">
+        <td>{{question.questionType}}</td>
+        <td>{{question.title}}</td>
+        <td>{{question.helpText}}</td>
+        <td>{{question.isRequired}}</td>
+        <td>{{question.choices}}</td>
+        <td>{{question.hasOtherOption}}</td>
+      </tr>
+    </tbody>
   </div>
 </div>

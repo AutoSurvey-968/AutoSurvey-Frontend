@@ -29,6 +29,8 @@ export class SurveyComponent implements OnInit {
   confirmation = new FormControl('Thanks for taking this survey!',  Validators.required);
   questions: FormArray = new FormArray([]);
   questionType: FormControl = new FormControl('', Validators.required);
+  fileUpload: FormGroup;
+  isQuestion: boolean = true;
   typeOptions = [
     'CHECKBOX',
     'DROPDOWN',
@@ -43,7 +45,11 @@ export class SurveyComponent implements OnInit {
     private caliberService: CaliberService,
     private titleService: Title,
     private snackBar: MatSnackBar,
-  ) {}
+  ) {
+    this.fileUpload = this.formBuilder.group({
+      file: null
+    })
+  }
 
   ngOnInit(): void {
     this.surveyForm = this.formBuilder.group({
@@ -55,25 +61,54 @@ export class SurveyComponent implements OnInit {
   }
 
   submit() {
-    let survey = this.getChoices(this.surveyForm.value as ISurvey);
-    console.log(survey);
-    
-    if (this.surveyForm.invalid) {
-      this.snackBar.open("Please make sure fields are fill out.", undefined, { duration: 2000 });
-      console.log("invalid");
-      return;
-    }
-    this.surveyService.addSurvey(survey as ISurvey).subscribe((data) => {
-      this.snackBar.open("Survey created!", undefined, { duration: 2000 });
-    }, 
-    (error: HttpErrorResponse) => {
-      if (error.status >= 500){
-        this.snackBar.open("Server Error. Please try again.", undefined, { duration: 2000 });
-      } else {
-        this.snackBar.open("Problem with the survey, please try again.", undefined, { duration: 2000 });
+    console.log(this.surveyForm.value as ISurvey);
+    if (this.isQuestion){
+      if (this.surveyForm.invalid) {
+        this.snackBar.open("Please make sure fields are fill out.", undefined, { duration: 2000 });
+        console.log("invalid");
+        return;
       }
-    });
-    
+      let survey = this.getChoices(this.surveyForm.value as ISurvey);
+      console.log(survey);
+      
+      if (this.surveyForm.invalid) {
+        this.snackBar.open("Please make sure fields are fill out.", undefined, { duration: 2000 });
+        console.log("invalid");
+        return;
+      }
+      this.surveyService.addSurvey(survey as ISurvey).subscribe((data) => {
+        this.snackBar.open("Survey created!", undefined, { duration: 2000 });
+      }, 
+      (error: HttpErrorResponse) => {
+        if (error.status >= 500){
+          this.snackBar.open("Server Error. Please try again.", undefined, { duration: 2000 });
+        } else {
+          this.snackBar.open("Problem with the survey, please try again.", undefined, { duration: 2000 });
+        }
+      });
+    } else {
+      if (this.title.invalid || this.description.invalid || this.confirmation.invalid || !this.fileUpload.get('file')?.value){
+        this.snackBar.open("Make sure all fields are filled out then submit again.", undefined, { duration: 2000 });
+        return;
+      }
+      let formData = new FormData();
+      formData.append("title", this.title.value);
+      formData.append("description", this.description.value);
+      formData.append("confirmation", this.confirmation.value);
+      formData.append("file", this.fileUpload.get('file')?.value);
+
+      this.surveyService.upload(formData).subscribe(data =>{
+        this.snackBar.open("The survey has been uploaded!", undefined, { duration: 2000 });
+      }, 
+      (error: HttpErrorResponse) =>{
+        if (error.status >= 500){
+          this.snackBar.open("Problem with server. Please try again.", undefined, { duration: 2000 });
+        } else {
+          this.snackBar.open("The survey is invalid. Please fix and try again.", undefined, { duration: 2000 });
+          console.log(error);
+        }
+      });
+    }
   }
 
   getQuestionTitle(index: number) {
@@ -100,6 +135,13 @@ export class SurveyComponent implements OnInit {
     return this.surveyForm.get('questions')?.value[index] as FormControl;
   }
 
+  upload(event: Event) {
+    let file = (event?.target as any)?.files[0];
+    this.fileUpload.patchValue({
+      file: file
+    })
+    console.log(file);
+  }
 
   onSelected(event: MatSelectChange, i: number) {
 
@@ -144,5 +186,19 @@ export class SurveyComponent implements OnInit {
     return survey;
   }
 
+  changeQuestionStatus(status: boolean, id: string) {
+    this.isQuestion = status;
+
+    let elements = document.getElementsByClassName("tab");
+    for (let i = 0; i < elements.length; i++){
+      elements[i].className = elements[i].className.replace(' active', '');
+    }
+
+    let activeTab = document.getElementById(id);
+    if (activeTab){
+      activeTab.className += ' active';
+    }
+    
+  }
 }
 

@@ -22,7 +22,14 @@ export class SurveyService implements SurveyServiceInterface {
     withCredentials: true,
   };
 
-  constructor(private http: HttpClient) { }
+  private formOptions = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + localStorage.getItem('token'),
+    }),
+    withCredentials: true,
+  };
+
+  constructor(private http: HttpClient) {}
 
   getSurveys(): Observable<Map<string, ISurvey>> {
     return this.http
@@ -46,6 +53,11 @@ export class SurveyService implements SurveyServiceInterface {
 
   addSurvey(survey: ISurvey):Observable<ISurvey> {
     return this.http.post<ISurvey>(this.endpoint, JSON.stringify(survey, this.replacerFunc()), this.httpOptions);
+  }
+
+  upload(formData: FormData): Observable<ISurvey> {
+    this.formOptions.headers.delete('Content-Type');
+    return this.http.post<ISurvey>(this.endpoint, formData, this.formOptions);
   }
 
   getSurveyById(surveyId: string): Observable<ISurvey> {

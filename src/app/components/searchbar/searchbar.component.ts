@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { Title } from '@angular/platform-browser';
 import { environment } from 'src/environments/environment';
 import { ISurvey } from 'src/app/models/isurvey-survey';
+import { IQuestion } from 'src/app/models/iquestion-question';
 
 @Component({
   selector: 'app-searchbar',
@@ -13,10 +14,10 @@ import { ISurvey } from 'src/app/models/isurvey-survey';
   styleUrls: ['./searchbar.component.css'],
 })
 export class SearchbarComponent implements OnInit {
-  @Input() 
-  searchInput!: string;
-  searchResult!: String[];
-  itemId!: Number;
+  @Input() searchInput!: string;
+  searchResult: String[] = [];
+  resultQuestions!: IQuestion[];
+
 
 
   constructor(
@@ -42,17 +43,23 @@ export class SearchbarComponent implements OnInit {
         .getSurveyByTitle(this.searchInput)
         .subscribe((data) => this.searchResult = [data.title, data.createdOn, data.description,
         data.confirmation]);
+      this.surveyService
+        .getSurveyByTitle(this.searchInput)
+        .subscribe((d) => this.resultQuestions = d.questions);
+
+      console.log("result questions: " + this.resultQuestions)
+
     } catch (Exception) {
       console.log(Exception);
     }
   }
 
-  onClick(e: any, i: number) {
-    var item = document.getElementById(i.toString());
-    console.log(item);
-    // make the searchresult component with the buttons go off
-    this.itemId = i;
-  }
+  // onClick(e: any, i: number) {
+  //   var item = document.getElementById(i.toString());
+  //   console.log(item);
+  //   // make the searchresult component with the buttons go off
+  //   this.itemId = i;
+  // }
 
   // get that edit
   edit(i: Number){
