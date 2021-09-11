@@ -17,6 +17,7 @@ export class SearchbarComponent implements OnInit {
   @Input() searchInput!: string;
   searchResult: String[] = [];
   resultQuestions!: IQuestion[];
+  surveyId!: string;
 
 
 
@@ -54,20 +55,20 @@ export class SearchbarComponent implements OnInit {
     }
   }
 
-  // onClick(e: any, i: number) {
-  //   var item = document.getElementById(i.toString());
-  //   console.log(item);
-  //   // make the searchresult component with the buttons go off
-  //   this.itemId = i;
-  // }
-
-  // get that edit
-  edit(i: Number){
-
+  edit(){
+    // get survey's id
+    this.surveyService
+      .getSurveyByTitle(this.searchInput)
+      .subscribe((data) => this.surveyId = data.uuid);
   }
 
-  // get that delete
-  delete(i: Number) {
+  delete() {
+    // get survey's id
+    this.surveyService
+      .getSurveyByTitle(this.searchInput)
+      .subscribe((data) => this.surveyId = data.uuid);
+    // send delete
+    this.surveyService.deleteSurvey(this.surveyId);
 
   }
 

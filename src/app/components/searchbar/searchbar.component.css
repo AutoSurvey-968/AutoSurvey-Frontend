@@ -34,6 +34,11 @@ div button {
   max-width: 360px;
 }
 
-#resultdisplay {
-  width: 90%;
+#delete-btn {
+  color: #fff;
+  background-color: #e31010;
+  border-color: #e31010;
+  height: auto;
+  margin-top: 25px;
 }
+

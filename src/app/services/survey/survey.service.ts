@@ -73,6 +73,17 @@ export class SurveyService implements SurveyServiceInterface {
       .get<any>(this.endpoint + '/', this.httpOptions)
       .pipe(map((response) => response as Map<string, string>));
   }
+
+  deleteSurvey(surveyId: string) {
+    return this.http.delete(this.endpoint + '/' + surveyId);
+  }
+
+  editSurvey(surveyId: string, survey: ISurvey):Observable<ISurvey> {
+    return this.http
+      .put<any>(this.endpoint + '/' + surveyId, JSON.stringify(survey, this.replacerFunc()), this.httpOptions);
+  }
+
+
 }
 
 @Injectable({
