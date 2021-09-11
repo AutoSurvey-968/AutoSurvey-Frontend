@@ -28,3 +28,12 @@ div button {
   opacity: 0.8;
   outline: none;
 }
+
+.resultsdiv {
+  margin: auto;
+  max-width: 360px;
+}
+
+#resultdisplay {
+  width: 90%;
+}

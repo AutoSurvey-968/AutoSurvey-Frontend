@@ -1,0 +1,16 @@
+#edit-btn {
+    color: #fff;
+    background-color: #0b5ed7;
+    border-color: #0a58ca;
+}
+
+#delete-btn {
+    color: #fff;
+    background-color: #e31010;
+    border-color: #e31010;
+}
+
+.result-btns {
+    height: auto;
+    margin-top: 25px;
+}
