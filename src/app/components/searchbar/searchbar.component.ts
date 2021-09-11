@@ -14,9 +14,11 @@ import { IQuestion } from 'src/app/models/iquestion-question';
   styleUrls: ['./searchbar.component.css'],
 })
 export class SearchbarComponent implements OnInit {
-  @Input() searchInput!: string;
+  @Input() 
+  searchInput!: string;
   searchResult: String[] = [];
   resultQuestions!: IQuestion[];
+  surveyId!: string;
 
 
 
@@ -53,9 +55,16 @@ export class SearchbarComponent implements OnInit {
       console.log(Exception);
     }
   }
-  // .map(m => {
-  //   m.choices.toString, m.hasOtherOption.valueOf.toString, m.helpText, 
-  //   m.isRequired.valueOf.toString, m.questionType, m.title
-  // });
+
+  delete() {
+    // get survey's id
+    this.surveyService
+      .getSurveyByTitle(this.searchInput)
+      .subscribe((data) => this.surveyId = data.uuid);
+    // send delete
+    this.surveyService.deleteSurvey(this.surveyId);
+
+  }
+
 
 }

@@ -3,9 +3,8 @@
     <input type="text" [(ngModel)]="searchInput" (change)="search()" placeholder="Search Survey" />
     <button (click)="search()">Search</button>
   </div>
+  <br>
   <div class="resultsDiv" (change)="search()">
-    {{this.searchResult}}
-
     <tbody>
       <tr *ngFor="let question of resultQuestions">
         <td>{{question.questionType}}</td>
@@ -16,5 +15,9 @@
         <td>{{question.hasOtherOption}}</td>
       </tr>
     </tbody>
+  </div>
+  <br>
+  <div ngIf*="searchResult != null">
+    <button type="button" id="delete-btn" (change)="delete()">Delete</button>
   </div>
 </div>
