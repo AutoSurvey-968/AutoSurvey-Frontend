@@ -5,6 +5,8 @@
   </div>
   <br>
   <div class="resultsDiv">
+    {{this.survey?.title}}
+    {{this.survey?.description}}
     <tbody>
       <tr *ngFor="let question of survey?.questions">
         <td>{{question.questionType}}</td>
