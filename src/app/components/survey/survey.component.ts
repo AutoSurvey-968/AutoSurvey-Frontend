@@ -125,7 +125,7 @@ export class SurveyComponent implements OnInit {
 
   submitEdit(searchResult: String[], survey: ISurvey) {
     // get survey id
-    this.surveyService
+    this.surveyService 
       .getSurveyByTitle(this.searchInput)
       .subscribe((data) => this.surveyId = data.uuid);
 

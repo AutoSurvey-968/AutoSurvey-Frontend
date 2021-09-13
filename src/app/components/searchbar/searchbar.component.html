@@ -5,6 +5,7 @@
   </div>
   <br>
   <div class="resultsDiv" (change)="search()">
+    {{this.searchResult}}
     <tbody>
       <tr *ngFor="let question of resultQuestions">
         <td>{{question.questionType}}</td>
