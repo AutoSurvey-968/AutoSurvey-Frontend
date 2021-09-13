@@ -36,19 +36,20 @@ export class SearchbarComponent implements OnInit {
   }
 
   search(): void {
-      this.router.navigateByUrl('/search');
-      this.surveyService
-        .getSurveyByTitle(this.searchInput)
-        .subscribe((data) => {
-          this.survey = data;
-        },
-        (error: HttpErrorResponse) => {
-          if (error.status >= 500){
-            this.snackBar.open("Problem with the server. Please try again.", undefined, { duration: 2000 });
-          } else {
-            this.snackBar.open("No survey with that name.", undefined, { duration: 2000 });
-          }
-        });
+    this.survey = null as any;
+    this.router.navigateByUrl('/search');
+    this.surveyService
+      .getSurveyByTitle(this.searchInput)
+      .subscribe((data) => {
+        this.survey = data;
+      },
+      (error: HttpErrorResponse) => {
+        if (error.status >= 500){
+          this.snackBar.open("Problem with the server. Please try again.", undefined, { duration: 2000 });
+        } else {
+          this.snackBar.open("No survey with that name.", undefined, { duration: 2000 });
+        }
+      });
 
   }
 
@@ -56,6 +57,7 @@ export class SearchbarComponent implements OnInit {
     this.surveyService.deleteSurvey(this.survey.uuid).subscribe(data => {
       this.snackBar.open("The survey has been deleted.", undefined, { duration: 2000 });
       this.searchInput = "";
+      this.survey = null as any;
     },
     (error: HttpErrorResponse) => {
       if (error.status >= 500){
