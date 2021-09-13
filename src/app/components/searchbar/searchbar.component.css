@@ -28,3 +28,17 @@ div button {
   opacity: 0.8;
   outline: none;
 }
+
+.resultsdiv {
+  margin: auto;
+  max-width: 360px;
+}
+ 
+#delete-btn {
+  color: #fff;
+  background-color: #e31010;
+  border-color: #e31010;
+  height: auto;
+  margin-top: 25px;
+}
+

@@ -39,6 +39,9 @@ export class SurveyComponent implements OnInit {
     'RADIO',
     'SHORT_ANSWER',
   ]
+  searchInput!: string;
+  searchResult: String[] = [];
+  surveyId!: string;
 
   constructor (
     private surveyService: SurveyService,
@@ -63,6 +66,7 @@ export class SurveyComponent implements OnInit {
 
   submit() {
     console.log(this.surveyForm.value as ISurvey);
+
     if (this.isQuestion){
       if (this.surveyForm.invalid) {
         this.snackBar.open("Please make sure fields are fill out.", undefined, { duration: 2000 });
@@ -77,6 +81,13 @@ export class SurveyComponent implements OnInit {
         console.log("invalid");
         return;
       }
+
+      // checks if this form already exists/was brought up in a search
+      if(this.searchResult != null) {
+        this.submitEdit(this.searchResult, survey);
+      }
+
+      // create survey
       this.surveyService.addSurvey(survey as ISurvey).subscribe((data) => {
         this.snackBar.open("Survey created!", undefined, { duration: 2000 });
       }, 
@@ -110,6 +121,27 @@ export class SurveyComponent implements OnInit {
         }
       });
     }
+  }
+
+  submitEdit(searchResult: String[], survey: ISurvey) {
+    // get survey id
+    this.surveyService 
+      .getSurveyByTitle(this.searchInput)
+      .subscribe((data) => this.surveyId = data.uuid);
+
+    // submit edits
+    this.surveyService.editSurvey(this.surveyId, survey as ISurvey).subscribe((data) => {
+      this.snackBar.open("Survey saved!", undefined, { duration: 2000 });
+    }, 
+    (error: HttpErrorResponse) => {
+      if (error.status >= 500){
+        this.snackBar.open("Server Error. Please try again.", undefined, { duration: 2000 });
+      } else {
+        this.snackBar.open("Problem with the survey, please try again.", undefined, { duration: 2000 });
+      }
+    });
+
+
   }
 
   getQuestionTitle(index: number) {
