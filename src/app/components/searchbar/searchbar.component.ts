@@ -44,7 +44,6 @@ export class SearchbarComponent implements OnInit {
 
   search(): void {
     this.surveyEmitter.emit(null as any);
-    this.router.navigateByUrl('/search');
     this.surveyService
       .getSurveyByTitle(this.searchInput)
       .subscribe((data) => {

@@ -20,8 +20,8 @@ export class ChoicesComponent implements OnInit {
     console.log(this.choiceForm);
     if (!this.choiceForm){
       this.choiceGroup = new FormGroup({
-            response0: new FormControl('', Validators.required),
-            response1: new FormControl('', Validators.required),
+            response0: new FormControl(''),
+            response1: new FormControl(''),
             response2: new FormControl(''),
             response3: new FormControl(''),
           })

@@ -86,12 +86,14 @@ export class SurveyComponent implements OnInit {
       // checks if this form already exists/was brought up in a search
       if(this.isEdit) {
         this.submitEdit(survey);
+
         return;
       }
 
       // create survey
       this.surveyService.addSurvey(survey as ISurvey).subscribe((data) => {
         this.snackBar.open("Survey created!", undefined, { duration: 2000 });
+        this.updateEditSurvey(null as any);
       }, 
       (error: HttpErrorResponse) => {
         if (error.status >= 500){
@@ -130,6 +132,7 @@ export class SurveyComponent implements OnInit {
     // submit edits
     this.surveyService.editSurvey(this.survey, survey as ISurvey).subscribe((data) => {
       this.snackBar.open("Survey saved!", undefined, { duration: 2000 });
+      this.updateEditSurvey(null as any);
     }, 
     (error: HttpErrorResponse) => {
       if (error.status >= 500){
@@ -185,12 +188,6 @@ export class SurveyComponent implements OnInit {
     console.log(event.value);
     formGroup.get("type")?.setValue(event);
     document.getElementById("appChoices"+i)?.setAttribute("choice",event.value);
-    formGroup.get("choices")?.setValue({
-      response0: '',
-      response1: '',
-      response2: '',
-      response3: ''
-    });
   }
 
   addQuestion() {
@@ -198,6 +195,20 @@ export class SurveyComponent implements OnInit {
       new FormGroup({
         title: new FormControl('', Validators.required),
         questionType: new FormControl('', Validators.required),
+        choices: new FormGroup({
+          response0: new FormControl(''),
+          response1: new FormControl(''),
+          response2: new FormControl(''),
+          response3: new FormControl('')
+        })
+      }));
+  }
+
+  addQuestionWithDefaults(title: string, type: string) {
+    this.questions.push(
+      new FormGroup({
+        title: new FormControl(title, Validators.required),
+        questionType: new FormControl(type, Validators.required),
         choices: new FormGroup({
           response0: new FormControl(''),
           response1: new FormControl(''),
@@ -216,7 +227,7 @@ export class SurveyComponent implements OnInit {
     this.survey = editSurvey;
     this.title.setValue(editSurvey?.title);
     this.description.setValue(editSurvey?.description);
-    this.confirmation.setValue(editSurvey?.confirmation);
+    this.confirmation.setValue('Thanks for taking this survey!');
     if (editSurvey){
       this.isEdit = true;
       this.isQuestion = true;
@@ -224,10 +235,10 @@ export class SurveyComponent implements OnInit {
         let questionChoices = new FormGroup({});
         if (question.choices?.length > 0){
           questionChoices = new FormGroup({
-            response0: new FormControl(question.choices[0], Validators.required),
-            response1: new FormControl(question.choices[1], Validators.required),
-            response2: new FormControl(question.choices[2], Validators.required),
-            response3: new FormControl(question.choices[3], Validators.required),
+            response0: new FormControl(question.choices[0]),
+            response1: new FormControl(question.choices[1]),
+            response2: new FormControl(question.choices[2]),
+            response3: new FormControl(question.choices[3]),
           })
         }
         this.questions.push(
