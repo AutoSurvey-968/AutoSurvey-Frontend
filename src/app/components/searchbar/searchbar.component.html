@@ -2,8 +2,11 @@
   <div class="bar">
     <input type="text" [(ngModel)]="searchInput" (keydown.enter)="search()" placeholder="Search Survey" />
     <button (click)="search()">Search</button>
+    <button *ngIf="surveyId" id="clear-btn" (click)="clear()">Clear</button>
+    <button *ngIf="surveyId" id="delete-btn" (click)="delete()">Delete</button>
+    
   </div>
-  <div *ngIf="surveyId">
-    <button type="button" id="delete-btn" (click)="delete()">Delete</button>
+  <div class="mb-3" *ngIf="surveyId">
+
   </div>
 </div>

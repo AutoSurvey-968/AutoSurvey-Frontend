@@ -36,6 +36,12 @@ export class SearchbarComponent implements OnInit {
     // console.log(this.searchResult);
   }
 
+  clear(): void {
+    this.surveyId = '';
+    this.searchInput = '';
+    this.surveyEmitter.emit(null as any);
+  }
+
   search(): void {
     this.surveyEmitter.emit(null as any);
     this.router.navigateByUrl('/search');
