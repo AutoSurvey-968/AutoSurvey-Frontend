@@ -1,6 +1,6 @@
 import { EventEmitter } from '@angular/core';
 import { Component, Input, OnInit, Output } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, FormGroupDirective, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-choices',
@@ -9,25 +9,29 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angu
 })
 export class ChoicesComponent implements OnInit {
   @Input() choice!: string;
-  @Input() choiceForm!: FormArray;
-  choiceGroup!: FormGroup;
-  @Output() choiceData: EventEmitter<FormArray> = new EventEmitter<FormArray>();
+   choiceForm!: FormArray;
+  @Input() choiceGroup!: FormGroup;
+  @Output() choiceData: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
 
   constructor(
     private formBuilder: FormBuilder
   ) {
-    this.choiceGroup = new FormGroup({
-      response0: new FormControl('', Validators.required),
-      response1: new FormControl('', Validators.required),
-      response2: new FormControl('', Validators.required),
-      response3: new FormControl('', Validators.required),
-    })
-    this.choiceForm = this.formBuilder.array([this.choiceGroup]);
+    console.log(this.choiceForm);
+    if (!this.choiceForm){
+      this.choiceGroup = new FormGroup({
+            response0: new FormControl('', Validators.required),
+            response1: new FormControl('', Validators.required),
+            response2: new FormControl(''),
+            response3: new FormControl(''),
+          })
+          this.choiceForm = this.formBuilder.array([this.choiceGroup]);
+    }
+    
   }
 
   update(){
-    this.choiceData.emit(this.choiceForm);
+    this.choiceData.emit(this.choiceGroup);
   }
 
   ngOnInit(): void {}

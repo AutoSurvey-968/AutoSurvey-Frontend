@@ -3,23 +3,7 @@
     <input type="text" [(ngModel)]="searchInput" (keydown.enter)="search()" placeholder="Search Survey" />
     <button (click)="search()">Search</button>
   </div>
-  <br>
-  <div class="resultsDiv">
-    {{this.survey?.title}}
-    {{this.survey?.description}}
-    <tbody>
-      <tr *ngFor="let question of survey?.questions">
-        <td>{{question.questionType}}</td>
-        <td>{{question.title}}</td>
-        <td>{{question.helpText}}</td>
-        <td>{{question.isRequired}}</td>
-        <td>{{question.choices}}</td>
-        <td>{{question.hasOtherOption}}</td>
-      </tr>
-    </tbody>
-  </div>
-  <br>
-  <div *ngIf="survey">
+  <div *ngIf="surveyId">
     <button type="button" id="delete-btn" (click)="delete()">Delete</button>
   </div>
 </div>
