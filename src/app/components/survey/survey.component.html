@@ -1,10 +1,10 @@
-<app-searchbar> </app-searchbar>
+<app-searchbar (surveyEmitter) = "updateEditSurvey($event)"> </app-searchbar>
 <div class="container bubble">
   <div class="d-flex justify-content-center">
-    <h1 class="display-4">Create Survey</h1><br>
+    <h1 class="display-4">{{isEdit ? 'Edit Survey' : 'Create Survey'}}</h1><br>
   </div>
   <br />
-  <div class = "tabs">
+  <div class = "tabs" *ngIf="!isEdit">
     <button id="createTab" class="btn tab active" (click) = "changeQuestionStatus(true, 'createTab')" >Create Questions</button>
     <button id="uploadTab" class="btn tab" (click) = "changeQuestionStatus(false, 'uploadTab')">Upload Questions</button>
   </div>
@@ -63,7 +63,7 @@
         </div>
 
         <!--CHOICES-->
-        <app-choices [choice] = "getQuestionTypeAsString(i)" (choiceData) = "update($event, i)"></app-choices>
+        <app-choices [choice] = "getQuestionTypeAsString(i)" [choiceGroup] = "getQuestionChoices(i)" (choiceData) = "update($event, i)"></app-choices>
 
         <div class="mb-3">
           <button
@@ -78,7 +78,7 @@
       </div>
     </div>
     <button mat-raised-button class="btn addQuestion" type="submit">
-      Submit
+      {{isEdit ? 'Edit' : 'Submit'}}
     </button>
   </form>
 </div>

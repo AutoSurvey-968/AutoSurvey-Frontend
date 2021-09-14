@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { SurveyService } from 'src/app/services/survey/survey.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
@@ -15,7 +15,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class SearchbarComponent implements OnInit {
   @Input() 
   searchInput!: string;
-  survey!: ISurvey;
+  surveyId!: string;
+  @Output() surveyEmitter: EventEmitter<ISurvey> = new EventEmitter<ISurvey>();
 
 
 
@@ -35,27 +36,40 @@ export class SearchbarComponent implements OnInit {
     // console.log(this.searchResult);
   }
 
+  clear(): void {
+    this.surveyId = '';
+    this.searchInput = '';
+    this.surveyEmitter.emit(null as any);
+  }
+
   search(): void {
-      this.router.navigateByUrl('/search');
-      this.surveyService
-        .getSurveyByTitle(this.searchInput)
-        .subscribe((data) => {
-          this.survey = data;
-        },
-        (error: HttpErrorResponse) => {
-          if (error.status >= 500){
-            this.snackBar.open("Problem with the server. Please try again.", undefined, { duration: 2000 });
-          } else {
-            this.snackBar.open("No survey with that name.", undefined, { duration: 2000 });
-          }
-        });
+    this.surveyEmitter.emit(null as any);
+    this.surveyService
+      .getSurveyByTitle(this.searchInput)
+      .subscribe((data) => {
+        console.log(data);
+        //this.survey = data;
+        this.surveyId = data.uuid;
+        this.surveyEmitter.emit(data);
+      },
+      (error: HttpErrorResponse) => {
+        if (error.status >= 500){
+          this.snackBar.open("Problem with the server. Please try again.", undefined, { duration: 2000 });
+        } else {
+          this.snackBar.open("No survey with that name.", undefined, { duration: 2000 });
+        }
+        this.surveyId = '';
+      });
 
   }
 
   delete() {
-    this.surveyService.deleteSurvey(this.survey.uuid).subscribe(data => {
+    this.surveyService.deleteSurvey(this.surveyId).subscribe(data => {
       this.snackBar.open("The survey has been deleted.", undefined, { duration: 2000 });
       this.searchInput = "";
+      this.surveyId = '';
+      this.surveyEmitter.emit(null as any);
+      
     },
     (error: HttpErrorResponse) => {
       if (error.status >= 500){

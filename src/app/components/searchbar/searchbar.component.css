@@ -35,10 +35,26 @@ div button {
 }
  
 #delete-btn {
-  color: #fff;
-  background-color: #e31010;
-  border-color: #e31010;
-  height: auto;
-  margin-top: 25px;
+  color: gray;
+  height: 3rem;
+  width: 5rem;
+  font-size: 1rem;
+  border-radius: 0 10rem 10rem 0;
+  background-color: #cc1212;
+  color: white;
+  opacity: 0.8;
+  outline: none;
+}
+
+#clear-btn {
+  color: gray;
+  height: 3rem;
+  width: 5rem;
+  font-size: 1rem;
+  border-radius: 0 10rem 10rem 0;
+  background-color: #0b5ed7;
+  color: white;
+  opacity: 0.8;
+  outline: none;
 }
 

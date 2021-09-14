@@ -78,9 +78,13 @@ export class SurveyService implements SurveyServiceInterface {
     return this.http.delete(this.endpoint + '/' + surveyId, this.httpOptions);
   }
  
-  editSurvey(surveyId: string, survey: ISurvey):Observable<ISurvey> {
+  editSurvey(oldSurvey: ISurvey, survey: ISurvey):Observable<ISurvey> {
+    console.log(survey);
+    survey.uuid = oldSurvey.uuid;
+    survey.createdOn = oldSurvey.createdOn;
+    survey.version = oldSurvey.version;
     return this.http
-      .put<any>(this.endpoint + '/' + surveyId, JSON.stringify(survey, this.replacerFunc()), this.httpOptions);
+      .put<any>(this.endpoint + '/' + oldSurvey.uuid, JSON.stringify(survey), this.httpOptions);
   }
 
 
